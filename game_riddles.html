@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜灯谜 - 2026宁波新春佳节</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DC2626',
+                        secondary: '#F59E0B',
+                        accent: '#059669',
+                        gold: '#D97706',
+                        'chinese-red': '#DC2626',
+                        'chinese-gold': '#D97706'
+                    },
+                    fontFamily: {
+                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'slide-in': 'slideIn 0.5s ease-out forwards'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            }
+            .bg-gradient-red {
+                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            }
+            .bg-gradient-gold {
+                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            }
+            .border-gradient {
+                border-image: linear-gradient(45deg, #F59E0B, #DC2626) 1;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px #F59E0B; }
+            to { box-shadow: 0 0 30px #F59E0B, 0 0 40px #F59E0B; }
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(-20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+        
+        .firecracker {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+        
+        .option-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .option-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .correct-answer {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            animation: glow 1s ease-in-out;
+        }
+        
+        .wrong-answer {
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #DC2626, #F59E0B);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #B91C1C, #D97706);
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-gradient-red shadow-2xl sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/20 p-2 rounded-full">
+                        <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                    </div>
+                    <span class="text-white text-xl font-bold text-shadow">2026宁波新春佳节</span>
+                </div>
+                
+                <!-- 桌面端菜单 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">首页</a>
+                    <a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">春节知识</a>
+                    <a href="culture.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">宁波年俗</a>
+                    <a href="games.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">春节游戏</a>
+                    <a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">宁波花市</a>
+                    <a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">特色美食</a>
+                    <a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">民俗表演</a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden">
+                    <button class="text-white hover:text-yellow-200 font-medium" onclick="toggleMobileMenu()">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden bg-gradient-red/95 hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">首页</a>
+                <a href="knowledge.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">春节知识</a>
+                <a href="culture.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">宁波年俗</a>
+                <a href="games.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">春节游戏</a>
+                <a href="flower_market.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">宁波花市</a>
+                <a href="food_culture.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">特色美食</a>
+                <a href="lion_dragon.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">民俗表演</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 游戏头部 -->
+    <section class="py-8 bg-gradient-to-r from-red-100 to-orange-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <button onclick="goBack()" class="bg-white text-chinese-red px-4 py-2 rounded-full font-medium hover:shadow-lg transition-all duration-300">
+                        <i class="fa fa-arrow-left mr-2"></i>返回游戏选择
+                    </button>
+                    <div class="bg-white px-4 py-2 rounded-full shadow-lg">
+                        <span class="text-chinese-red font-bold">游戏: 猜灯谜</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-6">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-chinese-red" id="currentScore">0</div>
+                        <div class="text-sm text-gray-600">当前积分</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-chinese-red" id="currentQuestion">1</div>
+                        <div class="text-sm text-gray-600">题目 <span id="totalQuestions">15</span></div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-chinese-red" id="currentStreak">0</div>
+                        <div class="text-sm text-gray-600">连击</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 进度条 -->
+            <div class="mt-6 bg-white rounded-full h-3 shadow-inner">
+                <div class="bg-gradient-gold h-3 rounded-full progress-bar" id="progressBar" style="width: 6.67%"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 难度选择 -->
+    <section class="py-16 bg-white" id="difficultySelection">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-chinese-red mb-8">选择难度等级</h2>
+            <p class="text-xl text-gray-700 mb-12">挑战不同难度的宁波特色灯谜</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 简单 -->
+                <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-8 shadow-xl card-hover cursor-pointer" onclick="startGame('easy')">
+                    <div class="bg-gradient-green w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-smile-o text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">简单</h3>
+                    <p class="text-gray-600 mb-6">宁波特色物品、美食相关灯谜</p>
+                    <div class="flex justify-center space-x-1 mb-4">
+                        <span class="text-yellow-600 text-lg">★☆☆☆☆</span>
+                    </div>
+                    <div class="text-sm text-gray-500">适合初学者</div>
+                </div>
+                
+                <!-- 中等 -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 shadow-xl card-hover cursor-pointer" onclick="startGame('medium')">
+                    <div class="bg-gradient-gold w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-meh-o text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">中等</h3>
+                    <p class="text-gray-600 mb-6">宁波历史文化相关灯谜</p>
+                    <div class="flex justify-center space-x-1 mb-4">
+                        <span class="text-yellow-600 text-lg">★★★☆☆</span>
+                    </div>
+                    <div class="text-sm text-gray-500">适合有一定了解</div>
+                </div>
+                
+                <!-- 困难 -->
+                <div class="bg-gradient-to-br from-red-50 to-purple-50 rounded-3xl p-8 shadow-xl card-hover cursor-pointer" onclick="startGame('hard')">
+                    <div class="bg-gradient-red w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-frown-o text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">困难</h3>
+                    <p class="text-gray-600 mb-6">宁波方言、传统习俗相关灯谜</p>
+                    <div class="flex justify-center space-x-1 mb-4">
+                        <span class="text-yellow-600 text-lg">★★★★★</span>
+                    </div>
+                    <div class="text-sm text-gray-500">适合文化专家</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏主界面 -->
+    <section class="py-16 bg-white hidden" id="gameScreen">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 题目卡片 -->
+            <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-3xl p-8 shadow-xl mb-8">
+                <div class="text-center mb-8">
+                    <div class="bg-gradient-red text-white px-6 py-3 rounded-full text-lg font-semibold inline-block mb-4">
+                        <i class="fa fa-question-circle mr-2"></i>灯谜题目
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4" id="questionText">
+                        圆圆滚滚白胖子，轻轻一咬甜滋滋，宁波特产人人爱，春节餐桌不能少
+                    </h3>
+                    <div class="text-gray-600" id="hintText">提示：这是一种宁波传统甜品</div>
+                </div>
+                
+                <!-- 选项 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="optionsContainer">
+                    <!-- 选项将通过JavaScript动态生成 -->
+                </div>
+            </div>
+            
+            <!-- 控制按钮 -->
+            <div class="flex justify-between items-center">
+                <button onclick="showHint()" class="bg-gradient-gold text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                    <i class="fa fa-lightbulb-o mr-2"></i>提示 (消耗10分)
+                </button>
+                <button onclick="skipQuestion()" class="bg-gray-500 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                    <i class="fa fa-forward mr-2"></i>跳过 (扣5分)
+                </button>
+                <button onclick="submitAnswer()" class="bg-gradient-red text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                    提交答案
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏结束界面 -->
+    <section class="py-16 bg-white hidden" id="gameOverScreen">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 shadow-xl">
+                <div class="bg-gradient-gold text-white w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa fa-trophy text-4xl"></i>
+                </div>
+                <h2 class="text-4xl font-bold text-chinese-red mb-4">游戏结束！</h2>
+                <p class="text-xl text-gray-700 mb-8">恭喜你完成了宁波灯谜挑战</p>
+                
+                <!-- 成绩统计 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-chinese-red" id="finalScore">0</div>
+                        <div class="text-sm text-gray-600">总积分</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-chinese-red" id="correctAnswers">0</div>
+                        <div class="text-sm text-gray-600">正确答案</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-chinese-red" id="accuracy">0%</div>
+                        <div class="text-sm text-gray-600">正确率</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-chinese-red" id="bestStreak">0</div>
+                        <div class="text-sm text-gray-600">最佳连击</div>
+                    </div>
+                </div>
+                
+                <!-- 评价 -->
+                <div class="bg-white rounded-2xl p-6 mb-8" id="evaluation">
+                    <h3 class="text-xl font-bold text-chinese-red mb-2">继续努力！</h3>
+                    <p class="text-gray-600">多了解宁波文化，下次一定能取得更好的成绩！</p>
+                </div>
+                
+                <!-- 操作按钮 -->
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button onclick="restartGame()" class="bg-gradient-red text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        <i class="fa fa-bullseye mr-2"></i>重新开始
+                    </button>
+                    <button onclick="changeDifficulty()" class="bg-gradient-gold text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        <i class="fa fa-bullseye mr-2"></i>更换难度
+                    </button>
+                    <button onclick="goBack()" class="bg-gray-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        <i class="fa fa-home mr-2"></i>返回首页
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gradient-red text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 网站介绍 -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="bg-white/20 p-2 rounded-full">
+                            <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-shadow">2026宁波新春佳节</span>
+                    </div>
+                    <p class="text-gray-200 mb-4">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情。</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-heart text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-star text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-thumbs-up text-yellow-200"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 快速导航 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">快速导航</h5>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white hover:text-yellow-200 transition-colors font-medium">首页</a></li>
+                        <li><a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节知识</a></li>
+                        <li><a href="culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波年俗</a></li>
+                        <li><a href="games.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节游戏</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 宁波特色 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">宁波特色</h5>
+                    <ul class="space-y-2">
+                        <li><a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波花市</a></li>
+                        <li><a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">特色美食</a></li>
+                        <li><a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors font-medium">民俗表演</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 联系信息 -->
+            <div class="border-t border-white/20 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-gray-200 font-medium">&copy; 2026 宁波新春佳节主题网站. 保留所有权利.</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <i class="fa fa-map-marker mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">浙江宁波</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-phone mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">0574-12345678</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-envelope mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">ningbo@spring.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-gold text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
+        <i class="fa fa-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        // 游戏数据
+        const gameData = {
+            easy: [
+                {
+                    question: "圆圆滚滚白胖子，轻轻一咬甜滋滋，宁波特产人人爱，春节餐桌不能少",
+                    hint: "这是一种宁波传统甜品",
+                    options: ["宁波汤圆", "年糕", "馒头", "饺子"],
+                    correct: 0,
+                    explanation: "宁波汤圆是宁波最著名的传统甜品，以猪油黑芝麻馅闻名"
+                },
+                {
+                    question: "白白胖胖一条糕，春节家家少不了，寓意年年节节高，宁波味道特别好",
+                    hint: "这是一种用米制成的食品",
+                    options: ["汤圆", "宁波年糕", "粽子", "月饼"],
+                    correct: 1,
+                    explanation: "宁波年糕是宁波传统食品，寓意年年高升"
+                },
+                {
+                    question: "红红膏体白肉身，宁波海鲜第一名，春节餐桌压轴菜，寓意红火又丰盛",
+                    hint: "这是一种宁波特色海鲜",
+                    options: ["红膏呛蟹", "大黄鱼", "虾蛄", "扇贝"],
+                    correct: 0,
+                    explanation: "红膏呛蟹是宁波海鲜之王，春节餐桌必备"
+                },
+                {
+                    question: "长长一条海中游，晒干之后味道优，宁波渔民传统菜，春节待客有面子",
+                    hint: "这是一种海鱼制成的干货",
+                    options: ["鱼干", "新风鳗鲞", "虾皮", "海带"],
+                    correct: 1,
+                    explanation: "新风鳗鲞是宁波渔家传统美食，味道鲜美"
+                },
+                {
+                    question: "正月十四宁波夜，家家户户都要吃，水果干果加年糕，寓意团圆又美好",
+                    hint: "这是宁波元宵节特色食品",
+                    options: ["汤圆", "丫头羹", "年糕汤", "八宝粥"],
+                    correct: 1,
+                    explanation: "丫头羹是宁波正月十四夜必吃的传统食品"
+                },
+                {
+                    question: "宁波城里有座庙，春节香火特别旺，祈福许愿保平安，历史悠久名气扬",
+                    hint: "这是宁波著名的古建筑",
+                    options: ["宁波城隍庙", "天童寺", "阿育王寺", "保国寺"],
+                    correct: 0,
+                    explanation: "宁波城隍庙是宁波最著名的古庙，春节香火鼎盛"
+                },
+                {
+                    question: "七千年历史长，稻作文明发源地，宁波文化之根脉，世界遗产美名扬",
+                    hint: "这是宁波著名的文化遗址",
+                    options: ["河姆渡遗址", "良渚遗址", "半坡遗址", "仰韶遗址"],
+                    correct: 0,
+                    explanation: "河姆渡遗址是宁波七千年稻作文明的发源地"
+                },
+                {
+                    question: "宁波城里一条街，古色古香韵味长，春节美食聚集地，游客如织乐洋洋",
+                    hint: "这是宁波著名的历史街区",
+                    options: ["南塘老街", "鼓楼步行街", "天一广场", "老外滩"],
+                    correct: 0,
+                    explanation: "南塘老街是宁波最著名的历史文化街区"
+                },
+                {
+                    question: "八百年历史久，布制龙身舞不休，宁波特色表演艺，国家级非遗美名留",
+                    hint: "这是宁波著名的传统舞蹈",
+                    options: ["舞狮", "奉化布龙", "腰鼓", "秧歌"],
+                    correct: 1,
+                    explanation: "奉化布龙是宁波最著名的传统表演艺术"
+                },
+                {
+                    question: "宁波话叫'汤果'，正月初一吃一碗，糯米制成寓意好，团团圆圆过大年",
+                    hint: "这是宁波春节传统食品",
+                    options: ["汤圆", "年糕", "汤果", "粽子"],
+                    correct: 2,
+                    explanation: "汤果是宁波话对汤圆的称呼，正月初一必吃"
+                },
+                {
+                    question: "腊月廿三送灶王，宁波人家都要做，八色糖果甜滋滋，粘住灶君嘴巴甜",
+                    hint: "这是宁波祭灶传统食品",
+                    options: ["灶糖", "祭灶果", "糖果", "年糕"],
+                    correct: 1,
+                    explanation: "祭灶果是宁波腊月廿三祭灶时用的八色糖果"
+                },
+                {
+                    question: "宁波传统小点心，外面年糕里面甜，黄豆粉儿滚一圈，香甜软糯味道鲜",
+                    hint: "这是宁波传统小吃",
+                    options: ["年糕团", "汤圆", "麻团", "粽子"],
+                    correct: 0,
+                    explanation: "年糕团是宁波传统小吃，外裹黄豆粉"
+                },
+                {
+                    question: "正月十五闹元宵，宁波城里真热闹，赏花灯来猜灯谜，传统文化传承好",
+                    hint: "这是宁波元宵节传统活动",
+                    options: ["庙会", "灯会", "舞龙", "舞狮"],
+                    correct: 1,
+                    explanation: "灯会是宁波元宵节最主要的传统活动"
+                },
+                {
+                    question: "宁波商人遍天下，诚信经营传佳话，无宁不成市之誉，商帮文化美名扬",
+                    hint: "这是宁波著名的商人群体",
+                    options: ["晋商", "徽商", "宁波商帮", "浙商"],
+                    correct: 2,
+                    explanation: "宁波商帮是中国著名的商人群体，有'无宁不成市'之称"
+                },
+                {
+                    question: "千年古县城，年糕发源地，江南第一古县城，文化底蕴深如海",
+                    hint: "这是宁波著名的古镇",
+                    options: ["慈城古县城", "前童古镇", "石浦古镇", "梁弄古镇"],
+                    correct: 0,
+                    explanation: "慈城古县城被誉为'江南第一古县城'，是年糕发源地"
+                }
+            ],
+            medium: [
+                {
+                    question: "宁波简称'甬'，这个字的由来与什么有关？",
+                    hint: "与宁波的地理特征有关",
+                    options: ["山", "河", "海", "港"],
+                    correct: 1,
+                    explanation: "'甬'字来源于宁波境内的甬江"
+                },
+                {
+                    question: "宁波城隍庙始建于哪个朝代？",
+                    hint: "是中国历史上的一个强盛朝代",
+                    options: ["唐朝", "宋朝", "明朝", "清朝"],
+                    correct: 0,
+                    explanation: "宁波城隍庙始建于唐代，距今已有1200多年历史"
+                },
+                {
+                    question: "河姆渡遗址距今约有多少年历史？",
+                    hint: "是一个以'七'开头的数字",
+                    options: ["5000年", "6000年", "7000年", "8000年"],
+                    correct: 2,
+                    explanation: "河姆渡遗址距今约7000年，是中国重要的新石器时代遗址"
+                },
+                {
+                    question: "宁波年糕制作工艺被列入第几批国家级非物质文化遗产？",
+                    hint: "是第一批",
+                    options: ["第一批", "第二批", "第三批", "第四批"],
+                    correct: 0,
+                    explanation: "宁波年糕制作工艺被列入第一批国家级非物质文化遗产"
+                },
+                {
+                    question: "宁波汤圆的历史可以追溯到哪个朝代？",
+                    hint: "是中国历史上经济文化发达的朝代",
+                    options: ["唐朝", "宋朝", "明朝", "清朝"],
+                    correct: 1,
+                    explanation: "宁波汤圆的历史可以追溯到宋朝，当时称为'浮元子'"
+                },
+                {
+                    question: "奉化布龙被列入国家级非物质文化遗产是在哪一年？",
+                    hint: "是21世纪初的一年",
+                    options: ["2004年", "2006年", "2008年", "2010年"],
+                    correct: 1,
+                    explanation: "奉化布龙于2006年被列入第一批国家级非物质文化遗产名录"
+                },
+                {
+                    question: "宁波话属于哪种方言体系？",
+                    hint: "是吴语的一个分支",
+                    options: ["吴语", "粤语", "闽语", "北方话"],
+                    correct: 0,
+                    explanation: "宁波话属于吴语太湖片甬江小片"
+                },
+                {
+                    question: "宁波港是中国历史上的重要港口，它曾是哪个贸易路线的起点？",
+                    hint: "是古代中国与外国贸易的重要通道",
+                    options: ["丝绸之路", "海上丝绸之路", "茶马古道", "京杭大运河"],
+                    correct: 1,
+                    explanation: "宁波港是海上丝绸之路的重要起点"
+                },
+                {
+                    question: "宁波天一阁是什么类型的建筑？",
+                    hint: "与书籍有关",
+                    options: ["寺庙", "藏书楼", "宫殿", "民居"],
+                    correct: 1,
+                    explanation: "天一阁是中国现存最古老的私家藏书楼"
+                },
+                {
+                    question: "宁波传统节日'谢年'通常在什么时候举行？",
+                    hint: "是在春节前的一段时间",
+                    options: ["腊月廿三", "腊月廿四", "腊月廿五至廿九", "除夕"],
+                    correct: 2,
+                    explanation: "谢年是宁波传统习俗，通常在腊月廿五至廿九举行"
+                },
+                {
+                    question: "宁波传统婚礼中有'闹洞房'的习俗，这体现了宁波文化的什么特点？",
+                    hint: "与家庭和社区有关",
+                    options: ["重视家庭", "重视教育", "重视商业", "重视艺术"],
+                    correct: 0,
+                    explanation: "闹洞房体现了宁波文化重视家庭和睦的特点"
+                },
+                {
+                    question: "宁波传统建筑中常见的'马头墙'有什么作用？",
+                    hint: "与建筑安全有关",
+                    options: ["装饰", "防火", "防盗", "防潮"],
+                    correct: 1,
+                    explanation: "马头墙主要作用是防火，是江南建筑的特色"
+                },
+                {
+                    question: "宁波传统音乐'四明南词'属于哪种音乐类型？",
+                    hint: "是一种说唱艺术",
+                    options: ["戏曲", "说唱", "器乐", "民歌"],
+                    correct: 1,
+                    explanation: "四明南词是宁波传统的说唱艺术"
+                },
+                {
+                    question: "宁波传统工艺'朱金漆木雕'主要用于什么地方？",
+                    hint: "与建筑装饰有关",
+                    options: ["家具", "建筑装饰", "工艺品", "日用品"],
+                    correct: 1,
+                    explanation: "朱金漆木雕主要用于建筑装饰，是宁波传统工艺"
+                },
+                {
+                    question: "宁波传统节日'丫头羹'为什么要在正月十四夜食用？",
+                    hint: "与月亮有关",
+                    options: ["十五月亮圆", "十四月亮亮", "十五要工作", "十四有空闲"],
+                    correct: 1,
+                    explanation: "宁波民间认为正月十四夜的月亮更亮，所以在这一夜吃丫头羹"
+                }
+            ],
+            hard: [
+                {
+                    question: "宁波话中'下饭'指的是什么？",
+                    hint: "与吃饭有关",
+                    options: ["米饭", "菜肴", "筷子", "碗"],
+                    correct: 1,
+                    explanation: "宁波话中'下饭'指的是菜肴，即用来配饭吃的菜"
+                },
+                {
+                    question: "宁波话中'阿拉'是什么意思？",
+                    hint: "与人称有关",
+                    options: ["我", "你", "他", "我们"],
+                    correct: 3,
+                    explanation: "宁波话中'阿拉'是'我们'的意思，是宁波话的代表性词汇"
+                },
+                {
+                    question: "宁波传统习俗中，'开门炮'为什么要'带四放三'？",
+                    hint: "与数字的寓意有关",
+                    options: ["四季平安", "三阳开泰", "留一作备炮", "图个吉利"],
+                    correct: 2,
+                    explanation: "宁波传统习俗中，开门炮要'带四放三'，留一作备炮，寓意有备无患"
+                },
+                {
+                    question: "宁波话中'石骨铁硬'形容什么？",
+                    hint: "与硬度有关",
+                    options: ["石头", "钢铁", "性格", "食物"],
+                    correct: 2,
+                    explanation: "宁波话中'石骨铁硬'形容人的性格坚强、固执"
+                },
+                {
+                    question: "宁波传统婚礼中，新娘为什么要穿'红棉袄'？",
+                    hint: "与保暖和寓意有关",
+                    options: ["保暖", "喜庆", "辟邪", "以上都是"],
+                    correct: 3,
+                    explanation: "宁波传统婚礼中新娘穿红棉袄有保暖、喜庆、辟邪等多重寓意"
+                },
+                {
+                    question: "宁波话中'贼骨铁硬'是什么意思？",
+                    hint: "是贬义词",
+                    options: ["非常硬", "非常坏", "非常狡猾", "非常固执"],
+                    correct: 3,
+                    explanation: "宁波话中'贼骨铁硬'形容人非常固执，难以说服"
+                },
+                {
+                    question: "宁波传统习俗中，'谢年'时为什么要用'五牲'或'七牲'？",
+                    hint: "与祭祀的规格有关",
+                    options: ["越多越好", "单数吉利", "双数不吉利", "没有特别含义"],
+                    correct: 1,
+                    explanation: "宁波传统习俗中，谢年时用单数的牲品，认为单数更吉利"
+                },
+                {
+                    question: "宁波话中'烂泥萝卜'形容什么？",
+                    hint: "与人的性格有关",
+                    options: ["软心肠", "硬心肠", "烂好人", "坏心肠"],
+                    correct: 0,
+                    explanation: "宁波话中'烂泥萝卜'形容人软心肠，容易被感动"
+                },
+                {
+                    question: "宁波传统建筑中，'明堂'指的是什么？",
+                    hint: "与建筑布局有关",
+                    options: ["大厅", "院子", "厨房", "卧室"],
+                    correct: 1,
+                    explanation: "宁波传统建筑中，'明堂'指的是院子，即房屋前面的空地"
+                },
+                {
+                    question: "宁波话中'木肤肤'形容什么？",
+                    hint: "与反应有关",
+                    options: ["木头", "皮肤", "反应迟钝", "皮肤光滑"],
+                    correct: 2,
+                    explanation: "宁波话中'木肤肤'形容人反应迟钝，不够机灵"
+                },
+                {
+                    question: "宁波传统习俗中，为什么正月初一不能扫地？",
+                    hint: "与财运有关",
+                    options: ["会扫走财运", "会扫走福气", "会扫走健康", "以上都是"],
+                    correct: 4,
+                    explanation: "宁波传统习俗中，正月初一不能扫地，认为会扫走财运、福气和健康"
+                },
+                {
+                    question: "宁波话中'噱头'是什么意思？",
+                    hint: "与表演有关",
+                    options: ["笑话", "表演技巧", "骗人的东西", "有趣的事情"],
+                    correct: 2,
+                    explanation: "宁波话中'噱头'指骗人的东西或手段"
+                },
+                {
+                    question: "宁波传统习俗中，'压岁钱'为什么要压在枕头下？",
+                    hint: "与辟邪有关",
+                    options: ["保暖", "安全", "辟邪", "招财"],
+                    correct: 2,
+                    explanation: "宁波传统习俗中，压岁钱要压在枕头下，寓意压住邪祟，保佑平安"
+                },
+                {
+                    question: "宁波话中'阿娘'指的是什么亲属？",
+                    hint: "是女性亲属",
+                    options: ["母亲", "祖母", "姑母", "姨母"],
+                    correct: 1,
+                    explanation: "宁波话中'阿娘'指的是祖母，即父亲的母亲"
+                },
+                {
+                    question: "宁波传统习俗中，为什么要在正月十四夜吃'丫头羹'而不是十五夜？",
+                    hint: "与一个历史事件有关",
+                    options: ["十四月亮亮", "十五要工作", "纪念方孝孺", "没有特别原因"],
+                    correct: 2,
+                    explanation: "传说宁波人在正月十四夜吃丫头羹是为了纪念明代忠臣方孝孺"
+                }
+            ]
+        };
+
+        // 游戏状态
+        let currentDifficulty = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let currentStreak = 0;
+        let bestStreak = 0;
+        let selectedOption = -1;
+
+        // 初始化游戏
+        function initGame() {
+            // 显示难度选择界面
+            document.getElementById('difficultySelection').classList.remove('hidden');
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('gameOverScreen').classList.add('hidden');
+            
+            // 重置游戏状态
+            currentQuestionIndex = 0;
+            score = 0;
+            correctAnswers = 0;
+            currentStreak = 0;
+            bestStreak = 0;
+            selectedOption = -1;
+            
+            // 更新UI
+            updateUI();
+        }
+
+        // 开始游戏
+        function startGame(difficulty) {
+            currentDifficulty = difficulty;
+            currentQuestions = [...gameData[difficulty]]; // 复制题目数组
+            
+            // 打乱题目顺序
+            currentQuestions = shuffleArray(currentQuestions);
+            
+            // 显示游戏界面
+            document.getElementById('difficultySelection').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+            document.getElementById('gameOverScreen').classList.add('hidden');
+            
+            // 加载第一题
+            loadQuestion();
+        }
+
+        // 加载题目
+        function loadQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                endGame();
+                return;
+            }
+            
+            const question = currentQuestions[currentQuestionIndex];
+            selectedOption = -1;
+            
+            // 更新题目内容
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('hintText').textContent = `提示：${question.hint}`;
+            
+            // 生成选项
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'bg-white p-4 rounded-xl shadow-lg option-hover cursor-pointer border-2 border-transparent';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectOption(index, optionDiv);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            // 更新UI
+            updateUI();
+        }
+
+        // 选择选项
+        function selectOption(index, element) {
+            // 清除之前的选择
+            document.querySelectorAll('#optionsContainer > div').forEach(div => {
+                div.classList.remove('border-chinese-red', 'bg-red-50');
+                div.classList.add('border-transparent');
+            });
+            
+            // 高亮当前选择
+            element.classList.remove('border-transparent');
+            element.classList.add('border-chinese-red', 'bg-red-50');
+            
+            selectedOption = index;
+        }
+
+        // 显示提示
+        function showHint() {
+            if (score < 10) {
+                alert('积分不足，无法使用提示！');
+                return;
+            }
+            
+            score -= 10;
+            const question = currentQuestions[currentQuestionIndex];
+            
+            // 显示更详细的提示
+            let detailedHint = '';
+            switch (question.correct) {
+                case 0: detailedHint = '第一个选项'; break;
+                case 1: detailedHint = '第二个选项'; break;
+                case 2: detailedHint = '第三个选项'; break;
+                case 3: detailedHint = '第四个选项'; break;
+            }
+            
+            document.getElementById('hintText').textContent = `提示：${question.hint} (${detailedHint})`;
+            updateUI();
+        }
+
+        // 跳过题目
+        function skipQuestion() {
+            score = Math.max(0, score - 5);
+            currentStreak = 0;
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        // 提交答案
+        function submitAnswer() {
+            if (selectedOption === -1) {
+                alert('请选择一个答案！');
+                return;
+            }
+            
+            const question = currentQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('#optionsContainer > div');
+            
+            if (selectedOption === question.correct) {
+                // 答对了
+                options[selectedOption].classList.add('correct-answer', 'text-white');
+                correctAnswers++;
+                currentStreak++;
+                bestStreak = Math.max(bestStreak, currentStreak);
+                
+                // 根据难度和连击数计算得分
+                let points = currentDifficulty === 'easy' ? 10 : currentDifficulty === 'medium' ? 20 : 30;
+                points *= (currentStreak >= 5) ? 2 : (currentStreak >= 3) ? 1.5 : 1;
+                score += Math.floor(points);
+                
+                // 显示解释
+                setTimeout(() => {
+                    alert(`恭喜答对了！\n\n${question.explanation}\n\n获得 ${Math.floor(points)} 分！`);
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }, 1000);
+            } else {
+                // 答错了
+                options[selectedOption].classList.add('wrong-answer', 'text-white');
+                options[question.correct].classList.add('correct-answer', 'text-white');
+                currentStreak = 0;
+                
+                // 显示解释
+                setTimeout(() => {
+                    alert(`答错了！\n\n正确答案是：${question.options[question.correct]}\n\n${question.explanation}`);
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }, 1000);
+            }
+        }
+
+        // 更新UI
+        function updateUI() {
+            document.getElementById('currentScore').textContent = score;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = currentQuestions.length;
+            document.getElementById('currentStreak').textContent = currentStreak;
+            
+            // 更新进度条
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        // 结束游戏
+        function endGame() {
+            // 显示游戏结束界面
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('gameOverScreen').classList.remove('hidden');
+            
+            // 更新最终成绩
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('correctAnswers').textContent = correctAnswers;
+            document.getElementById('accuracy').textContent = Math.round((correctAnswers / currentQuestions.length) * 100) + '%';
+            document.getElementById('bestStreak').textContent = bestStreak;
+            
+            // 生成评价
+            const evaluation = document.getElementById('evaluation');
+            let title = '';
+            let content = '';
+            
+            const accuracy = (correctAnswers / currentQuestions.length) * 100;
+            
+            if (accuracy >= 90) {
+                title = '宁波文化大师！';
+                content = '你对宁波文化的了解非常深入，是真正的宁波文化大师！';
+            } else if (accuracy >= 80) {
+                title = '宁波文化达人！';
+                content = '你对宁波文化有很深的了解，继续保持！';
+            } else if (accuracy >= 70) {
+                title = '宁波文化爱好者！';
+                content = '你对宁波文化有一定了解，继续努力！';
+            } else if (accuracy >= 60) {
+                title = '宁波文化初学者！';
+                content = '你对宁波文化有基本了解，多学习会更好！';
+            } else {
+                title = '需要加油！';
+                content = '多了解宁波文化，下次一定能取得更好的成绩！';
+            }
+            
+            evaluation.innerHTML = `
+                <h3 class="text-xl font-bold text-chinese-red mb-2">${title}</h3>
+                <p class="text-gray-600">${content}</p>
+            `;
+            
+            // 保存成绩到本地存储
+            saveScore();
+        }
+
+        // 保存成绩
+        function saveScore() {
+            const scores = JSON.parse(localStorage.getItem('ningboGameScores') || '[]');
+            scores.push({
+                game: 'riddles',
+                difficulty: currentDifficulty,
+                score: score,
+                correct: correctAnswers,
+                total: currentQuestions.length,
+                accuracy: Math.round((correctAnswers / currentQuestions.length) * 100),
+                date: new Date().toLocaleDateString()
+            });
+            
+            // 只保留最近的100条记录
+            if (scores.length > 100) {
+                scores.splice(0, scores.length - 100);
+            }
+            
+            localStorage.setItem('ningboGameScores', JSON.stringify(scores));
+        }
+
+        // 重新开始游戏
+        function restartGame() {
+            startGame(currentDifficulty);
+        }
+
+        // 更换难度
+        function changeDifficulty() {
+            initGame();
+        }
+
+        // 返回游戏选择
+        function goBack() {
+            window.location.href = 'games.html';
+        }
+
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 返回顶部
+        function backToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 数组打乱函数
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                navbar.classList.remove('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        // 返回顶部按钮点击事件
+        document.getElementById('backToTop').addEventListener('click', backToTop);
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // ESC键关闭移动端菜单
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+            
+            // 游戏中的键盘操作
+            if (!document.getElementById('gameScreen').classList.contains('hidden')) {
+                switch(e.key) {
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                        const index = parseInt(e.key) - 1;
+                        const options = document.querySelectorAll('#optionsContainer > div');
+                        if (index >= 0 && index < options.length) {
+                            selectOption(index, options[index]);
+                        }
+                        break;
+                    case 'Enter':
+                        submitAnswer();
+                        break;
+                    case ' ':
+                        e.preventDefault();
+                        showHint();
+                        break;
+                    case 'ArrowRight':
+                        skipQuestion();
+                        break;
+                }
+            }
+        });
+
+        // 页面加载完成后初始化游戏
+        document.addEventListener('DOMContentLoaded', function() {
+            initGame();
+        });
+    </script>
+</body>
+
+</html>

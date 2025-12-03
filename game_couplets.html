@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>春联配对 - 2026宁波新春佳节</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DC2626',
+                        secondary: '#F59E0B',
+                        accent: '#059669',
+                        gold: '#D97706',
+                        'chinese-red': '#DC2626',
+                        'chinese-gold': '#D97706'
+                    },
+                    fontFamily: {
+                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'slide-in': 'slideIn 0.5s ease-out forwards',
+                        'match': 'match 0.6s ease-in-out',
+                        'shake': 'shake 0.5s ease-in-out'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            }
+            .bg-gradient-red {
+                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            }
+            .bg-gradient-gold {
+                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            }
+            .border-gradient {
+                border-image: linear-gradient(45deg, #F59E0B, #DC2626) 1;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px #F59E0B; }
+            to { box-shadow: 0 0 30px #F59E0B, 0 0 40px #F59E0B; }
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(-20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+        
+        @keyframes match {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .firecracker {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .couple-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .couple-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .couple-item.selected {
+            border-color: #F59E0B;
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+        }
+        
+        .couple-item.matched {
+            border-color: #10B981;
+            background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+            animation: match 0.6s ease-in-out;
+        }
+        
+        .couple-item.error {
+            border-color: #EF4444;
+            background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #DC2626, #F59E0B);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #B91C1C, #D97706);
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-gradient-red shadow-2xl sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/20 p-2 rounded-full">
+                        <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                    </div>
+                    <span class="text-white text-xl font-bold text-shadow">2026宁波新春佳节</span>
+                </div>
+                
+                <!-- 桌面端菜单 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">首页</a>
+                    <a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">春节知识</a>
+                    <a href="culture.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">宁波年俗</a>
+                    <a href="games.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">春节游戏</a>
+                    <a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">宁波花市</a>
+                    <a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">特色美食</a>
+                    <a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">民俗表演</a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden">
+                    <button class="text-white hover:text-yellow-200 font-medium" onclick="toggleMobileMenu()">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden bg-gradient-red/95 hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">首页</a>
+                <a href="knowledge.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">春节知识</a>
+                <a href="culture.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">宁波年俗</a>
+                <a href="games.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">春节游戏</a>
+                <a href="flower_market.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">宁波花市</a>
+                <a href="food_culture.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">特色美食</a>
+                <a href="lion_dragon.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">民俗表演</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 游戏头部 -->
+    <section class="py-8 bg-gradient-to-r from-red-100 to-orange-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <button onclick="goBack()" class="bg-white text-chinese-red px-4 py-2 rounded-full font-medium hover:shadow-lg transition-all duration-300">
+                        <i class="fa fa-arrow-left mr-2"></i>返回游戏选择
+                    </button>
+                    <div class="bg-white px-4 py-2 rounded-full shadow-lg">
+                        <span class="text-chinese-red font-bold">游戏: 春联配对</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-6">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-chinese-red" id="currentScore">0</div>
+                        <div class="text-sm text-gray-600">当前积分</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-chinese-red" id="matchedPairs">0</div>
+                        <div class="text-sm text-gray-600">已配对 <span id="totalPairs">10</span></div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-chinese-red" id="currentStreak">0</div>
+                        <div class="text-sm text-gray-600">连击</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 进度条 -->
+            <div class="mt-6 bg-white rounded-full h-3 shadow-inner">
+                <div class="bg-gradient-gold h-3 rounded-full progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 难度选择 -->
+    <section class="py-16 bg-white" id="difficultySelection">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-chinese-red mb-8">选择难度等级</h2>
+            <p class="text-xl text-gray-700 mb-12">体验宁波特色春联的对仗之美</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 简单 -->
+                <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-8 shadow-xl card-hover cursor-pointer" onclick="startGame('easy')">
+                    <div class="bg-gradient-green w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-smile-o text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">简单</h3>
+                    <p class="text-gray-600 mb-6">宁波常见春联，通俗易懂</p>
+                    <div class="flex justify-center space-x-1 mb-4">
+                        <span class="text-yellow-600 text-lg">★☆☆☆☆</span>
+                    </div>
+                    <div class="text-sm text-gray-500">适合初学者</div>
+                </div>
+                
+                <!-- 中等 -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 shadow-xl card-hover cursor-pointer" onclick="startGame('medium')">
+                    <div class="bg-gradient-gold w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-meh-o text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">中等</h3>
+                    <p class="text-gray-600 mb-6">宁波历史名人春联</p>
+                    <div class="flex justify-center space-x-1 mb-4">
+                        <span class="text-yellow-600 text-lg">★★★☆☆</span>
+                    </div>
+                    <div class="text-sm text-gray-500">适合有一定文化基础</div>
+                </div>
+                
+                <!-- 困难 -->
+                <div class="bg-gradient-to-br from-red-50 to-purple-50 rounded-3xl p-8 shadow-xl card-hover cursor-pointer" onclick="startGame('hard')">
+                    <div class="bg-gradient-red w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-frown-o text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">困难</h3>
+                    <p class="text-gray-600 mb-6">宁波经典名联，意境深远</p>
+                    <div class="flex justify-center space-x-1 mb-4">
+                        <span class="text-yellow-600 text-lg">★★★★★</span>
+                    </div>
+                    <div class="text-sm text-gray-500">适合文化专家</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏主界面 -->
+    <section class="py-16 bg-white hidden" id="gameScreen">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 题目说明 -->
+            <div class="text-center mb-12">
+                <div class="bg-gradient-red text-white px-6 py-3 rounded-full text-lg font-semibold inline-block mb-4">
+                    <i class="fa fa-edit mr-2"></i>春联配对
+                </div>
+                <h3 class="text-2xl font-bold text-chinese-red mb-4">请将上联与对应的下联配对</h3>
+                <p class="text-gray-600" id="hintText">点击上联，再点击下联进行配对</p>
+            </div>
+            
+            <!-- 春联配对区域 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 上联区域 -->
+                <div>
+                    <h4 class="text-xl font-bold text-chinese-red mb-6 text-center">
+                        <i class="fa fa-arrow-right mr-2"></i>上联
+                    </h4>
+                    <div class="space-y-4" id="upperContainer">
+                        <!-- 上联将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 下联区域 -->
+                <div>
+                    <h4 class="text-xl font-bold text-chinese-red mb-6 text-center">
+                        <i class="fa fa-arrow-left mr-2"></i>下联
+                    </h4>
+                    <div class="space-y-4" id="lowerContainer">
+                        <!-- 下联将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 控制按钮 -->
+            <div class="flex justify-center space-x-4">
+                <button onclick="showHint()" class="bg-gradient-gold text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                    <i class="fa fa-lightbulb-o mr-2"></i>提示 (消耗10分)
+                </button>
+                <button onclick="resetSelection()" class="bg-gray-500 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                    <i class="fa fa-bullseye mr-2"></i>重置选择
+                </button>
+                <button onclick="submitAll()" class="bg-gradient-red text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                    <i class="fa fa-check mr-2"></i>提交全部
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏结束界面 -->
+    <section class="py-16 bg-white hidden" id="gameOverScreen">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 shadow-xl">
+                <div class="bg-gradient-gold text-white w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa fa-trophy text-4xl"></i>
+                </div>
+                <h2 class="text-4xl font-bold text-chinese-red mb-4">游戏结束！</h2>
+                <p class="text-xl text-gray-700 mb-8">恭喜你完成了宁波春联配对挑战</p>
+                
+                <!-- 成绩统计 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-chinese-red" id="finalScore">0</div>
+                        <div class="text-sm text-gray-600">总积分</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-chinese-red" id="correctPairs">0</div>
+                        <div class="text-sm text-gray-600">正确配对</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-chinese-red" id="accuracy">0%</div>
+                        <div class="text-sm text-gray-600">正确率</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-chinese-red" id="bestStreak">0</div>
+                        <div class="text-sm text-gray-600">最佳连击</div>
+                    </div>
+                </div>
+                
+                <!-- 评价 -->
+                <div class="bg-white rounded-2xl p-6 mb-8" id="evaluation">
+                    <h3 class="text-xl font-bold text-chinese-red mb-2">继续努力！</h3>
+                    <p class="text-gray-600">多了解宁波文化，下次一定能取得更好的成绩！</p>
+                </div>
+                
+                <!-- 操作按钮 -->
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button onclick="restartGame()" class="bg-gradient-red text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        <i class="fa fa-bullseye mr-2"></i>重新开始
+                    </button>
+                    <button onclick="changeDifficulty()" class="bg-gradient-gold text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        <i class="fa fa-bullseye mr-2"></i>更换难度
+                    </button>
+                    <button onclick="goBack()" class="bg-gray-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        <i class="fa fa-home mr-2"></i>返回首页
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gradient-red text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 网站介绍 -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="bg-white/20 p-2 rounded-full">
+                            <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-shadow">2026宁波新春佳节</span>
+                    </div>
+                    <p class="text-gray-200 mb-4">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情。</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-heart text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-star text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-thumbs-up text-yellow-200"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 快速导航 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">快速导航</h5>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white hover:text-yellow-200 transition-colors font-medium">首页</a></li>
+                        <li><a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节知识</a></li>
+                        <li><a href="culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波年俗</a></li>
+                        <li><a href="games.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节游戏</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 宁波特色 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">宁波特色</h5>
+                    <ul class="space-y-2">
+                        <li><a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波花市</a></li>
+                        <li><a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">特色美食</a></li>
+                        <li><a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors font-medium">民俗表演</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 联系信息 -->
+            <div class="border-t border-white/20 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-gray-200 font-medium">&copy; 2026 宁波新春佳节主题网站. 保留所有权利.</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <i class="fa fa-map-marker mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">浙江宁波</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-phone mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">0574-12345678</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-envelope mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">ningbo@spring.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-gold text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
+        <i class="fa fa-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        // 春联数据
+        const coupletsData = {
+            easy: [
+                {
+                    upper: "春风得意年年好",
+                    lower: "事业有成步步高",
+                    explanation: "这是一副寓意吉祥的春联，表达了对新年的美好祝愿"
+                },
+                {
+                    upper: "春回大地千山秀",
+                    lower: "福降人间万户欢",
+                    explanation: "描绘了春天到来时大地复苏、人民欢乐的景象"
+                },
+                {
+                    upper: "年糕年糕年年高",
+                    lower: "汤圆汤圆团团圆",
+                    explanation: "宁波特色春联，体现了宁波人对年糕和汤圆的喜爱"
+                },
+                {
+                    upper: "红灯高照全家福",
+                    lower: "春光辉映满堂春",
+                    explanation: "表达了家庭和睦、春意盎然的美好祝愿"
+                },
+                {
+                    upper: "春风送暖花千树",
+                    lower: "瑞气呈祥福满门",
+                    explanation: "描绘了春天的美景和祥瑞之气"
+                },
+                {
+                    upper: "宁波汤圆甜如蜜",
+                    lower: "甬城年糕香万家",
+                    explanation: "宁波特色春联，赞美了宁波的传统美食"
+                },
+                {
+                    upper: "岁岁平安福寿全",
+                    lower: "年年如意财源广",
+                    explanation: "表达了对新年平安、如意、财源广进的祝愿"
+                },
+                {
+                    upper: "春风化雨润万物",
+                    lower: "瑞雪兆丰年千家",
+                    explanation: "描绘了春天的滋润和瑞雪带来的好兆头"
+                },
+                {
+                    upper: "花香鸟语春满园",
+                    lower: "人寿年丰福满堂",
+                    explanation: "表达了对美好生活的向往"
+                },
+                {
+                    upper: "宁波港通四海",
+                    lower: "甬江水润万家",
+                    explanation: "赞美了宁波作为港口城市的重要地位"
+                }
+            ],
+            medium: [
+                {
+                    upper: "书藏古今天一阁",
+                    lower: "港通天下宁波城",
+                    explanation: "这是宁波最著名的对联，上联讲天一阁的文化底蕴，下联讲宁波港的重要地位"
+                },
+                {
+                    upper: "七千年河姆渡文明源远流长",
+                    lower: "八万里东海潮气势磅礴",
+                    explanation: "上联赞美河姆渡文化的悠久历史，下联描绘东海的磅礴气势"
+                },
+                {
+                    upper: "四明山水甲天下",
+                    lower: "甬城文化传古今",
+                    explanation: "赞美宁波的山水之美和深厚的文化底蕴"
+                },
+                {
+                    upper: "王阳明心学传千古",
+                    lower: "黄宗羲思想照后人",
+                    explanation: "上联讲王阳明的心学，下联讲黄宗羲的思想，都是宁波历史文化名人"
+                },
+                {
+                    upper: "城隍庙香火鼎盛千年",
+                    lower: "宁波城文风昌盛万代",
+                    explanation: "上联讲城隍庙的历史悠久，下联讲宁波的文化传承"
+                },
+                {
+                    upper: "三江口潮起潮落",
+                    lower: "天一阁书香永存",
+                    explanation: "上联描绘三江口的自然景观，下联赞美天一阁的文化价值"
+                },
+                {
+                    upper: "浙东学派传薪火",
+                    lower: "四明医派济苍生",
+                    explanation: "上联讲浙东学派的学术传承，下联讲四明医派的医学贡献"
+                },
+                {
+                    upper: "老外滩见证百年沧桑",
+                    lower: "新宁波展现时代风采",
+                    explanation: "上联讲老外滩的历史，下联讲新宁波的发展"
+                },
+                {
+                    upper: "奉化布龙腾云起",
+                    lower: "宁海耍牙技艺精",
+                    explanation: "上联讲奉化布龙，下联讲宁海耍牙，都是宁波的非物质文化遗产"
+                },
+                {
+                    upper: "朱金漆木雕工艺精湛",
+                    lower: "泥金彩漆艺术绝伦",
+                    explanation: "赞美宁波传统工艺的精湛技艺"
+                }
+            ],
+            hard: [
+                {
+                    upper: "天一阁藏天下书",
+                    lower: "四明山育世间才",
+                    explanation: "天一阁是中国最古老的私家藏书楼，四明山是宁波的著名山脉"
+                },
+                {
+                    upper: "三江汇聚成甬水",
+                    lower: "五岳朝宗是四明",
+                    explanation: "上联讲宁波三江汇流的地理特征，下联讲四明山的重要地位"
+                },
+                {
+                    upper: "河姆渡稻作文明开启华夏农业先河",
+                    lower: "宁波港海上丝路连接世界贸易桥梁",
+                    explanation: "上联讲河姆渡文化的历史意义，下联讲宁波港的国际地位"
+                },
+                {
+                    upper: "王阳明龙场悟道心外无物",
+                    lower: "黄宗羲梨洲讲学天下为主",
+                    explanation: "上联讲王阳明的哲学思想，下联讲黄宗羲的政治思想"
+                },
+                {
+                    upper: "浙东学术经世致用",
+                    lower: "四明医道济世救人",
+                    explanation: "上联讲浙东学派的学术特点，下联讲四明医派的医学宗旨"
+                },
+                {
+                    upper: "城隍庙内祈福平安",
+                    lower: "月湖岸边赏月吟诗",
+                    explanation: "上联讲城隍庙的功能，下联讲月湖的文化活动"
+                },
+                {
+                    upper: "宁波商帮诚信经营传佳话",
+                    lower: "甬江儿女勤劳致富谱新篇",
+                    explanation: "上联讲宁波商帮的商业道德，下联讲宁波人民的勤劳品质"
+                },
+                {
+                    upper: "朱金漆木雕雕刻人间百态",
+                    lower: "泥金彩漆描绘盛世华章",
+                    explanation: "赞美宁波传统工艺的艺术价值"
+                },
+                {
+                    upper: "奉化布龙舞动中华魂",
+                    lower: "宁海耍牙展现民间艺",
+                    explanation: "赞美宁波非物质文化遗产的艺术魅力"
+                },
+                {
+                    upper: "七千年文明传承薪火不息",
+                    lower: "八万里河山孕育英才辈出",
+                    explanation: "表达了对宁波文化传承和人才培养的赞美"
+                }
+            ]
+        };
+
+        // 游戏状态
+        let currentDifficulty = '';
+        let currentCouplets = [];
+        let shuffledUppers = [];
+        let shuffledLowers = [];
+        let selectedUpper = -1;
+        let selectedLower = -1;
+        let matchedPairs = new Set();
+        let score = 0;
+        let correctPairs = 0;
+        let currentStreak = 0;
+        let bestStreak = 0;
+
+        // 初始化游戏
+        function initGame() {
+            // 显示难度选择界面
+            document.getElementById('difficultySelection').classList.remove('hidden');
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('gameOverScreen').classList.add('hidden');
+            
+            // 重置游戏状态
+            currentCouplets = [];
+            shuffledUppers = [];
+            shuffledLowers = [];
+            selectedUpper = -1;
+            selectedLower = -1;
+            matchedPairs = new Set();
+            score = 0;
+            correctPairs = 0;
+            currentStreak = 0;
+            bestStreak = 0;
+            
+            // 更新UI
+            updateUI();
+        }
+
+        // 开始游戏
+        function startGame(difficulty) {
+            currentDifficulty = difficulty;
+            currentCouplets = [...coupletsData[difficulty]]; // 复制春联数据
+            
+            // 打乱上联和下联的顺序
+            shuffledUppers = currentCouplets.map((couplet, index) => ({ ...couplet, index }));
+            shuffledLowers = currentCouplets.map((couplet, index) => ({ ...couplet, index }));
+            
+            shuffledUppers = shuffleArray(shuffledUppers);
+            shuffledLowers = shuffleArray(shuffledLowers);
+            
+            // 显示游戏界面
+            document.getElementById('difficultySelection').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+            document.getElementById('gameOverScreen').classList.add('hidden');
+            
+            // 生成春联选项
+            generateCouplets();
+            
+            // 更新UI
+            updateUI();
+        }
+
+        // 生成春联选项
+        function generateCouplets() {
+            const upperContainer = document.getElementById('upperContainer');
+            const lowerContainer = document.getElementById('lowerContainer');
+            
+            upperContainer.innerHTML = '';
+            lowerContainer.innerHTML = '';
+            
+            // 生成上联
+            shuffledUppers.forEach((couplet, displayIndex) => {
+                const upperDiv = document.createElement('div');
+                upperDiv.className = 'couple-item bg-white p-4 rounded-xl shadow-lg border-2 border-gray-200';
+                upperDiv.innerHTML = `
+                    <div class="text-lg font-medium text-chinese-red mb-2">上联 ${displayIndex + 1}</div>
+                    <div class="text-gray-800">${couplet.upper}</div>
+                `;
+                upperDiv.onclick = () => selectUpper(displayIndex, upperDiv);
+                upperContainer.appendChild(upperDiv);
+            });
+            
+            // 生成下联
+            shuffledLowers.forEach((couplet, displayIndex) => {
+                const lowerDiv = document.createElement('div');
+                lowerDiv.className = 'couple-item bg-white p-4 rounded-xl shadow-lg border-2 border-gray-200';
+                lowerDiv.innerHTML = `
+                    <div class="text-lg font-medium text-chinese-red mb-2">下联 ${displayIndex + 1}</div>
+                    <div class="text-gray-800">${couplet.lower}</div>
+                `;
+                lowerDiv.onclick = () => selectLower(displayIndex, lowerDiv);
+                lowerContainer.appendChild(lowerDiv);
+            });
+        }
+
+        // 选择上联
+        function selectUpper(index, element) {
+            // 如果已经配对，不允许重新选择
+            if (matchedPairs.has(`upper-${index}`)) return;
+            
+            // 清除之前的选择
+            document.querySelectorAll('#upperContainer .couple-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // 高亮当前选择
+            element.classList.add('selected');
+            selectedUpper = index;
+            
+            // 如果已经选择了下联，尝试配对
+            if (selectedLower !== -1) {
+                setTimeout(() => {
+                    attemptMatch();
+                }, 500);
+            }
+        }
+
+        // 选择下联
+        function selectLower(index, element) {
+            // 如果已经配对，不允许重新选择
+            if (matchedPairs.has(`lower-${index}`)) return;
+            
+            // 清除之前的选择
+            document.querySelectorAll('#lowerContainer .couple-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // 高亮当前选择
+            element.classList.add('selected');
+            selectedLower = index;
+            
+            // 如果已经选择了上联，尝试配对
+            if (selectedUpper !== -1) {
+                setTimeout(() => {
+                    attemptMatch();
+                }, 500);
+            }
+        }
+
+        // 尝试配对
+        function attemptMatch() {
+            if (selectedUpper === -1 || selectedLower === -1) return;
+            
+            const upperCouplet = shuffledUppers[selectedUpper];
+            const lowerCouplet = shuffledLowers[selectedLower];
+            const isMatch = upperCouplet.index === lowerCouplet.index;
+            
+            const upperElement = document.querySelectorAll('#upperContainer .couple-item')[selectedUpper];
+            const lowerElement = document.querySelectorAll('#lowerContainer .couple-item')[selectedLower];
+            
+            if (isMatch) {
+                // 配对成功
+                upperElement.classList.add('matched');
+                lowerElement.classList.add('matched');
+                matchedPairs.add(`upper-${selectedUpper}`);
+                matchedPairs.add(`lower-${selectedLower}`);
+                
+                correctPairs++;
+                currentStreak++;
+                bestStreak = Math.max(bestStreak, currentStreak);
+                
+                // 计算得分
+                let points = currentDifficulty === 'easy' ? 20 : currentDifficulty === 'medium' ? 30 : 50;
+                points *= (currentStreak >= 3) ? 1.5 : 1;
+                score += Math.floor(points);
+                
+                // 显示解释
+                setTimeout(() => {
+                    alert(`配对成功！\n\n上联：${upperCouplet.upper}\n下联：${lowerCouplet.lower}\n\n${upperCouplet.explanation}\n\n获得 ${Math.floor(points)} 分！`);
+                    
+                    // 检查游戏是否结束
+                    if (matchedPairs.size === currentCouplets.length * 2) {
+                        setTimeout(() => {
+                            endGame();
+                        }, 1000);
+                    }
+                }, 600);
+            } else {
+                // 配对失败
+                upperElement.classList.add('error');
+                lowerElement.classList.add('error');
+                currentStreak = 0;
+                
+                // 扣分
+                score = Math.max(0, score - 5);
+                
+                setTimeout(() => {
+                    upperElement.classList.remove('error', 'selected');
+                    lowerElement.classList.remove('error', 'selected');
+                }, 1000);
+            }
+            
+            // 重置选择
+            selectedUpper = -1;
+            selectedLower = -1;
+            
+            // 更新UI
+            updateUI();
+        }
+
+        // 显示提示
+        function showHint() {
+            if (score < 10) {
+                alert('积分不足，无法使用提示！');
+                return;
+            }
+            
+            score -= 10;
+            
+            // 找到一个未配对的上联，给出对应的下联提示
+            let unmatchedUpper = -1;
+            for (let i = 0; i < shuffledUppers.length; i++) {
+                if (!matchedPairs.has(`upper-${i}`)) {
+                    unmatchedUpper = i;
+                    break;
+                }
+            }
+            
+            if (unmatchedUpper === -1) {
+                alert('所有上联都已配对完成！');
+                return;
+            }
+            
+            const targetUpper = shuffledUppers[unmatchedUpper];
+            const targetLowerIndex = shuffledLowers.findIndex(lower => lower.index === targetUpper.index);
+            
+            const hintText = document.getElementById('hintText');
+            hintText.textContent = `提示：上联"${targetUpper.upper}"的下联包含"${targetUpper.lower.substring(0, 3)}..."`;
+            
+            // 高亮提示的上联
+            const upperElements = document.querySelectorAll('#upperContainer .couple-item');
+            upperElements[unmatchedUpper].classList.add('border-yellow-400', 'bg-yellow-50');
+            
+            updateUI();
+        }
+
+        // 重置选择
+        function resetSelection() {
+            selectedUpper = -1;
+            selectedLower = -1;
+            
+            document.querySelectorAll('#upperContainer .couple-item').forEach(item => {
+                item.classList.remove('selected', 'border-yellow-400', 'bg-yellow-50');
+            });
+            
+            document.querySelectorAll('#lowerContainer .couple-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            document.getElementById('hintText').textContent = '点击上联，再点击下联进行配对';
+        }
+
+        // 提交全部
+        function submitAll() {
+            // 检查是否所有都已配对
+            if (matchedPairs.size === currentCouplets.length * 2) {
+                endGame();
+                return;
+            }
+            
+            if (confirm('还有未配对的春联，确定要提交吗？未配对的将视为错误。')) {
+                endGame();
+            }
+        }
+
+        // 更新UI
+        function updateUI() {
+            document.getElementById('currentScore').textContent = score;
+            document.getElementById('matchedPairs').textContent = correctPairs;
+            document.getElementById('totalPairs').textContent = currentCouplets.length;
+            document.getElementById('currentStreak').textContent = currentStreak;
+            
+            // 更新进度条
+            const progress = (matchedPairs.size / (currentCouplets.length * 2)) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        // 结束游戏
+        function endGame() {
+            // 显示游戏结束界面
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('gameOverScreen').classList.remove('hidden');
+            
+            // 更新最终成绩
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('correctPairs').textContent = correctPairs;
+            document.getElementById('accuracy').textContent = Math.round((correctPairs / currentCouplets.length) * 100) + '%';
+            document.getElementById('bestStreak').textContent = bestStreak;
+            
+            // 生成评价
+            const evaluation = document.getElementById('evaluation');
+            let title = '';
+            let content = '';
+            
+            const accuracy = (correctPairs / currentCouplets.length) * 100;
+            
+            if (accuracy >= 90) {
+                title = '春联大师！';
+                content = '你对宁波春联文化的理解非常深入，是真正的春联大师！';
+            } else if (accuracy >= 80) {
+                title = '春联达人！';
+                content = '你对宁波春联文化有很深的理解，继续保持！';
+            } else if (accuracy >= 70) {
+                title = '春联爱好者！';
+                content = '你对宁波春联文化有一定理解，继续努力！';
+            } else if (accuracy >= 60) {
+                title = '春联初学者！';
+                content = '你对宁波春联文化有基本了解，多学习会更好！';
+            } else {
+                title = '需要加油！';
+                content = '多了解宁波春联文化，下次一定能取得更好的成绩！';
+            }
+            
+            evaluation.innerHTML = `
+                <h3 class="text-xl font-bold text-chinese-red mb-2">${title}</h3>
+                <p class="text-gray-600">${content}</p>
+            `;
+            
+            // 保存成绩到本地存储
+            saveScore();
+        }
+
+        // 保存成绩
+        function saveScore() {
+            const scores = JSON.parse(localStorage.getItem('ningboGameScores') || '[]');
+            scores.push({
+                game: 'couplets',
+                difficulty: currentDifficulty,
+                score: score,
+                correct: correctPairs,
+                total: currentCouplets.length,
+                accuracy: Math.round((correctPairs / currentCouplets.length) * 100),
+                date: new Date().toLocaleDateString()
+            });
+            
+            // 只保留最近的100条记录
+            if (scores.length > 100) {
+                scores.splice(0, scores.length - 100);
+            }
+            
+            localStorage.setItem('ningboGameScores', JSON.stringify(scores));
+        }
+
+        // 重新开始游戏
+        function restartGame() {
+            startGame(currentDifficulty);
+        }
+
+        // 更换难度
+        function changeDifficulty() {
+            initGame();
+        }
+
+        // 返回游戏选择
+        function goBack() {
+            window.location.href = 'games.html';
+        }
+
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 返回顶部
+        function backToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 数组打乱函数
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                navbar.classList.remove('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        // 返回顶部按钮点击事件
+        document.getElementById('backToTop').addEventListener('click', backToTop);
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // ESC键关闭移动端菜单
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
+                // ESC键重置选择
+                if (!document.getElementById('gameScreen').classList.contains('hidden')) {
+                    resetSelection();
+                }
+            }
+            
+            // 游戏中的键盘操作
+            if (!document.getElementById('gameScreen').classList.contains('hidden')) {
+                switch(e.key) {
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                    case '0':
+                        const index = parseInt(e.key) - 1;
+                        if (index >= 0 && index < currentCouplets.length) {
+                            const upperElements = document.querySelectorAll('#upperContainer .couple-item');
+                            if (upperElements[index] && !matchedPairs.has(`upper-${index}`)) {
+                                selectUpper(index, upperElements[index]);
+                            }
+                        }
+                        break;
+                    case ' ':
+                        e.preventDefault();
+                        showHint();
+                        break;
+                    case 'Enter':
+                        submitAll();
+                        break;
+                }
+            }
+        });
+
+        // 页面加载完成后初始化游戏
+        document.addEventListener('DOMContentLoaded', function() {
+            initGame();
+        });
+    </script>
+</body>
+
+</html>

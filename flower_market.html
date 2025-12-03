@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宁波特色文化场所 - 2026宁波新春佳节</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DC2626',
+                        secondary: '#F59E0B',
+                        accent: '#059669',
+                        gold: '#D97706',
+                        'chinese-red': '#DC2626',
+                        'chinese-gold': '#D97706'
+                    },
+                    fontFamily: {
+                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+                        'slide-in-right': 'slideInRight 0.8s ease-out forwards'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            }
+            .bg-gradient-red {
+                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            }
+            .bg-gradient-gold {
+                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            }
+            .border-gradient {
+                border-image: linear-gradient(45deg, #F59E0B, #DC2626) 1;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px #F59E0B; }
+            to { box-shadow: 0 0 30px #F59E0B, 0 0 40px #F59E0B; }
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                opacity: 0; 
+                transform: translateX(-50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                opacity: 0; 
+                transform: translateX(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+        
+        .firecracker {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .market-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .market-card:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+        
+        .market-card:nth-child(even) {
+            animation-delay: 0.4s;
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #DC2626, #F59E0B);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #B91C1C, #D97706);
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-gradient-red shadow-2xl sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/20 p-2 rounded-full">
+                        <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                    </div>
+                    <span class="text-white text-xl font-bold text-shadow">2026宁波新春佳节</span>
+                </div>
+                
+                <!-- 桌面端菜单 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">首页</a>
+                    <a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">春节知识</a>
+                    <a href="culture.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">宁波年俗</a>
+                    <a href="games.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">春节游戏</a>
+                    <a href="flower_market.html" class="text-white font-semibold border-b-2 border-yellow-200 hover:text-yellow-200 transition-colors duration-300">宁波花市</a>
+                    <a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">特色美食</a>
+                    <a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">民俗表演</a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden">
+                    <button class="text-white hover:text-yellow-200 font-medium" onclick="toggleMobileMenu()">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden bg-gradient-red/95 hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">首页</a>
+                <a href="knowledge.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">春节知识</a>
+                <a href="culture.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">宁波年俗</a>
+                <a href="games.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">春节游戏</a>
+                <a href="food_culture.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">特色美食</a>
+                <a href="lion_dragon.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">民俗表演</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="relative py-20 bg-gradient-to-br from-red-100 to-orange-100 overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow"></div>
+            <div class="absolute top-32 right-20 w-16 h-16 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-32 left-20 w-24 h-24 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 2s;"></div>
+            <div class="absolute bottom-10 right-10 w-12 h-12 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 0.5s;"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block bg-gradient-gold text-white px-6 py-3 rounded-full text-lg font-semibold mb-6 shadow-lg">
+                <i class="fa fa-map-marker mr-2"></i>文化场所
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-chinese-red mb-6 text-shadow-lg">宁波特色文化场所</h1>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                探索宁波最具代表性的文化场所，感受浓厚的历史文化底蕴
+            </p>
+            
+            <!-- 装饰性元素 -->
+            <div class="absolute top-20 left-20 animate-float">
+                <i class="fa fa-heart text-4xl text-red-300 opacity-60"></i>
+            </div>
+            <div class="absolute top-40 right-32 animate-float" style="animation-delay: 1s;">
+                <i class="fa fa-star text-3xl text-yellow-300 opacity-60"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 宁波城隍庙 -->
+            <div class="mb-20 market-card">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="relative">
+                            <img src="https://doc.doubao.com/s/v4j62msvih4/" alt="宁波城隍庙" class="w-full h-96 object-cover rounded-2xl shadow-xl">
+                            <div class="absolute top-4 left-4 bg-gradient-red text-white px-4 py-2 rounded-full text-sm font-medium">
+                                <i class="fa fa-star mr-1"></i>必游推荐
+                            </div>
+                            <div class="absolute top-4 right-4 bg-white/90 text-chinese-red px-4 py-2 rounded-full text-sm font-medium">
+                                <span class="text-yellow-600 font-bold">★★★★★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-chinese-red mb-6">宁波城隍庙</h2>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            宁波城隍庙是宁波市区内保存最完整的古建筑群之一，始建于唐代，距今已有1200多年历史。春节期间，这里香火鼎盛，是市民祈福的重要场所。
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-clock-o text-chinese-red mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">开放时间</h3>
+                                    <p class="text-gray-600">8:00 - 17:00（春节期间延长至21:00）</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-map-marker text-chinese-red mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">地址</h3>
+                                    <p class="text-gray-600">宁波市海曙区县学街22号</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-ticket text-chinese-red mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">门票</h3>
+                                    <p class="text-gray-600">免费开放</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-medium">古建筑</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium">祈福圣地</span>
+                            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">春节庙会</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 慈城古县城 -->
+            <div class="mb-20 market-card">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="lg:order-2">
+                        <div class="relative">
+                            <img src="https://doc.doubao.com/s/f6taPoErqX8/" alt="慈城古县城" class="w-full h-96 object-cover rounded-2xl shadow-xl">
+                            <div class="absolute top-4 left-4 bg-gradient-gold text-white px-4 py-2 rounded-full text-sm font-medium">
+                                <i class="fa fa-star mr-1"></i>文化遗产
+                            </div>
+                            <div class="absolute top-4 right-4 bg-white/90 text-chinese-red px-4 py-2 rounded-full text-sm font-medium">
+                                <span class="text-yellow-600 font-bold">★★★★☆</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:order-1">
+                        <h2 class="text-3xl font-bold text-chinese-red mb-6">慈城古县城</h2>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            慈城古县城被誉为"江南第一古县城"，拥有2500多年历史。这里是宁波年糕文化的发源地，春节期间举办盛大的年糕文化节。
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-clock-o text-chinese-red mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">开放时间</h3>
+                                    <p class="text-gray-600">8:30 - 17:00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-map-marker text-chinese-red mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">地址</h3>
+                                    <p class="text-gray-600">宁波市江北区慈城镇</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-ticket text-chinese-red mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">门票</h3>
+                                    <p class="text-gray-600">60元/人（春节期间有优惠）</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-medium">古县城</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium">年糕文化</span>
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">历史古迹</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 南塘老街 -->
+            <div class="mb-20 market-card">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="relative">
+                            <img src="https://doc.doubao.com/s/3uBVAL7ELpw/" alt="南塘老街" class="w-full h-96 object-cover rounded-2xl shadow-xl">
+                            <div class="absolute top-4 left-4 bg-gradient-green text-white px-4 py-2 rounded-full text-sm font-medium">
+                                <i class="fa fa-star mr-1"></i>美食天堂
+                            </div>
+                            <div class="absolute top-4 right-4 bg-white/90 text-chinese-red px-4 py-2 rounded-full text-sm font-medium">
+                                <span class="text-yellow-600 font-bold">★★★★★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-chinese-red mb-6">南塘老街</h2>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            南塘老街是宁波历史文化街区的代表，保留了大量明清时期的古建筑。春节期间，这里举办202.5米长桌宴，展示甬菜百碗，是体验宁波美食文化的绝佳去处。
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-clock-o text-chinese-red mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">开放时间</h3>
+                                    <p class="text-gray-600">全天开放</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-map-marker text-chinese-red mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">地址</h3>
+                                    <p class="text-gray-600">宁波市海曙区南塘河两岸</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i class="fa fa-ticket text-chinese-red mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">门票</h3>
+                                    <p class="text-gray-600">免费开放</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-medium">历史街区</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium">美食街</span>
+                            <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium">长桌宴</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 其他特色场所 -->
+            <div class="market-card">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-chinese-red mb-6">其他特色场所</h2>
+                    <p class="text-xl text-gray-700 max-w-3xl mx-auto">宁波还有许多值得一游的文化场所</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-6 shadow-xl card-hover">
+                        <div class="w-full h-48 bg-gradient-blue rounded-2xl flex items-center justify-center mb-4">
+                            <i class="fa fa-university text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-chinese-red mb-2">天一阁</h3>
+                        <p class="text-gray-600 text-sm mb-4">中国现存最古老的私家藏书楼</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-yellow-600 font-bold">★★★★☆</span>
+                            <span class="text-xs text-gray-500">文化遗产</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-6 shadow-xl card-hover">
+                        <div class="w-full h-48 bg-gradient-green rounded-2xl flex items-center justify-center mb-4">
+                            <i class="fa fa-building text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-chinese-red mb-2">宁波博物馆</h3>
+                        <p class="text-gray-600 text-sm mb-4">了解宁波历史文化的重要窗口</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-yellow-600 font-bold">★★★★☆</span>
+                            <span class="text-xs text-gray-500">博物馆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-6 shadow-xl card-hover">
+                        <div class="w-full h-48 bg-gradient-purple rounded-2xl flex items-center justify-center mb-4">
+                            <i class="fa fa-ship text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-chinese-red mb-2">老外滩</h3>
+                        <p class="text-gray-600 text-sm mb-4">百年外滩，宁波近代历史的见证</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-yellow-600 font-bold">★★★★☆</span>
+                            <span class="text-xs text-gray-500">历史街区</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl p-6 shadow-xl card-hover">
+                        <div class="w-full h-48 bg-gradient-orange rounded-2xl flex items-center justify-center mb-4">
+                            <i class="fa fa-bullseye text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-chinese-red mb-2">东钱湖</h3>
+                        <p class="text-gray-600 text-sm mb-4">宁波著名的风景旅游区</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-yellow-600 font-bold">★★★★☆</span>
+                            <span class="text-xs text-gray-500">自然风光</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 春节活动推荐 -->
+    <section class="py-20 bg-gradient-to-br from-yellow-50 to-red-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-chinese-red mb-6">春节活动推荐</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">宁波各文化场所春节期间的特色活动</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-red w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-calendar text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">城隍庙庙会</h3>
+                    <p class="text-gray-600 mb-4">
+                        春节期间城隍庙举办盛大庙会，有舞龙舞狮、戏曲表演、民间艺术展示等活动。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fa fa-clock-o mr-1"></i>
+                        正月初一至正月十五
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-gold w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-cutlery text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">南塘长桌宴</h3>
+                    <p class="text-gray-600 mb-4">
+                        南塘老街举办202.5米长桌宴，展示甬菜百碗，让游客品尝正宗宁波美食。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fa fa-clock-o mr-1"></i>
+                        除夕夜至正月初三
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-green w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-star text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">慈城年糕节</h3>
+                    <p class="text-gray-600 mb-4">
+                        慈城古县城举办年糕文化节，有年糕制作体验、年糕品尝、年糕文化展览等。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fa fa-clock-o mr-1"></i>
+                        腊月廿五至正月十五
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 交通指南 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-chinese-red mb-6">交通指南</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">如何到达这些文化场所</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 shadow-xl">
+                    <div class="bg-gradient-blue w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-bus text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">公交出行</h3>
+                    <p class="text-gray-600 mb-4">
+                        宁波公交网络发达，各文化场所都有直达公交线路，建议使用手机APP查询实时公交信息。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fa fa-money mr-1"></i>
+                        票价：2-3元
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-8 shadow-xl">
+                    <div class="bg-gradient-green w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-subway text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">地铁出行</h3>
+                    <p class="text-gray-600 mb-4">
+                        宁波地铁1号线、2号线覆盖主要文化场所，春节期间延长运营时间。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fa fa-money mr-1"></i>
+                        票价：2-6元
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 shadow-xl">
+                    <div class="bg-gradient-gold w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-car text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">自驾出行</h3>
+                    <p class="text-gray-600 mb-4">
+                        各文化场所都有停车场，但春节期间人流量大，建议提前规划停车。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fa fa-money mr-1"></i>
+                        停车费：5-20元/小时
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gradient-red text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 网站介绍 -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="bg-white/20 p-2 rounded-full">
+                            <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-shadow">2026宁波新春佳节</span>
+                    </div>
+                    <p class="text-gray-200 mb-4">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情。</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-heart text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-star text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-thumbs-up text-yellow-200"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 快速导航 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">快速导航</h5>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white hover:text-yellow-200 transition-colors font-medium">首页</a></li>
+                        <li><a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节知识</a></li>
+                        <li><a href="culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波年俗</a></li>
+                        <li><a href="games.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节游戏</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 宁波特色 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">宁波特色</h5>
+                    <ul class="space-y-2">
+                        <li><a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波花市</a></li>
+                        <li><a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">特色美食</a></li>
+                        <li><a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors font-medium">民俗表演</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 联系信息 -->
+            <div class="border-t border-white/20 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-gray-200 font-medium">&copy; 2026 宁波新春佳节主题网站. 保留所有权利.</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <i class="fa fa-map-marker mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">浙江宁波</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-phone mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">0574-12345678</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-envelope mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">ningbo@spring.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-gold text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
+        <i class="fa fa-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 返回顶部
+        function backToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                navbar.classList.remove('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        // 返回顶部按钮点击事件
+        document.getElementById('backToTop').addEventListener('click', backToTop);
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加页面加载动画
+            const elements = document.querySelectorAll('.market-card');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    el.style.transition = 'all 0.6s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // ESC键关闭移动端菜单
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

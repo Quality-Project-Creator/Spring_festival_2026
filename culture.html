@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宁波年俗文化 - 2026宁波新春佳节</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DC2626',
+                        secondary: '#F59E0B',
+                        accent: '#059669',
+                        gold: '#D97706',
+                        'chinese-red': '#DC2626',
+                        'chinese-gold': '#D97706',
+                        'warm-orange': '#F97316'
+                    },
+                    fontFamily: {
+                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'slide-in': 'slideIn 0.8s ease-out forwards',
+                        'fade-in': 'fadeIn 1s ease-out forwards'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            }
+            .bg-gradient-red {
+                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            }
+            .bg-gradient-gold {
+                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            }
+            .bg-gradient-orange {
+                background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+            }
+            .border-gradient {
+                border-image: linear-gradient(45deg, #F59E0B, #DC2626) 1;
+            }
+            .timeline-line {
+                background: linear-gradient(to bottom, #DC2626, #F59E0B, #059669);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px #F59E0B; }
+            to { box-shadow: 0 0 30px #F59E0B, 0 0 40px #F59E0B; }
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(-50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .firecracker {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .timeline-item {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+        
+        .timeline-item:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            animation-delay: 0.4s;
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #DC2626, #F59E0B);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #B91C1C, #D97706);
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-gradient-red shadow-2xl sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/20 p-2 rounded-full">
+                        <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                    </div>
+                    <span class="text-white text-xl font-bold text-shadow">2026宁波新春佳节</span>
+                </div>
+                
+                <!-- 桌面端菜单 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">首页</a>
+                    <a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">春节知识</a>
+                    <a href="culture.html" class="text-white font-semibold border-b-2 border-yellow-200 hover:text-yellow-200 transition-colors duration-300">宁波年俗</a>
+                    <a href="games.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">春节游戏</a>
+                    <a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">宁波花市</a>
+                    <a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">特色美食</a>
+                    <a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">民俗表演</a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden">
+                    <button class="text-white hover:text-yellow-200 font-medium" onclick="toggleMobileMenu()">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden bg-gradient-red/95 hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">首页</a>
+                <a href="knowledge.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">春节知识</a>
+                <a href="games.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">春节游戏</a>
+                <a href="flower_market.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">宁波花市</a>
+                <a href="food_culture.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">特色美食</a>
+                <a href="lion_dragon.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">民俗表演</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="relative py-20 bg-gradient-to-br from-red-100 to-orange-100 overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow"></div>
+            <div class="absolute top-32 right-20 w-16 h-16 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-32 left-20 w-24 h-24 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 2s;"></div>
+            <div class="absolute bottom-10 right-10 w-12 h-12 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 0.5s;"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block bg-gradient-gold text-white px-6 py-3 rounded-full text-lg font-semibold mb-6 shadow-lg">
+                <i class="fa fa-calendar mr-2"></i>传统习俗
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-chinese-red mb-6 text-shadow-lg">宁波年俗文化</h1>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情
+            </p>
+            
+            <!-- 装饰性元素 -->
+            <div class="absolute top-20 left-20 animate-float">
+                <i class="fa fa-heart text-4xl text-red-300 opacity-60"></i>
+            </div>
+            <div class="absolute top-40 right-32 animate-float" style="animation-delay: 1s;">
+                <i class="fa fa-star text-3xl text-yellow-300 opacity-60"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- 宁波年俗时间线 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-chinese-red mb-6">宁波春节习俗时间线</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">追溯宁波春节的传统习俗，感受浓厚的文化底蕴</p>
+            </div>
+            
+            <div class="relative">
+                <!-- 时间线 -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full timeline-line rounded-full"></div>
+                
+                <!-- 冬至 -->
+                <div class="relative mb-16 timeline-item">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="lg:text-right">
+                            <div class="bg-gradient-red text-white rounded-2xl p-8 shadow-xl">
+                                <h3 class="text-2xl font-bold mb-4">冬至大如年</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    宁波老话："冬至大如年，皇帝老倌也谢年"。冬至日要吃大头菜年糕、煮番薯汤果、吃汤团，拉开春节序幕。
+                                </p>
+                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
+                                    农历十一月
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:text-left">
+                            <div class="relative">
+                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-red absolute left-1/2 transform -translate-x-1/2 -translate-y-8">
+                                    <i class="fa fa-snowflake-o text-2xl text-chinese-red"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 腊月廿三 祭灶 -->
+                <div class="relative mb-16 timeline-item">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="lg:text-right">
+                            <div class="relative">
+                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-orange absolute right-1/2 transform translate-x-1/2 -translate-y-8">
+                                    <i class="fa fa-fire text-2xl text-warm-orange"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:text-left">
+                            <div class="bg-gradient-orange text-white rounded-2xl p-8 shadow-xl">
+                                <h3 class="text-2xl font-bold mb-4">腊月廿三 祭灶</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    送灶君上天汇报，用"净茶"和"祭灶果"供奉。祭灶果有红球、白球、麻球、油果、寸金糖、脚骨糖、白交切、黑交切8色，寓意让灶君尝到甜头，粘住他的口。
+                                </p>
+                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
+                                    小年
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 腊月廿四 掸尘 -->
+                <div class="relative mb-16 timeline-item">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="lg:text-right">
+                            <div class="bg-gradient-green text-white rounded-2xl p-8 shadow-xl">
+                                <h3 class="text-2xl font-bold mb-4">腊月廿四 掸尘</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    "廿三祭灶，廿四掸尘"，进行彻底的家庭大扫除，寓意去陈迎新，迎接新年到来。
+                                </p>
+                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
+                                    除尘迎新
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:text-left">
+                            <div class="relative">
+                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-green absolute left-1/2 transform -translate-x-1/2 -translate-y-8">
+                                    <i class="fa fa-bullseye text-2xl text-accent"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 腊月廿五至廿九 谢年 -->
+                <div class="relative mb-16 timeline-item">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="lg:text-right">
+                            <div class="relative">
+                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-gold absolute right-1/2 transform translate-x-1/2 -translate-y-8">
+                                    <i class="fa fa-gift text-2xl text-chinese-gold"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:text-left">
+                            <div class="bg-gradient-gold text-white rounded-2xl p-8 shadow-xl">
+                                <h3 class="text-2xl font-bold mb-4">谢年祝福</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    一年中最隆重的祭神活动，用"五牲"或"七牲"供奉，祈求神明降福，俗谓"闷声大发财"。
+                                </p>
+                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
+                                    祈福祭祀
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 除夕 -->
+                <div class="relative mb-16 timeline-item">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="lg:text-right">
+                            <div class="bg-gradient-red text-white rounded-2xl p-8 shadow-xl">
+                                <h3 class="text-2xl font-bold mb-4">除夕年夜饭</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    贴春联、挂年画、吃年夜饭、放爆竹、守岁。长辈给晚辈压岁钱，寓意压住邪祟，保佑平安。
+                                </p>
+                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
+                                    大年三十
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:text-left">
+                            <div class="relative">
+                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-red absolute left-1/2 transform -translate-x-1/2 -translate-y-8">
+                                    <i class="fa fa-home text-2xl text-chinese-red"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 正月初一 -->
+                <div class="relative mb-16 timeline-item">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="lg:text-right">
+                            <div class="relative">
+                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-orange absolute right-1/2 transform translate-x-1/2 -translate-y-8">
+                                    <i class="fa fa-star text-2xl text-warm-orange"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:text-left">
+                            <div class="bg-gradient-orange text-white rounded-2xl p-8 shadow-xl">
+                                <h3 class="text-2xl font-bold mb-4">正月初一 春节</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    穿新衣、放开门炮、吃汤果。让家里器物"休息"一天，不扫地、不乞火、不杀牲、不动刀剪、不倒马桶、不洗涤衣服，过"太平夜"。
+                                </p>
+                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
+                                    新年第一天
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 初二至初八 -->
+                <div class="relative mb-16 timeline-item">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="lg:text-right">
+                            <div class="bg-gradient-green text-white rounded-2xl p-8 shadow-xl">
+                                <h3 class="text-2xl font-bold mb-4">初二至初八 拜岁</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    出门走亲访友，先至亲后远亲，少拜长。互相款待"岁饭"、"岁酒"，增进亲情友情。
+                                </p>
+                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
+                                    走亲访友
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:text-left">
+                            <div class="relative">
+                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-green absolute left-1/2 transform -translate-x-1/2 -translate-y-8">
+                                    <i class="fa fa-users text-2xl text-accent"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 正月十四 元宵节 -->
+                <div class="relative timeline-item">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="lg:text-right">
+                            <div class="relative">
+                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-gold absolute right-1/2 transform translate-x-1/2 -translate-y-8">
+                                    <i class="fa fa-moon-o text-2xl text-chinese-gold"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:text-left">
+                            <div class="bg-gradient-gold text-white rounded-2xl p-8 shadow-xl">
+                                <h3 class="text-2xl font-bold mb-4">正月十四 元宵节</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    宁波有"正月十四夜，户户丫头羹"的习俗。用水果、干果、年糕丁、糯米圆子熬制丫头羹，祈求团圆美满。正月十五吃汤圆、猜灯谜。
+                                </p>
+                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
+                                    上元节
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 宁波年俗特色 -->
+    <section class="py-20 bg-gradient-to-br from-yellow-50 to-red-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-chinese-red mb-6">宁波年俗特色</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">了解宁波春节的独特习俗和文化内涵</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 祭灶果 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-gold w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-bullseye text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">八色祭灶果</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        宁波祭灶果有八色：红球、白球、麻球、油果、寸金糖、脚骨糖、白交切、黑交切，寓意让灶君尝到甜头，上天言好事。
+                    </p>
+                </div>
+                
+                <!-- 谢年仪式 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-red w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-gift text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">谢年大典</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        宁波人最隆重的祭神仪式，用五牲或七牲供奉，男性主祭，祈求神明保佑全家平安，来年财源广进。
+                    </p>
+                </div>
+                
+                <!-- 丫头羹 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-orange w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-spoon text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">丫头羹习俗</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        正月十四夜，宁波家家户户熬制丫头羹，用水果、干果、年糕丁、糯米圆子等食材，象征团圆美满。
+                    </p>
+                </div>
+                
+                <!-- 开门炮 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-green w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-fire text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">开门炮仗</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        正月初一早晨放开门炮，"带四放三，留一作备炮"，寓意开门大吉，驱邪迎新，祈求新年平安顺利。
+                    </p>
+                </div>
+                
+                <!-- 压岁钱 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-purple w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-money text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">压岁钱文化</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        宁波人重视压岁钱，长辈给晚辈压岁钱要压在枕头下，寓意压住邪祟，保佑晚辈平安健康成长。
+                    </p>
+                </div>
+                
+                <!-- 汤圆文化 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-pink w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-circle text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">汤圆寓意</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        宁波汤圆象征团团圆圆，正月初一、十五必吃。宁波猪油汤圆以其香甜软糯闻名全国，是春节不可或缺的美食。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 宁波商帮文化影响 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-chinese-red mb-6">宁波商帮文化影响</h2>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                        宁波作为"海上丝绸之路"的重要起点，商帮文化深厚。宁波商人素有"无宁不成市"之说，其务实、诚信、创新的精神也深刻影响了宁波的春节习俗。
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-gradient-red text-white p-3 rounded-full flex-shrink-0">
+                                <i class="fa fa-bullseye text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-chinese-red mb-2">务实精神</h3>
+                                <p class="text-gray-600">宁波春节习俗注重实际，如谢年祭祀祈求实际利益，压岁钱注重实用价值。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-gradient-gold text-white p-3 rounded-full flex-shrink-0">
+                                <i class="fa fa-handshake-o text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-chinese-red mb-2">诚信文化</h3>
+                                <p class="text-gray-600">宁波商人重诚信，这种精神体现在春节的拜年礼仪和人际关系处理中。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-gradient-green text-white p-3 rounded-full flex-shrink-0">
+                                <i class="fa fa-ship text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-chinese-red mb-2">开放包容</h3>
+                                <p class="text-gray-600">海洋文化使宁波春节习俗具有开放性，吸收了各地文化精华。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-red-100 to-orange-100 rounded-3xl p-8 shadow-xl">
+                        <img src="https://doc.doubao.com/s/v4j62msvih4/" alt="宁波城隍庙" class="w-full h-96 object-cover rounded-2xl shadow-lg mb-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white rounded-2xl p-4 text-center">
+                                <div class="text-3xl font-bold text-chinese-red mb-2">7000+</div>
+                                <div class="text-gray-600">年文化传承</div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-4 text-center">
+                                <div class="text-3xl font-bold text-chinese-red mb-2">100+</div>
+                                <div class="text-gray-600">项传统习俗</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gradient-red text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 网站介绍 -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="bg-white/20 p-2 rounded-full">
+                            <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-shadow">2026宁波新春佳节</span>
+                    </div>
+                    <p class="text-gray-200 mb-4">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情。</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-heart text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-star text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-thumbs-up text-yellow-200"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 快速导航 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">快速导航</h5>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white hover:text-yellow-200 transition-colors font-medium">首页</a></li>
+                        <li><a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节知识</a></li>
+                        <li><a href="culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波年俗</a></li>
+                        <li><a href="games.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节游戏</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 宁波特色 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">宁波特色</h5>
+                    <ul class="space-y-2">
+                        <li><a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波花市</a></li>
+                        <li><a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">特色美食</a></li>
+                        <li><a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors font-medium">民俗表演</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 联系信息 -->
+            <div class="border-t border-white/20 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-gray-200 font-medium">&copy; 2026 宁波新春佳节主题网站. 保留所有权利.</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <i class="fa fa-map-marker mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">浙江宁波</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-phone mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">0574-12345678</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-envelope mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">ningbo@spring.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-gold text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
+        <i class="fa fa-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 返回顶部
+        function backToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                navbar.classList.remove('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        // 返回顶部按钮点击事件
+        document.getElementById('backToTop').addEventListener('click', backToTop);
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加滚动触发动画
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // 观察所有需要动画的元素
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // ESC键关闭移动端菜单
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

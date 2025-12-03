@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>春节游戏 - 2026宁波新春佳节</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DC2626',
+                        secondary: '#F59E0B',
+                        accent: '#059669',
+                        gold: '#D97706',
+                        'chinese-red': '#DC2626',
+                        'chinese-gold': '#D97706'
+                    },
+                    fontFamily: {
+                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            }
+            .bg-gradient-red {
+                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            }
+            .bg-gradient-gold {
+                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            }
+            .border-gradient {
+                border-image: linear-gradient(45deg, #F59E0B, #DC2626) 1;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px #F59E0B; }
+            to { box-shadow: 0 0 30px #F59E0B, 0 0 40px #F59E0B; }
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .firecracker {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .game-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .game-card:nth-child(1) { animation-delay: 0.2s; }
+        .game-card:nth-child(2) { animation-delay: 0.4s; }
+        .game-card:nth-child(3) { animation-delay: 0.6s; }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #DC2626, #F59E0B);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #B91C1C, #D97706);
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-gradient-red shadow-2xl sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/20 p-2 rounded-full">
+                        <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                    </div>
+                    <span class="text-white text-xl font-bold text-shadow">2026宁波新春佳节</span>
+                </div>
+                
+                <!-- 桌面端菜单 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">首页</a>
+                    <a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">春节知识</a>
+                    <a href="culture.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">宁波年俗</a>
+                    <a href="games.html" class="text-white font-semibold border-b-2 border-yellow-200 hover:text-yellow-200 transition-colors duration-300">春节游戏</a>
+                    <a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">宁波花市</a>
+                    <a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">特色美食</a>
+                    <a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">民俗表演</a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden">
+                    <button class="text-white hover:text-yellow-200 font-medium" onclick="toggleMobileMenu()">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden bg-gradient-red/95 hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">首页</a>
+                <a href="knowledge.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">春节知识</a>
+                <a href="culture.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">宁波年俗</a>
+                <a href="flower_market.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">宁波花市</a>
+                <a href="food_culture.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">特色美食</a>
+                <a href="lion_dragon.html" class="block px-3 py-2 text-white hover:text-yellow-200 hover:bg-primary/20 transition-colors font-medium">民俗表演</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="relative py-20 bg-gradient-to-br from-red-100 to-orange-100 overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow"></div>
+            <div class="absolute top-32 right-20 w-16 h-16 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-32 left-20 w-24 h-24 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 2s;"></div>
+            <div class="absolute bottom-10 right-10 w-12 h-12 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 0.5s;"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block bg-gradient-gold text-white px-6 py-3 rounded-full text-lg font-semibold mb-6 shadow-lg">
+                <i class="fa fa-gamepad mr-2"></i>互动游戏
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-chinese-red mb-6 text-shadow-lg">春节游戏体验</h1>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                在游戏中感受宁波春节文化的魅力，体验传统文化的乐趣
+            </p>
+            
+            <!-- 装饰性元素 -->
+            <div class="absolute top-20 left-20 animate-float">
+                <i class="fa fa-heart text-4xl text-red-300 opacity-60"></i>
+            </div>
+            <div class="absolute top-40 right-32 animate-float" style="animation-delay: 1s;">
+                <i class="fa fa-star text-3xl text-yellow-300 opacity-60"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏选择 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 猜灯谜 -->
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-3xl p-8 shadow-xl card-hover text-center game-card">
+                    <div class="bg-gradient-red w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-question text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">猜灯谜</h3>
+                    <p class="text-gray-600 mb-6">挑战宁波特色灯谜，体验传统文化乐趣</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-center space-x-1">
+                            <span class="text-yellow-600 text-lg">★★★☆☆</span>
+                        </div>
+                        <p class="text-sm text-gray-500">适合所有年龄段</p>
+                    </div>
+                    <button onclick="startGame('game_riddles.html')" class="bg-gradient-red text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 w-full">
+                        开始挑战
+                    </button>
+                </div>
+                
+                <!-- 春联配对 -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 shadow-xl card-hover text-center game-card">
+                    <div class="bg-gradient-gold w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-edit text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">春联配对</h3>
+                    <p class="text-gray-600 mb-6">学习宁波春联文化，体验对仗工整之美</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-center space-x-1">
+                            <span class="text-yellow-600 text-lg">★★★★☆</span>
+                        </div>
+                        <p class="text-sm text-gray-500">适合有一定文化基础</p>
+                    </div>
+                    <button onclick="startGame('game_couplets.html')" class="bg-gradient-gold text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 w-full">
+                        开始配对
+                    </button>
+                </div>
+                
+                <!-- 年俗问答 -->
+                <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-8 shadow-xl card-hover text-center game-card">
+                    <div class="bg-gradient-green w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-graduation-cap text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">年俗问答</h3>
+                    <p class="text-gray-600 mb-6">测试你对宁波春节习俗的了解程度</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-center space-x-1">
+                            <span class="text-yellow-600 text-lg">★★★★★</span>
+                        </div>
+                        <p class="text-sm text-gray-500">适合文化爱好者</p>
+                    </div>
+                    <button onclick="startGame('game_quiz.html')" class="bg-gradient-green text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 w-full">
+                        开始答题
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏规则说明 -->
+    <section class="py-20 bg-gradient-to-br from-yellow-50 to-red-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-chinese-red mb-6">游戏规则说明</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">了解游戏规则，更好地体验宁波春节文化</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-red w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-trophy text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">积分系统</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        每个游戏都有积分系统，答对题目可获得积分，积分可用于解锁更多游戏内容。
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-gold w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-star text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">难度等级</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        游戏分为简单、中等、困难三个难度等级，适合不同文化基础的玩家。
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
+                    <div class="bg-gradient-green w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-heart text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-chinese-red mb-4">文化传承</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        通过游戏了解宁波春节文化，传承和弘扬优秀传统文化。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 排行榜 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-chinese-red mb-6">游戏排行榜</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">看看谁是宁波春节文化的最强玩家</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- 猜灯谜排行榜 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <h3 class="text-xl font-bold text-chinese-red mb-4 text-center">
+                            <i class="fa fa-question mr-2"></i>猜灯谜排行
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-gradient-gold text-white px-4 py-2 rounded-lg">
+                                <span class="font-bold">🥇 玩家123</span>
+                                <span>980分</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-200 px-4 py-2 rounded-lg">
+                                <span>🥈 宁波达人</span>
+                                <span>950分</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-orange-200 px-4 py-2 rounded-lg">
+                                <span>🥉 文化爱好者</span>
+                                <span>920分</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 春联配对排行榜 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <h3 class="text-xl font-bold text-chinese-red mb-4 text-center">
+                            <i class="fa fa-edit mr-2"></i>春联配对排行
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-gradient-gold text-white px-4 py-2 rounded-lg">
+                                <span class="font-bold">🥇 墨客骚人</span>
+                                <span>960分</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-200 px-4 py-2 rounded-lg">
+                                <span>🥈 诗词爱好者</span>
+                                <span>930分</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-orange-200 px-4 py-2 rounded-lg">
+                                <span>🥉 文学青年</span>
+                                <span>900分</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 年俗问答排行榜 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <h3 class="text-xl font-bold text-chinese-red mb-4 text-center">
+                            <i class="fa fa-graduation-cap mr-2"></i>年俗问答排行
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-gradient-gold text-white px-4 py-2 rounded-lg">
+                                <span class="font-bold">🥇 文化专家</span>
+                                <span>990分</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-200 px-4 py-2 rounded-lg">
+                                <span>🥈 民俗达人</span>
+                                <span>960分</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-orange-200 px-4 py-2 rounded-lg">
+                                <span>🥉 宁波通</span>
+                                <span>930分</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gradient-red text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 网站介绍 -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="bg-white/20 p-2 rounded-full">
+                            <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-shadow">2026宁波新春佳节</span>
+                    </div>
+                    <p class="text-gray-200 mb-4">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情。</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-heart text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-star text-yellow-200"></i>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                            <i class="fa fa-thumbs-up text-yellow-200"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 快速导航 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">快速导航</h5>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white hover:text-yellow-200 transition-colors font-medium">首页</a></li>
+                        <li><a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节知识</a></li>
+                        <li><a href="culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波年俗</a></li>
+                        <li><a href="games.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节游戏</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 宁波特色 -->
+                <div>
+                    <h5 class="text-xl font-semibold mb-4 text-gray-100">宁波特色</h5>
+                    <ul class="space-y-2">
+                        <li><a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波花市</a></li>
+                        <li><a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">特色美食</a></li>
+                        <li><a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors font-medium">民俗表演</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 联系信息 -->
+            <div class="border-t border-white/20 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-gray-200 font-medium">&copy; 2026 宁波新春佳节主题网站. 保留所有权利.</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <i class="fa fa-map-marker mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">浙江宁波</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-phone mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">0574-12345678</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-envelope mr-2 text-yellow-200"></i>
+                            <span class="text-gray-200">ningbo@spring.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-gold text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
+        <i class="fa fa-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 开始游戏
+        function startGame(gameUrl) {
+            window.location.href = gameUrl;
+        }
+
+        // 返回顶部
+        function backToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                navbar.classList.remove('bg-gradient-red/95', 'backdrop-blur-sm');
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        // 返回顶部按钮点击事件
+        document.getElementById('backToTop').addEventListener('click', backToTop);
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加页面加载动画
+            const elements = document.querySelectorAll('.game-card');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    el.style.transition = 'all 0.6s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // ESC键关闭移动端菜单
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
