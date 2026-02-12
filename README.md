@@ -157,3 +157,12 @@ The website is compatible with all modern web browsers:
 4. **Visual Appeal**: Create an aesthetically pleasing interface with traditional Chinese design elements
 5. **Accessibility**: Ensure the website is accessible to all users regardless of device or ability
 
+---
+
+## Development Notes
+
+- **Last Updated**: 2026-02-12
+- **Git Sync**: Configured with automated GitHub sync workflow
+- **Pre-built Scripts**: See `GIT_SYNC_GUIDE.md` for workflow details
+
+
