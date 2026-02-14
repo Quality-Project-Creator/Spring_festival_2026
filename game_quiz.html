@@ -829,7 +829,7 @@
                 
                 // 显示解释
                 setTimeout(() => {
-                    showAlert(`答错了！\n\n正确答案是：${question.options[question.correct]}\n\n${question.explanation}`, '答错了');
+                    showAlert(`答错了！\n\n正确答案是：${question.options[question.correct]}\n\n${question.explanation}`, '答错了', 'error');
                     currentQuestionIndex++;
                     loadQuestion();
                 }, 1000);
@@ -1017,12 +1017,12 @@
     <div id="customAlert" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] hidden">
         <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all duration-300">
             <div class="text-center">
-                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fa fa-check-circle text-3xl text-green-600"></i>
+                <div id="alertIcon" class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i id="alertIconClass" class="fa fa-check-circle text-3xl text-green-600"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-4" id="alertTitle">提示</h3>
                 <p class="text-gray-600 mb-6 whitespace-pre-line" id="alertMessage"></p>
-                <button onclick="hideCustomAlert()" class="w-full bg-gradient-green text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                <button id="alertButton" onclick="hideCustomAlert()" class="w-full bg-gradient-green text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
                     确定
                 </button>
             </div>
@@ -1031,13 +1031,28 @@
 
     <script>
         // 自定义alert函数
-        function showAlert(message, title = '提示') {
+        function showAlert(message, title = '提示', type = 'success') {
             const alertModal = document.getElementById('customAlert');
             const alertTitle = document.getElementById('alertTitle');
             const alertMessage = document.getElementById('alertMessage');
+            const alertIcon = document.getElementById('alertIcon');
+            const alertIconClass = document.getElementById('alertIconClass');
+            const alertButton = document.getElementById('alertButton');
             
             alertTitle.textContent = title;
             alertMessage.textContent = message;
+            
+            // 根据类型设置图标和颜色
+            if (type === 'error') {
+                alertIcon.className = 'w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4';
+                alertIconClass.className = 'fa fa-times-circle text-3xl text-red-600';
+                alertButton.className = 'w-full bg-gradient-red text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300';
+            } else {
+                alertIcon.className = 'w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4';
+                alertIconClass.className = 'fa fa-check-circle text-3xl text-green-600';
+                alertButton.className = 'w-full bg-gradient-green text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300';
+            }
+            
             alertModal.classList.remove('hidden');
             
             // 添加动画效果
