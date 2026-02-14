@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红膏呛蟹制作 - 2026宁波新春佳节</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DC2626',
+                        secondary: '#F59E0B',
+                        accent: '#059669',
+                        gold: '#D97706',
+                        'chinese-red': '#DC2626',
+                        'chinese-gold': '#D97706'
+                    },
+                    fontFamily: {
+                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            }
+            .bg-gradient-red {
+                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            }
+            .bg-gradient-gold {
+                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            }
+        }
+        
+        .step-slider {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .step-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .step-item {
+            min-width: 100%;
+            padding: 0 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .step-item {
+                min-width: 50%;
+            }
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #DC2626, #F59E0B);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-gradient-red shadow-2xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/20 p-2 rounded-full">
+                        <i class="fa fa-fire text-2xl text-yellow-200"></i>
+                    </div>
+                    <span class="text-white text-xl font-bold text-shadow">2026宁波新春佳节</span>
+                </div>
+                
+                <!-- 桌面端菜单 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-yellow-200 transition-colors duration-300 font-medium">首页</a>
+                    <a href="food_culture.html" class="text-white font-semibold border-b-2 border-yellow-200 hover:text-yellow-200 transition-colors duration-300">特色美食</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="relative py-20 bg-gradient-to-br from-orange-100 to-red-100 overflow-hidden">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block bg-gradient-gold text-white px-6 py-3 rounded-full text-lg font-semibold mb-6 shadow-lg">
+                <i class="fa fa-star mr-2"></i>海鲜之王
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-chinese-red mb-6 text-shadow-lg">红膏呛蟹制作</h1>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                宁波海鲜之王，寓意红红火火
+            </p>
+        </div>
+    </section>
+
+    <!-- 食物介绍 -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="bg-gradient-to-br from-orange-400 to-red-500 rounded-3xl p-8 shadow-2xl">
+                        <img src="public/images/qiang-xie.jpeg" alt="红膏呛蟹" class="w-full h-96 object-cover rounded-2xl shadow-lg">
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="text-3xl font-bold text-chinese-red mb-6">美食介绍</h2>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                        红膏呛蟹是浙江宁波的传统大菜，色彩艳红、鲜咸滑嫩。选用新鲜的梭子蟹，通过盐水腌制而成，保留了海鲜的原汁原味。腌制后的红膏像果冻一样颤巍巍，蟹肉鲜甜紧实。
+                    </p>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                        红膏呛蟹寓意"红红火火"，是宁波人年夜饭的必备菜品之一。蘸着姜泥醋食用，味道更加鲜美。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 text-center">
+                            <i class="fa fa-clock text-2xl text-chinese-red mb-2"></i>
+                            <p class="font-semibold text-gray-700">准备时间</p>
+                            <p class="text-chinese-red font-bold">16-20小时</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-4 text-center">
+                            <i class="fa fa-users text-2xl text-chinese-red mb-2"></i>
+                            <p class="font-semibold text-gray-700">适用人数</p>
+                            <p class="text-chinese-red font-bold">3-4人</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 制作步骤 -->
+    <section class="py-16 bg-gradient-to-br from-red-50 to-yellow-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-chinese-red mb-4">制作步骤</h2>
+                <p class="text-xl text-gray-700">左右滑动查看详细制作步骤</p>
+            </div>
+
+            <!-- 步骤导航 -->
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex space-x-2 bg-white rounded-full p-2 shadow-lg" id="step-dots">
+                    <!-- 步骤指示点将通过JS动态生成 -->
+                </div>
+            </div>
+
+            <!-- 步骤滑动器 -->
+            <div class="relative">
+                <!-- 左箭头 -->
+                <button id="prevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:shadow-xl z-10 transition-all duration-300 hover:bg-chinese-red hover:text-white hidden md:block">
+                    <i class="fa fa-chevron-left text-2xl"></i>
+                </button>
+
+                <!-- 步骤容器 -->
+                <div class="step-slider">
+                    <div class="step-container" id="stepContainer">
+                        <!-- 步骤1 -->
+                        <div class="step-item">
+                            <div class="bg-white rounded-3xl p-8 shadow-xl">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">1</div>
+                                    <h3 class="text-2xl font-bold text-chinese-red">挑选活蟹</h3>
+                                </div>
+                                <div class="mb-6">
+                                    <img src="public/images/qiangxie-step1.jpg" alt="挑选活蟹" class="w-full h-64 object-cover rounded-2xl">
+                                </div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    选购新鲜的梭子蟹，一定要选择活蟹。挑选圆脐的母蟹，要挑选有红膏的蟹。检查蟹壳是否完整，蟹腿是否齐全，蟹的活力是否旺盛。
+                                </p>
+                                <div class="bg-orange-50 rounded-xl p-4 border-l-4 border-chinese-gold">
+                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>母蟹的红膏越多，腌制出来的呛蟹越美味。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 步骤2 -->
+                        <div class="step-item">
+                            <div class="bg-white rounded-3xl p-8 shadow-xl">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">2</div>
+                                    <h3 class="text-2xl font-bold text-chinese-red">清洗螃蟹</h3>
+                                </div>
+                                <div class="mb-6">
+                                    <img src="public/images/qiangxie-step2.jpg" alt="清洗螃蟹" class="w-full h-64 object-cover rounded-2xl">
+                                </div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    用刷子仔细清洗螃蟹的表面和蟹脚，去除污垢和杂质。用淡盐水浸泡几分钟，让螃蟹吐出泥沙，再用清水冲洗干净，沥干水分。
+                                </p>
+                                <div class="bg-orange-50 rounded-xl p-4 border-l-4 border-chinese-gold">
+                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>清洗时不要把螃蟹弄死，保持鲜活状态。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 步骤3 -->
+                        <div class="step-item">
+                            <div class="bg-white rounded-3xl p-8 shadow-xl">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">3</div>
+                                    <h3 class="text-2xl font-bold text-chinese-red">调制盐水</h3>
+                                </div>
+                                <div class="mb-6">
+                                    <img src="public/images/qiangxie-step3.jpg" alt="调制盐水" class="w-full h-64 object-cover rounded-2xl">
+                                </div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    按照一斤凉开水加入5两盐的比例配制盐水，充分搅拌至盐完全溶解。加入盐、花椒、生姜等调料，增加风味。冷却后备用。
+                                </p>
+                                <div class="bg-orange-50 rounded-xl p-4 border-l-4 border-chinese-gold">
+                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>盐水的浓度可以根据个人口味适当调整。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 步骤4 -->
+                        <div class="step-item">
+                            <div class="bg-white rounded-3xl p-8 shadow-xl">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">4</div>
+                                    <h3 class="text-2xl font-bold text-chinese-red">腌制螃蟹</h3>
+                                </div>
+                                <div class="mb-6">
+                                    <img src="public/images/qiangxie-step4.jpg" alt="腌制螃蟹" class="w-full h-64 object-cover rounded-2xl">
+                                </div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    将洗净的活蟹放入容器中，倒入调制好的盐水，水量要刚好淹没螃蟹为宜。盖上盖子，放入冰箱冷藏腌制16-20小时。
+                                </p>
+                                <div class="bg-orange-50 rounded-xl p-4 border-l-4 border-chinese-gold">
+                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>腌制时间不宜过长，以免过咸。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 步骤5 -->
+                        <div class="step-item">
+                            <div class="bg-white rounded-3xl p-8 shadow-xl">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">5</div>
+                                    <h3 class="text-2xl font-bold text-chinese-red">切块装盘</h3>
+                                </div>
+                                <div class="mb-6">
+                                    <img src="public/images/qiangxie-step5.jpg" alt="切块装盘" class="w-full h-64 object-cover rounded-2xl">
+                                </div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    取出腌制好的螃蟹，对半切开。将蟹身切成块状，整齐摆放在盘中。红膏要保留完整，这是最精华的部分。配上姜泥醋蘸料食用。
+                                </p>
+                                <div class="bg-orange-50 rounded-xl p-4 border-l-4 border-chinese-gold">
+                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>切块时刀要锋利，动作要利落，保持切口平整。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右箭头 -->
+                <button id="nextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:shadow-xl z-10 transition-all duration-300 hover:bg-chinese-red hover:text-white hidden md:block">
+                    <i class="fa fa-chevron-right text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- 移动端滑动提示 -->
+            <div class="mt-8 text-center md:hidden">
+                <p class="text-gray-500 text-sm"><i class="fa fa-hand-point-left mr-2"></i>左右滑动查看更多步骤</p>
+            </div>
+
+            <!-- 步骤进度条 -->
+            <div class="mt-8">
+                <div class="bg-white rounded-full h-3 shadow-lg">
+                    <div class="bg-gradient-gold h-3 rounded-full transition-all duration-300" id="progressBar" style="width: 20%"></div>
+                </div>
+                <div class="flex justify-between mt-2 text-sm text-gray-600">
+                    <span>步骤 1/5</span>
+                    <span id="stepCounter">当前步骤：挑选活蟹</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 食材清单 -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-chinese-red mb-8 text-center">所需食材</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 text-center shadow-lg">
+                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-fish text-4xl text-chinese-gold"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">梭子蟹</h3>
+                    <p class="text-chinese-red font-bold">2公斤</p>
+                </div>
+                <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-6 text-center shadow-lg">
+                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-cube text-4xl text-gray-600"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">食用盐</h3>
+                    <p class="text-chinese-red font-bold">1斤</p>
+                </div>
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 text-center shadow-lg">
+                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-circle text-4xl text-chinese-gold"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">花椒</h3>
+                    <p class="text-chinese-red font-bold">适量</p>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl p-6 text-center shadow-lg">
+                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-leaf text-4xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">生姜</h3>
+                    <p class="text-chinese-red font-bold">适量</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 返回美食主页按钮 -->
+    <section class="py-12 bg-gradient-to-br from-red-50 to-yellow-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <a href="food_culture.html" class="inline-block bg-gradient-red text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                <i class="fa fa-arrow-left mr-2"></i>返回美食文化
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // 步骤滑动功能
+        let currentStep = 0;
+        const totalSteps = 5;
+        const stepContainer = document.getElementById('stepContainer');
+        const stepDots = document.getElementById('step-dots');
+        const progressBar = document.getElementById('progressBar');
+        const stepCounter = document.getElementById('stepCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        const stepNames = ['挑选活蟹', '清洗螃蟹', '调制盐水', '腌制螃蟹', '切块装盘'];
+
+        // 创建步骤指示点
+        function createStepDots() {
+            for (let i = 0; i < totalSteps; i++) {
+                const dot = document.createElement('button');
+                dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${i === 0 ? 'bg-gradient-gold w-6' : 'bg-gray-300'}`;
+                dot.addEventListener('click', () => goToStep(i));
+                stepDots.appendChild(dot);
+            }
+        }
+
+        // 更新步骤显示
+        function updateStepDisplay() {
+            const stepWidth = window.innerWidth >= 768 ? 50 : 100;
+            const translateX = -(currentStep * stepWidth);
+            stepContainer.style.transform = `translateX(${translateX}%)`;
+            
+            // 更新进度条
+            const progress = ((currentStep + 1) / totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // 更新步骤计数
+            stepCounter.textContent = `当前步骤：${stepNames[currentStep]}`;
+            
+            // 更新指示点
+            const dots = stepDots.querySelectorAll('button');
+            dots.forEach((dot, index) => {
+                if (index === currentStep) {
+                    dot.className = 'w-6 h-3 rounded-full bg-gradient-gold transition-all duration-300';
+                } else {
+                    dot.className = 'w-3 h-3 rounded-full bg-gray-300 transition-all duration-300';
+                }
+            });
+            
+            // 更新按钮状态
+            prevBtn.disabled = currentStep === 0;
+            nextBtn.disabled = currentStep === totalSteps - 1;
+            prevBtn.style.opacity = currentStep === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentStep === totalSteps - 1 ? '0.5' : '1';
+        }
+
+        // 下一页
+        function nextStep() {
+            if (currentStep < totalSteps - 1) {
+                currentStep++;
+                updateStepDisplay();
+            }
+        }
+
+        // 上一页
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                updateStepDisplay();
+            }
+        }
+
+        // 跳转到指定步骤
+        function goToStep(index) {
+            currentStep = index;
+            updateStepDisplay();
+        }
+
+        // 事件监听
+        nextBtn.addEventListener('click', nextStep);
+        prevBtn.addEventListener('click', prevStep);
+
+        // 触摸滑动支持
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        stepContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        stepContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentStep < totalSteps - 1) {
+                    nextStep();
+                } else if (diff < 0 && currentStep > 0) {
+                    prevStep();
+                }
+            }
+        }
+
+        // 键盘导航
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextStep();
+            } else if (e.key === 'ArrowLeft') {
+                prevStep();
+            }
+        });
+
+        // 窗口大小改变时更新显示
+        window.addEventListener('resize', updateStepDisplay);
+
+        // 初始化
+        createStepDots();
+        updateStepDisplay();
+    </script>
+</body>
+</html>
