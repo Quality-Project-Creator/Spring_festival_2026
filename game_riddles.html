@@ -867,7 +867,7 @@
         // 显示提示
         function showHint() {
             if (score < 10) {
-                alert('积分不足，无法使用提示！');
+                showAlert('积分不足，无法使用提示！', '提示');
                 return;
             }
             
@@ -898,7 +898,7 @@
         // 提交答案
         function submitAnswer() {
             if (selectedOption === -1) {
-                alert('请选择一个答案！');
+                showAlert('请选择一个答案！', '提示');
                 return;
             }
             
@@ -919,7 +919,7 @@
                 
                 // 显示解释
                 setTimeout(() => {
-                    alert(`恭喜答对了！\n\n${question.explanation}\n\n获得 ${Math.floor(points)} 分！`);
+                    showAlert(`恭喜答对了！\n\n${question.explanation}\n\n获得 ${Math.floor(points)} 分！`, '答对了');
                     currentQuestionIndex++;
                     loadQuestion();
                 }, 1000);
@@ -931,7 +931,7 @@
                 
                 // 显示解释
                 setTimeout(() => {
-                    alert(`答错了！\n\n正确答案是：${question.options[question.correct]}\n\n${question.explanation}`);
+                    showAlert(`答错了！\n\n正确答案是：${question.options[question.correct]}\n\n${question.explanation}`, '答错了');
                     currentQuestionIndex++;
                     loadQuestion();
                 }, 1000);
@@ -1112,6 +1112,53 @@
         // 页面加载完成后初始化游戏
         document.addEventListener('DOMContentLoaded', function() {
             initGame();
+        });
+    </script>
+
+    <!-- 自定义模态框组件 -->
+    <div id="customAlert" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all duration-300">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa fa-check-circle text-3xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4" id="alertTitle">提示</h3>
+                <p class="text-gray-600 mb-6 whitespace-pre-line" id="alertMessage"></p>
+                <button onclick="hideCustomAlert()" class="w-full bg-gradient-green text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 自定义alert函数
+        function showAlert(message, title = '提示') {
+            const alertModal = document.getElementById('customAlert');
+            const alertTitle = document.getElementById('alertTitle');
+            const alertMessage = document.getElementById('alertMessage');
+            
+            alertTitle.textContent = title;
+            alertMessage.textContent = message;
+            alertModal.classList.remove('hidden');
+            
+            // 添加动画效果
+            alertModal.querySelector('.transform').classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                alertModal.querySelector('.transform').classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        }
+
+        function hideCustomAlert() {
+            const alertModal = document.getElementById('customAlert');
+            alertModal.classList.add('hidden');
+        }
+
+        // 点击模态框外部关闭
+        document.getElementById('customAlert').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideCustomAlert();
+            }
         });
     </script>
 </body>
