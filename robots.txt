@@ -1,0 +1,11 @@
+# robots.txt for 2026宁波新春佳节网站
+# https://spring-festival-2026.pages.dev/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://spring-festival-2026.pages.dev/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
