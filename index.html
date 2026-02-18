@@ -13,10 +13,10 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <script src="https://cdn.tailwindcss.com" defer></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"></noscript>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?config=config"></script>
     <script>
+        window.tailwind = window.tailwind || {};
         tailwind.config = {
             theme: {
                 extend: {
@@ -40,6 +40,38 @@
             }
         }
     </script>
+    <!-- Font Awesome 异步加载 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"></noscript>
+    <!-- 防止CLS: 字体回退样式和布局稳定性 -->
+    <style>
+        /* 字体显示策略 - 防止字体加载导致的偏移 */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: PingFang SC, Microsoft YaHei, system-ui, sans-serif;
+        }
+        /* 预设容器尺寸防止布局偏移 */
+        .nav-card {
+            min-height: 180px;
+            contain: layout style;
+        }
+        @media (min-width: 768px) {
+            .nav-card {
+                min-height: 220px;
+            }
+        }
+        /* 为section设置最小高度防止内容加载偏移 */
+        section {
+            contain: layout;
+        }
+        /* 图片容器预设尺寸 */
+        .food-card img, .nav-card img {
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+    </style>
     <style type="text/tailwindcss">
         @layer utilities {
             .text-shadow {

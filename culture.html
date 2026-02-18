@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"></noscript>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css" media="print" onload="this.media='all'">
@@ -156,6 +156,16 @@
         html {
             scroll-behavior: smooth;
         }
+    </style>
+
+    <!-- 防止CLS: 布局稳定性样式 -->
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: PingFang SC, Microsoft YaHei, system-ui, sans-serif; }
+        .nav-card, .food-card { min-height: 180px; contain: layout style; }
+        section { contain: layout; }
+        img { aspect-ratio: auto; object-fit: cover; }
+        .food-card img { aspect-ratio: 16/9; }
     </style>
 </head>
 
