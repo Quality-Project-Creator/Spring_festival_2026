@@ -193,7 +193,7 @@
     <!-- 游戏选择 -->
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- 猜灯谜 -->
                 <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-3xl p-8 shadow-xl card-hover text-center game-card">
                     <div class="bg-gradient-red w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -247,6 +247,24 @@
                         开始答题
                     </button>
                 </div>
+                
+                <!-- 烟花模拟器 -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 shadow-xl card-hover text-center game-card">
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-rocket text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-chinese-red mb-4">烟花模拟器</h3>
+                    <p class="text-gray-600 mb-6">点击屏幕绽放绚丽烟花，感受节日氛围</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-center space-x-1">
+                            <span class="text-yellow-600 text-lg">★★☆☆☆</span>
+                        </div>
+                        <p class="text-sm text-gray-500">适合所有年龄段</p>
+                    </div>
+                    <button onclick="startGame('firework.html')" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 w-full">
+                        开始放烟花
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -259,7 +277,7 @@
                 <p class="text-xl text-gray-700 max-w-3xl mx-auto">了解游戏规则，更好地体验宁波春节文化</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
                     <div class="bg-gradient-red w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fa fa-trophy text-2xl text-white"></i>
@@ -302,7 +320,7 @@
             </div>
             
             <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 shadow-xl">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- 猜灯谜排行榜 -->
                     <div class="bg-white rounded-2xl p-6 shadow-lg">
                         <h3 class="text-xl font-bold text-chinese-red mb-4 text-center">
