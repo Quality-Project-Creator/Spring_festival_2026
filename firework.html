@@ -107,6 +107,11 @@
                 
                 <!-- 控制按钮 -->
                 <div class="flex justify-center gap-4 flex-wrap">
+                    <button onclick="toggleSound()" id="soundBtn" class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 flex items-center">
+                        <i class="fa fa-volume-up mr-2" id="soundIcon"></i>
+                        <span id="soundBtnText">音效已开启</span>
+                    </button>
+                    
                     <button onclick="toggleAutoLaunch()" id="autoBtn" class="bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 flex items-center">
                         <i class="fa fa-magic mr-2"></i>
                         <span id="autoBtnText">开启自动烟花</span>
@@ -138,6 +143,127 @@
     </div>
     
     <script>
+        // ============ 音效系统 ============
+        let audioContext = null;
+        let soundEnabled = true;
+        
+        // 初始化音频上下文
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        }
+        
+        // 播放烟花发射音效（嗖~的声音）
+        function playLaunchSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                const filter = audioContext.createBiquadFilter();
+                
+                oscillator.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.5);
+                
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(3000, audioContext.currentTime);
+                filter.frequency.exponentialRampToValueAtTime(500, audioContext.currentTime + 0.5);
+                
+                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (e) {
+                console.log('音效播放失败:', e);
+            }
+        }
+        
+        // 播放烟花爆炸音效（砰~的声音）
+        function playExplosionSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            try {
+                // 创建噪声源
+                const bufferSize = audioContext.sampleRate * 0.3;
+                const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+                const data = buffer.getChannelData(0);
+                
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 2);
+                }
+                
+                const noise = audioContext.createBufferSource();
+                noise.buffer = buffer;
+                
+                const filter = audioContext.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(2000, audioContext.currentTime);
+                filter.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.3);
+                
+                const gainNode = audioContext.createGain();
+                gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                noise.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                noise.start(audioContext.currentTime);
+                
+                // 添加低频轰鸣声
+                const bass = audioContext.createOscillator();
+                const bassGain = audioContext.createGain();
+                
+                bass.type = 'sine';
+                bass.frequency.setValueAtTime(80, audioContext.currentTime);
+                bass.frequency.exponentialRampToValueAtTime(30, audioContext.currentTime + 0.2);
+                
+                bassGain.gain.setValueAtTime(0.3, audioContext.currentTime);
+                bassGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                
+                bass.connect(bassGain);
+                bassGain.connect(audioContext.destination);
+                
+                bass.start(audioContext.currentTime);
+                bass.stop(audioContext.currentTime + 0.2);
+            } catch (e) {
+                console.log('爆炸音效播放失败:', e);
+            }
+        }
+        
+        // 切换音效开关
+        function toggleSound() {
+            initAudio();
+            soundEnabled = !soundEnabled;
+            
+            const btn = document.getElementById('soundBtn');
+            const btnText = document.getElementById('soundBtnText');
+            const icon = document.getElementById('soundIcon');
+            
+            if (soundEnabled) {
+                btnText.textContent = '音效已开启';
+                icon.className = 'fa fa-volume-up mr-2';
+                btn.classList.remove('from-gray-500', 'to-gray-600');
+                btn.classList.add('from-blue-500', 'to-cyan-500');
+            } else {
+                btnText.textContent = '音效已关闭';
+                icon.className = 'fa fa-volume-mute mr-2';
+                btn.classList.remove('from-blue-500', 'to-cyan-500');
+                btn.classList.add('from-gray-500', 'to-gray-600');
+            }
+        }
+        
+        // ============ 烟花系统 ============
         // Canvas设置
         const canvas = document.getElementById('fireworkCanvas');
         const ctx = canvas.getContext('2d');
@@ -279,6 +405,9 @@
                 fireworkCount++;
                 document.getElementById('fireworkCount').textContent = fireworkCount;
                 
+                // 播放爆炸音效
+                playExplosionSound();
+                
                 const particleCount = 80 + Math.floor(Math.random() * 40);
                 const baseColor = this.color;
                 
@@ -380,6 +509,9 @@
             const startY = canvas.height;
             const color = getRandomColor();
             fireworks.push(new Firework(x, startY, targetY, color));
+            // 播放发射音效
+            initAudio();
+            playLaunchSound();
         }
         
         // 点击发射烟花
@@ -436,12 +568,14 @@
         
         // 点击事件
         canvas.addEventListener('click', (e) => {
+            initAudio();
             launchAtPosition(e.clientX, e.clientY);
         });
         
         // 触摸事件
         canvas.addEventListener('touchstart', (e) => {
             e.preventDefault();
+            initAudio();
             const touch = e.touches[0];
             launchAtPosition(touch.clientX, touch.clientY);
         });
