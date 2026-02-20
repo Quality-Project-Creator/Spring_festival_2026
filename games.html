@@ -7,398 +7,672 @@
     <meta name="description" content="春节互动游戏专区，包含猜灯谜、春节知识问答、写春联等趣味小游戏，增添节日欢乐气氛。">
     <meta name="keywords" content="春节游戏,猜灯谜,春节问答,写春联,春节互动,节日娱乐">
     <title>春节游戏 - 2026宁波新春佳节</title>
-    <!-- DNS预解析和预连接 -->
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css" media="print" onload="this.media='all'">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#DC2626',
-                        secondary: '#F59E0B',
-                        accent: '#059669',
-                        gold: '#D97706',
-                        'chinese-red': '#DC2626',
-                        'chinese-gold': '#D97706'
-                    },
-                    fontFamily: {
-                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 3s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                        'bounce-slow': 'bounce 2s infinite',
-                        'pulse-slow': 'pulse 3s infinite',
-                        'wiggle': 'wiggle 1s ease-in-out infinite',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards'
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-shadow {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            }
-            .text-shadow-lg {
-                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-            }
-            .bg-gradient-red {
-                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            }
-            .bg-gradient-gold {
-                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            }
-            .border-gradient {
-                border-image: linear-gradient(45deg, #F59E0B, #DC2626) 1;
-            }
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #ffffff 50%, #fefce8 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #1f2937;
         }
         
+        /* 渐变 */
+        .bg-gradient-red { background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); }
+        .bg-gradient-gold { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+        .bg-gradient-green { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .bg-gradient-purple { background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%); }
+        .bg-gradient-orange { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); }
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .text-shadow-lg { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); }
+        
+        /* 动画 */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-        
-        @keyframes glow {
-            from { box-shadow: 0 0 20px #F59E0B; }
-            to { box-shadow: 0 0 30px #F59E0B, 0 0 40px #F59E0B; }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.05); }
         }
-        
         @keyframes wiggle {
             0%, 100% { transform: rotate(-3deg); }
             50% { transform: rotate(3deg); }
         }
-        
         @keyframes fadeInUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse { animation: pulse 3s ease-in-out infinite; }
+        .animate-wiggle { animation: wiggle 0.5s ease-in-out infinite; }
         
-        .firecracker {
-            animation: wiggle 0.5s ease-in-out infinite;
+        /* 导航栏 */
+        nav {
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
+        .nav-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-back:hover { color: #fef08a; }
+        .nav-back svg { width: 1.25rem; height: 1.25rem; }
+        .nav-title { color: white; font-size: 1.125rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
         
-        .card-hover {
-            transition: all 0.3s ease;
+        /* Hero区域 */
+        .hero {
+            position: relative;
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, #fee2e2 0%, #ffedd5 100%);
+            overflow: hidden;
         }
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1280px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .hero-badge svg { width: 1rem; height: 1rem; }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #DC2626;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+        @media (min-width: 768px) { .hero-title { font-size: 3.75rem; } }
+        .hero-desc {
+            font-size: 1.25rem;
+            color: #374151;
+            max-width: 48rem;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+        .hero-icon {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+        .hero-icon svg { width: 2.5rem; height: 2.5rem; opacity: 0.6; }
         
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        /* 游戏选择区域 */
+        .games-section {
+            padding: 5rem 1rem;
+            background: white;
         }
+        .games-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) { .games-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1280px) { .games-grid { grid-template-columns: repeat(5, 1fr); } }
         
         .game-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
             opacity: 0;
-            transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
         }
-        
         .game-card:nth-child(1) { animation-delay: 0.2s; }
         .game-card:nth-child(2) { animation-delay: 0.4s; }
         .game-card:nth-child(3) { animation-delay: 0.6s; }
+        .game-card:nth-child(4) { animation-delay: 0.8s; }
+        .game-card:nth-child(5) { animation-delay: 1s; }
+        .game-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
         
-        /* 自定义滚动条 */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+        .game-card-red { border-color: #fecaca; }
+        .game-card-yellow { border-color: #fef08a; }
+        .game-card-green { border-color: #bbf7d0; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .game-card-purple { border-color: #e9d5ff; }
+        .game-card-orange { border-color: #fed7aa; }
         
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+        .game-icon {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
+        .game-icon svg { width: 2rem; height: 2rem; color: white; }
         
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #DC2626, #F59E0B);
-            border-radius: 4px;
-        }
+        .game-card h3 { font-size: 1.25rem; font-weight: 700; color: #DC2626; margin-bottom: 0.75rem; }
+        .game-card p { color: #374151; font-weight: 500; margin-bottom: 1.5rem; }
         
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #B91C1C, #D97706);
+        .game-meta {
+            margin-bottom: 1.5rem;
         }
+        .game-stars { color: #ca8a04; font-size: 1.125rem; margin-bottom: 0.5rem; }
+        .game-level { font-size: 0.875rem; color: #4b5563; }
         
-        /* 平滑滚动 */
-        html {
-            scroll-behavior: smooth;
+        .game-btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            color: white;
         }
-    </style>
-
-    <!-- 防止CLS: 布局稳定性样式 -->
-    <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: PingFang SC, Microsoft YaHei, system-ui, sans-serif; }
-        .nav-card, .food-card { min-height: 180px; contain: layout style; }
-        section { contain: layout; }
-        img { aspect-ratio: auto; object-fit: cover; }
-        .food-card img { aspect-ratio: 16/9; }
+        .game-btn:hover { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
+        
+        /* 规则说明 */
+        .rules-section {
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, #fefce8 0%, #fef2f2 100%);
+        }
+        .rules-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { .rules-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .rules-grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .rule-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .rule-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+        
+        .rule-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .rule-icon svg { width: 1.5rem; height: 1.5rem; color: white; }
+        .rule-card h3 { font-size: 1.25rem; font-weight: 700; color: #DC2626; margin-bottom: 0.75rem; }
+        .rule-card p { color: #4b5563; line-height: 1.75; }
+        
+        /* 排行榜 */
+        .leaderboard-section {
+            padding: 5rem 1rem;
+            background: white;
+        }
+        .leaderboard-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .leaderboard-card {
+            background: linear-gradient(135deg, #fefce8 0%, #ffedd5 100%);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        .leaderboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { .leaderboard-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .leaderboard-grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .leaderboard-item {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .leaderboard-item h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #DC2626;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .leaderboard-item h4 svg { width: 1.25rem; height: 1.25rem; }
+        
+        .rank-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .rank-gold { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: white; }
+        .rank-gold span:first-child { font-weight: 700; }
+        .rank-silver { background: #e5e7eb; }
+        .rank-bronze { background: #fed7aa; }
+        
+        /* 页脚 */
+        footer {
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            color: white;
+            padding: 4rem 1rem;
+        }
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-brand-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+        .footer-brand-icon svg { width: 1.5rem; height: 1.5rem; color: #fef08a; }
+        .footer-brand-text { font-size: 1.5rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .footer-desc { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
+        .footer-social { display: flex; gap: 1rem; }
+        .footer-social-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        .footer-social-icon:hover { background: rgba(255, 255, 255, 0.3); }
+        .footer-social-icon svg { width: 1.25rem; height: 1.25rem; color: #fef08a; }
+        
+        .footer-nav h5 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9); }
+        .footer-nav ul { list-style: none; }
+        .footer-nav li { margin-bottom: 0.5rem; }
+        .footer-nav a { color: white; text-decoration: none; transition: color 0.3s; font-weight: 500; }
+        .footer-nav a:hover { color: #fef08a; }
+        
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+        .footer-copyright { color: rgba(255, 255, 255, 0.8); font-weight: 500; }
+        .footer-contact { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .footer-contact-item svg { width: 1rem; height: 1rem; color: #fef08a; }
+        
+        /* 返回顶部 */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .back-to-top.visible { opacity: 1; pointer-events: auto; }
+        .back-to-top:hover { transform: scale(1.1); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); }
+        .back-to-top svg { width: 1.25rem; height: 1.25rem; }
+        
+        /* section标题 */
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #DC2626;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .section-desc {
+            font-size: 1.25rem;
+            color: #374151;
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto 4rem;
+        }
     </style>
 </head>
 
-<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+<body>
     <!-- 导航栏 -->
-        <!-- 简化导航栏 -->
-    <nav class="bg-gradient-red shadow-2xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="flex items-center space-x-2 text-white hover:text-yellow-200 transition-colors">
-                    <i class="fa fa-arrow-left text-xl"></i>
-                    <span class="font-medium">返回首页</span>
-                </a>
-                <span class="text-white text-lg font-bold text-shadow">2026宁波新春佳节</span>
-            </div>
+    <nav>
+        <div class="nav-content">
+            <a href="index.html" class="nav-back">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                <span>返回首页</span>
+            </a>
+            <span class="nav-title">2026宁波新春佳节</span>
         </div>
     </nav>
 
     <!-- 页面标题 -->
-    <section class="relative py-20 bg-gradient-to-br from-red-100 to-orange-100 overflow-hidden">
+    <section class="hero">
         <!-- 背景装饰 -->
-        <div class="absolute inset-0">
-            <div class="absolute top-10 left-10 w-20 h-20 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow"></div>
-            <div class="absolute top-32 right-20 w-16 h-16 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
-            <div class="absolute bottom-32 left-20 w-24 h-24 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 2s;"></div>
-            <div class="absolute bottom-10 right-10 w-12 h-12 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 0.5s;"></div>
-        </div>
+        <div class="deco-circle" style="width: 5rem; height: 5rem; top: 2.5rem; left: 2.5rem; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);"></div>
+        <div class="deco-circle" style="width: 4rem; height: 4rem; top: 8rem; right: 5rem; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); animation-delay: 1s;"></div>
+        <div class="deco-circle" style="width: 6rem; height: 6rem; bottom: 8rem; left: 5rem; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); animation-delay: 2s;"></div>
+        <div class="deco-circle" style="width: 3rem; height: 3rem; bottom: 2.5rem; right: 2.5rem; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); animation-delay: 0.5s;"></div>
         
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-block bg-gradient-gold text-white px-6 py-3 rounded-full text-lg font-semibold mb-6 shadow-lg">
-                <i class="fa fa-gamepad mr-2"></i>互动游戏
+        <div class="hero-content">
+            <div class="hero-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                </svg>
+                互动游戏
             </div>
-            <h1 class="text-5xl md:text-6xl font-bold text-chinese-red mb-6 text-shadow-lg">春节游戏体验</h1>
-            <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                在游戏中感受宁波春节文化的魅力，体验传统文化的乐趣
-            </p>
+            <h1 class="hero-title">春节游戏体验</h1>
+            <p class="hero-desc">在游戏中感受宁波春节文化的魅力，体验传统文化的乐趣</p>
             
-            <!-- 装饰性元素 -->
-            <div class="absolute top-20 left-20 animate-float">
-                <i class="fa fa-heart text-4xl text-red-300 opacity-60"></i>
+            <div class="hero-icon" style="top: 5rem; left: 5rem;">
+                <svg viewBox="0 0 24 24" fill="#f87171">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
             </div>
-            <div class="absolute top-40 right-32 animate-float" style="animation-delay: 1s;">
-                <i class="fa fa-star text-3xl text-yellow-300 opacity-60"></i>
+            <div class="hero-icon" style="top: 10rem; right: 8rem; animation-delay: 1s;">
+                <svg viewBox="0 0 24 24" fill="#facc15">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
             </div>
         </div>
     </section>
 
     <!-- 游戏选择 -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
-                <!-- 猜灯谜 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover text-center game-card border-2 border-red-100">
-                    <div class="bg-gradient-red w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fa fa-question text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-chinese-red mb-4">猜灯谜</h3>
-                    <p class="text-gray-800 mb-6 font-medium">挑战宁波特色灯谜，体验传统文化乐趣</p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex justify-center space-x-1">
-                            <span class="text-yellow-600 text-lg">★★★☆☆</span>
-                        </div>
-                        <p class="text-sm text-gray-700">适合所有年龄段</p>
-                    </div>
-                    <button onclick="startGame('game_riddles.html')" class="bg-gradient-red text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 w-full">
-                        开始挑战
-                    </button>
+    <section class="games-section">
+        <div class="games-grid">
+            <!-- 猜灯谜 -->
+            <div class="game-card game-card-red">
+                <div class="game-icon bg-gradient-red">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/>
+                    </svg>
                 </div>
-                
-                <!-- 春联配对 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover text-center game-card border-2 border-yellow-100">
-                    <div class="bg-gradient-gold w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fa fa-edit text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-chinese-red mb-4">春联配对</h3>
-                    <p class="text-gray-800 mb-6 font-medium">学习宁波春联文化，体验对仗工整之美</p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex justify-center space-x-1">
-                            <span class="text-yellow-600 text-lg">★★★★☆</span>
-                        </div>
-                        <p class="text-sm text-gray-700">适合有一定文化基础</p>
-                    </div>
-                    <button onclick="startGame('game_couplets.html')" class="bg-gradient-gold text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 w-full">
-                        开始配对
-                    </button>
+                <h3>猜灯谜</h3>
+                <p>挑战宁波特色灯谜，体验传统文化乐趣</p>
+                <div class="game-meta">
+                    <div class="game-stars">★★★☆☆</div>
+                    <div class="game-level">适合所有年龄段</div>
                 </div>
-                
-                <!-- 年俗问答 -->
-                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8 shadow-xl card-hover text-center game-card border-2 border-green-200">
-                    <div class="bg-gradient-to-br from-green-500 to-emerald-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <i class="fa fa-graduation-cap text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-green-800 mb-4">年俗问答</h3>
-                    <p class="text-gray-700 mb-6 font-medium">测试你对宁波春节习俗的了解程度</p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex justify-center space-x-1">
-                            <span class="text-yellow-600 text-lg">★★★★★</span>
-                        </div>
-                        <p class="text-sm text-gray-600">适合文化爱好者</p>
-                    </div>
-                    <button onclick="startGame('game_quiz.html')" class="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 w-full">
-                        开始答题
-                    </button>
+                <a href="game_riddles.html" class="game-btn bg-gradient-red">开始挑战</a>
+            </div>
+            
+            <!-- 春联配对 -->
+            <div class="game-card game-card-yellow">
+                <div class="game-icon bg-gradient-gold">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                    </svg>
                 </div>
-                
-                <!-- 烟花模拟器 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover text-center game-card border-2 border-purple-100">
-                    <div class="bg-gradient-to-br from-purple-500 to-pink-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fa fa-rocket text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-chinese-red mb-4">烟花模拟器</h3>
-                    <p class="text-gray-800 mb-6 font-medium">点击屏幕绽放绚丽烟花，感受节日氛围</p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex justify-center space-x-1">
-                            <span class="text-yellow-600 text-lg">★★☆☆☆</span>
-                        </div>
-                        <p class="text-sm text-gray-700">适合所有年龄段</p>
-                    </div>
-                    <button onclick="startGame('firework.html')" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 w-full">
-                        开始放烟花
-                    </button>
+                <h3>春联配对</h3>
+                <p>学习宁波春联文化，体验对仗工整之美</p>
+                <div class="game-meta">
+                    <div class="game-stars">★★★★☆</div>
+                    <div class="game-level">适合有一定文化基础</div>
                 </div>
-                
-                <!-- 美食模拟制作 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover text-center game-card border-2 border-orange-100">
-                    <div class="bg-gradient-to-br from-orange-500 to-amber-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fa fa-utensils text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-chinese-red mb-4">美食模拟制作</h3>
-                    <p class="text-gray-800 mb-6 font-medium">学习制作宁波特色美食，体验传统烹饪乐趣</p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex justify-center space-x-1">
-                            <span class="text-yellow-600 text-lg">★★★☆☆</span>
-                        </div>
-                        <p class="text-sm text-gray-700">适合美食爱好者</p>
-                    </div>
-                    <button onclick="startGame('cooking_sim.html')" class="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 w-full">
-                        开始制作
-                    </button>
+                <a href="game_couplets.html" class="game-btn bg-gradient-gold">开始配对</a>
+            </div>
+            
+            <!-- 年俗问答 -->
+            <div class="game-card game-card-green">
+                <div class="game-icon bg-gradient-green">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                    </svg>
                 </div>
+                <h3>年俗问答</h3>
+                <p>测试你对宁波春节习俗的了解程度</p>
+                <div class="game-meta">
+                    <div class="game-stars">★★★★★</div>
+                    <div class="game-level">适合文化爱好者</div>
+                </div>
+                <a href="game_quiz.html" class="game-btn bg-gradient-green">开始答题</a>
+            </div>
+            
+            <!-- 烟花模拟器 -->
+            <div class="game-card game-card-purple">
+                <div class="game-icon bg-gradient-purple">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9.19 6.35c-2.04 2.29-3.44 5.58-3.57 5.89L2 10.69l4.05-4.05c.47-.47 1.15-.68 1.81-.55l1.33.26zM11.17 17s3.74-1.55 5.89-3.7c5.4-5.4 4.5-9.62 4.21-10.57-.95-.3-5.17-1.19-10.57 4.21C8.55 9.09 7 12.83 7 12.83L11.17 17zm6.48-2.19c-2.29 2.04-5.58 3.44-5.89 3.57L13.31 22l4.05-4.05c.47-.47.68-1.15.55-1.81l-.26-1.33zM9 18c0 .83-.34 1.58-.88 2.12C6.94 21.3 2 22 2 22s.7-4.94 1.88-6.12C4.42 15.34 5.17 15 6 15c1.66 0 3 1.34 3 3zm4-9c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/>
+                    </svg>
+                </div>
+                <h3>烟花模拟器</h3>
+                <p>点击屏幕绽放绚丽烟花，感受节日氛围</p>
+                <div class="game-meta">
+                    <div class="game-stars">★★☆☆☆</div>
+                    <div class="game-level">适合所有年龄段</div>
+                </div>
+                <a href="firework.html" class="game-btn bg-gradient-purple">开始放烟花</a>
+            </div>
+            
+            <!-- 美食模拟制作 -->
+            <div class="game-card game-card-orange">
+                <div class="game-icon bg-gradient-orange">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/>
+                    </svg>
+                </div>
+                <h3>美食模拟制作</h3>
+                <p>学习制作宁波特色美食，体验传统烹饪乐趣</p>
+                <div class="game-meta">
+                    <div class="game-stars">★★★☆☆</div>
+                    <div class="game-level">适合美食爱好者</div>
+                </div>
+                <a href="cooking_sim.html" class="game-btn bg-gradient-orange">开始制作</a>
             </div>
         </div>
     </section>
 
     <!-- 游戏规则说明 -->
-    <section class="py-20 bg-gradient-to-br from-yellow-50 to-red-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-chinese-red mb-6">游戏规则说明</h2>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">了解游戏规则，更好地体验宁波春节文化</p>
-            </div>
+    <section class="rules-section">
+        <div style="max-width: 1280px; margin: 0 auto;">
+            <h2 class="section-title">游戏规则说明</h2>
+            <p class="section-desc">了解游戏规则，更好地体验宁波春节文化</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
-                    <div class="bg-gradient-red w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fa fa-trophy text-2xl text-white"></i>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <div class="rule-icon bg-gradient-red">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-chinese-red mb-4">积分系统</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        每个游戏都有积分系统，答对题目可获得积分，积分可用于解锁更多游戏内容。
-                    </p>
+                    <h3>积分系统</h3>
+                    <p>每个游戏都有积分系统，答对题目可获得积分，积分可用于解锁更多游戏内容。</p>
                 </div>
                 
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
-                    <div class="bg-gradient-gold w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fa fa-star text-2xl text-white"></i>
+                <div class="rule-card">
+                    <div class="rule-icon bg-gradient-gold">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-chinese-red mb-4">难度等级</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        游戏分为简单、中等、困难三个难度等级，适合不同文化基础的玩家。
-                    </p>
+                    <h3>难度等级</h3>
+                    <p>游戏分为简单、中等、困难三个难度等级，适合不同文化基础的玩家。</p>
                 </div>
                 
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
-                    <div class="bg-gradient-green w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fa fa-heart text-2xl text-white"></i>
+                <div class="rule-card">
+                    <div class="rule-icon bg-gradient-green">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-chinese-red mb-4">文化传承</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        通过游戏了解宁波春节文化，传承和弘扬优秀传统文化。
-                    </p>
+                    <h3>文化传承</h3>
+                    <p>通过游戏了解宁波春节文化，传承和弘扬优秀传统文化。</p>
+                </div>
+                
+                <div class="rule-card">
+                    <div class="rule-icon bg-gradient-purple">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                        </svg>
+                    </div>
+                    <h3>互动分享</h3>
+                    <p>与家人朋友一起游戏，分享欢乐时光，增进节日气氛。</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 排行榜 -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-chinese-red mb-6">游戏排行榜</h2>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">看看谁是宁波春节文化的最强玩家</p>
-            </div>
+    <section class="leaderboard-section">
+        <div class="leaderboard-container">
+            <h2 class="section-title">游戏排行榜</h2>
+            <p class="section-desc">看看谁是宁波春节文化的最强玩家</p>
             
-            <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 shadow-xl">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="leaderboard-card">
+                <div class="leaderboard-grid">
                     <!-- 猜灯谜排行榜 -->
-                    <div class="bg-white rounded-2xl p-6 shadow-lg">
-                        <h3 class="text-xl font-bold text-chinese-red mb-4 text-center">
-                            <i class="fa fa-question mr-2"></i>猜灯谜排行
-                        </h3>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center bg-gradient-gold text-white px-4 py-2 rounded-lg">
-                                <span class="font-bold">🥇 玩家123</span>
-                                <span>980分</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-gray-200 px-4 py-2 rounded-lg">
-                                <span>🥈 宁波达人</span>
-                                <span>950分</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-orange-200 px-4 py-2 rounded-lg">
-                                <span>🥉 文化爱好者</span>
-                                <span>920分</span>
-                            </div>
+                    <div class="leaderboard-item">
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/>
+                            </svg>
+                            猜灯谜排行
+                        </h4>
+                        <div class="rank-item rank-gold">
+                            <span>🥇 玩家123</span>
+                            <span>980分</span>
+                        </div>
+                        <div class="rank-item rank-silver">
+                            <span>🥈 宁波达人</span>
+                            <span>950分</span>
+                        </div>
+                        <div class="rank-item rank-bronze">
+                            <span>🥉 文化爱好者</span>
+                            <span>920分</span>
                         </div>
                     </div>
                     
                     <!-- 春联配对排行榜 -->
-                    <div class="bg-white rounded-2xl p-6 shadow-lg">
-                        <h3 class="text-xl font-bold text-chinese-red mb-4 text-center">
-                            <i class="fa fa-edit mr-2"></i>春联配对排行
-                        </h3>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center bg-gradient-gold text-white px-4 py-2 rounded-lg">
-                                <span class="font-bold">🥇 墨客骚人</span>
-                                <span>960分</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-gray-200 px-4 py-2 rounded-lg">
-                                <span>🥈 诗词爱好者</span>
-                                <span>930分</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-orange-200 px-4 py-2 rounded-lg">
-                                <span>🥉 文学青年</span>
-                                <span>900分</span>
-                            </div>
+                    <div class="leaderboard-item">
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                            </svg>
+                            春联配对排行
+                        </h4>
+                        <div class="rank-item rank-gold">
+                            <span>🥇 墨客骚人</span>
+                            <span>960分</span>
+                        </div>
+                        <div class="rank-item rank-silver">
+                            <span>🥈 诗词爱好者</span>
+                            <span>930分</span>
+                        </div>
+                        <div class="rank-item rank-bronze">
+                            <span>🥉 文学青年</span>
+                            <span>900分</span>
                         </div>
                     </div>
                     
                     <!-- 年俗问答排行榜 -->
-                    <div class="bg-white rounded-2xl p-6 shadow-lg">
-                        <h3 class="text-xl font-bold text-chinese-red mb-4 text-center">
-                            <i class="fa fa-graduation-cap mr-2"></i>年俗问答排行
-                        </h3>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center bg-gradient-gold text-white px-4 py-2 rounded-lg">
-                                <span class="font-bold">🥇 文化专家</span>
-                                <span>990分</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-gray-200 px-4 py-2 rounded-lg">
-                                <span>🥈 民俗达人</span>
-                                <span>960分</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-orange-200 px-4 py-2 rounded-lg">
-                                <span>🥉 宁波通</span>
-                                <span>930分</span>
-                            </div>
+                    <div class="leaderboard-item">
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                            </svg>
+                            年俗问答排行
+                        </h4>
+                        <div class="rank-item rank-gold">
+                            <span>🥇 文化专家</span>
+                            <span>990分</span>
+                        </div>
+                        <div class="rank-item rank-silver">
+                            <span>🥈 民俗达人</span>
+                            <span>960分</span>
+                        </div>
+                        <div class="rank-item rank-bronze">
+                            <span>🥉 宁波通</span>
+                            <span>930分</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 美食制作排行榜 -->
+                    <div class="leaderboard-item">
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/>
+                            </svg>
+                            美食制作排行
+                        </h4>
+                        <div class="rank-item rank-gold">
+                            <span>🥇 宁波厨师</span>
+                            <span>970分</span>
+                        </div>
+                        <div class="rank-item rank-silver">
+                            <span>🥈 美食达人</span>
+                            <span>940分</span>
+                        </div>
+                        <div class="rank-item rank-bronze">
+                            <span>🥉 小厨神</span>
+                            <span>910分</span>
                         </div>
                     </div>
                 </div>
@@ -407,147 +681,104 @@
     </section>
 
     <!-- 页脚 -->
-    <footer class="bg-gradient-red text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- 网站介绍 -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="bg-white/20 p-2 rounded-full">
-                            <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
-                        </div>
-                        <span class="text-2xl font-bold text-shadow">2026宁波新春佳节</span>
+    <footer>
+        <div class="footer-grid">
+            <div style="grid-column: span 2;">
+                <div class="footer-brand">
+                    <div class="footer-brand-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="animate-wiggle">
+                            <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                        </svg>
                     </div>
-                    <p class="text-gray-200 mb-4">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情。</p>
-                    <div class="flex space-x-4">
-                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                            <i class="fa fa-heart text-yellow-200"></i>
-                        </div>
-                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                            <i class="fa fa-star text-yellow-200"></i>
-                        </div>
-                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                            <i class="fa fa-thumbs-up text-yellow-200"></i>
-                        </div>
+                    <span class="footer-brand-text">2026宁波新春佳节</span>
+                </div>
+                <p class="footer-desc">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情。</p>
+                <div class="footer-social">
+                    <div class="footer-social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                     </div>
-                </div>
-                
-                <!-- 快速导航 -->
-                <div>
-                    <h5 class="text-xl font-semibold mb-4 text-gray-100">快速导航</h5>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="text-white hover:text-yellow-200 transition-colors font-medium">首页</a></li>
-                        <li><a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节知识</a></li>
-                        <li><a href="culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波年俗</a></li>
-                        <li><a href="games.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节游戏</a></li>
-                    </ul>
-                </div>
-                
-                <!-- 宁波特色 -->
-                <div>
-                    <h5 class="text-xl font-semibold mb-4 text-gray-100">宁波特色</h5>
-                    <ul class="space-y-2">
-                        <li><a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波花市</a></li>
-                        <li><a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">特色美食</a></li>
-                        <li><a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors font-medium">民俗表演</a></li>
-                    </ul>
+                    <div class="footer-social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                    </div>
+                    <div class="footer-social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
             
-            <!-- 联系信息 -->
-            <div class="border-t border-white/20 mt-12 pt-8 text-center">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="mb-4 md:mb-0">
-                        <p class="text-gray-200 font-medium">&copy; 2026 宁波新春佳节主题网站. 保留所有权利.</p>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <div class="flex items-center">
-                            <i class="fa fa-map-marker mr-2 text-yellow-200"></i>
-                            <span class="text-gray-200">浙江宁波</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa fa-phone mr-2 text-yellow-200"></i>
-                            <span class="text-gray-200">0574-12345678</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa fa-envelope mr-2 text-yellow-200"></i>
-                            <span class="text-gray-200">ningbo@spring.com</span>
-                        </div>
-                    </div>
+            <div class="footer-nav">
+                <h5>快速导航</h5>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="knowledge.html">春节知识</a></li>
+                    <li><a href="culture.html">宁波年俗</a></li>
+                    <li><a href="games.html">春节游戏</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-nav">
+                <h5>宁波特色</h5>
+                <ul>
+                    <li><a href="flower_market.html">宁波花市</a></li>
+                    <li><a href="food_culture.html">特色美食</a></li>
+                    <li><a href="lion_dragon.html">民俗表演</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 宁波新春佳节主题网站. 保留所有权利.</p>
+            <div class="footer-contact">
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span>浙江宁波</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    <span>0574-12345678</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <span>ningbo@spring.com</span>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- 返回顶部按钮 -->
-    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-gold text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
-        <i class="fa fa-arrow-up text-xl"></i>
+    <button id="backToTop" class="back-to-top">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+        </svg>
     </button>
 
     <script>
-        // 移动端菜单切换
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // 开始游戏
-        function startGame(gameUrl) {
-            window.location.href = gameUrl;
-        }
-
         // 返回顶部
-        function backToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // 导航栏滚动效果
+        const backToTopBtn = document.getElementById('backToTop');
+        
         window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const backToTop = document.getElementById('backToTop');
-            
             if (window.scrollY > 100) {
-                navbar.classList.add('bg-gradient-red/95', 'backdrop-blur-sm');
-                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('visible');
             } else {
-                navbar.classList.remove('bg-gradient-red/95', 'backdrop-blur-sm');
-                backToTop.classList.add('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.remove('visible');
             }
         });
-
-        // 返回顶部按钮点击事件
-        document.getElementById('backToTop').addEventListener('click', backToTop);
-
-        // 页面加载完成后的初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            // 添加页面加载动画
-            const elements = document.querySelectorAll('.game-card');
-            elements.forEach((el, index) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                
-                setTimeout(() => {
-                    el.style.transition = 'all 0.6s ease';
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, index * 200);
-            });
-        });
-
-        // 键盘导航支持
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                // ESC键关闭移动端菜单
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            }
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>
-
 </html>

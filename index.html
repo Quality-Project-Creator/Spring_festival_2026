@@ -8,229 +8,353 @@
     <meta name="keywords" content="宁波春节,2026春节,河姆渡文化,宁波年俗,宁波美食,舞龙舞狮,宁波花市">
     <meta name="author" content="宁波文化">
     <title>2026宁波新春佳节 - 感受七千年河姆渡文化传承</title>
-    <!-- DNS预解析和预连接 -->
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?config=config"></script>
-    <script>
-        window.tailwind = window.tailwind || {};
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#DC2626',
-                        secondary: '#F59E0B',
-                        accent: '#059669',
-                        gold: '#D97706',
-                        'chinese-red': '#DC2626',
-                        'chinese-gold': '#D97706'
-                    },
-                    fontFamily: {
-                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 3s ease-in-out infinite',
-                        'bounce-slow': 'bounce 2s infinite',
-                        'pulse-slow': 'pulse 3s infinite',
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Font Awesome 异步加载 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"></noscript>
-    <!-- 防止CLS: 字体回退样式和布局稳定性 -->
     <style>
-        /* 字体显示策略 - 防止字体加载导致的偏移 */
-        html {
-            scroll-behavior: smooth;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: PingFang SC, Microsoft YaHei, system-ui, sans-serif;
-        }
-        /* 预设容器尺寸防止布局偏移 */
-        .nav-card {
-            min-height: 180px;
-            contain: layout style;
-        }
-        @media (min-width: 768px) {
-            .nav-card {
-                min-height: 220px;
-            }
-        }
-        /* 为section设置最小高度防止内容加载偏移 */
-        section {
-            contain: layout;
-        }
-        /* 图片容器预设尺寸 */
-        .food-card img, .nav-card img {
-            aspect-ratio: 16/9;
-            object-fit: cover;
-        }
-    </style>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-shadow {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            }
-            .text-shadow-lg {
-                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-            }
-            .bg-gradient-red {
-                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            }
-            .bg-gradient-gold {
-                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            }
-            .bg-gradient-green {
-                background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            }
+            font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #ffffff 50%, #fefce8 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #1f2937;
         }
         
+        /* 渐变 */
+        .bg-gradient-red { background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); }
+        .bg-gradient-gold { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .text-shadow-lg { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); }
+        
+        /* 动画 */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.05); }
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse { animation: pulse 3s ease-in-out infinite; }
+        .animate-wiggle { animation: wiggle 0.5s ease-in-out infinite; }
+        
+        /* 头部 */
+        header {
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .header-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+        .header-icon svg { color: #fef08a; width: 1.5rem; height: 1.5rem; }
+        .header-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        @media (min-width: 768px) { .header-title { font-size: 1.5rem; } }
+        
+        /* Hero区域 */
+        .hero {
+            position: relative;
+            padding: 3rem 0;
+            overflow: hidden;
+        }
+        @media (min-width: 768px) { .hero { padding: 5rem 0; } }
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 1rem;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #DC2626;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+        @media (min-width: 768px) { .hero-title { font-size: 3.75rem; } }
+        .hero-desc {
+            font-size: 1.125rem;
+            color: #374151;
+            max-width: 48rem;
+            margin: 0 auto 1.5rem;
+            line-height: 1.75;
+        }
+        @media (min-width: 768px) { .hero-desc { font-size: 1.25rem; } }
+        .hero-wish {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 42rem;
+            margin: 0 auto 2rem;
+        }
+        .hero-wish p {
+            font-size: 1.125rem;
+            color: #1f2937;
+            font-weight: 500;
+        }
+        
+        /* 导航卡片区域 */
+        .nav-section {
+            padding: 2rem 1rem;
+        }
+        @media (min-width: 768px) { .nav-section { padding: 4rem 1rem; } }
+        .nav-container {
+            max-width: 72rem;
+            margin: 0 auto;
+        }
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #DC2626;
+            text-align: center;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        @media (min-width: 768px) { .nav-title { font-size: 1.875rem; margin-bottom: 3rem; } }
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        @media (min-width: 768px) { .nav-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
         
         .nav-card {
-            transition: all 0.3s ease;
+            display: block;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+        .nav-card:hover { transform: translateY(-10px) scale(1.02); }
+        .nav-card:active { transform: scale(0.98); }
+        .nav-card-inner {
+            border-radius: 1.5rem;
+            padding: 1rem;
+            text-align: center;
+            min-height: 160px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        @media (min-width: 768px) { .nav-card-inner { padding: 1.5rem; min-height: 200px; } }
+        .nav-card-red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .nav-card-orange { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); }
+        .nav-card-green { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .nav-card-pink { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+        .nav-card-yellow { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); }
+        .nav-card-purple { background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%); }
+        .nav-card-icon {
+            width: 3rem;
+            height: 3rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+        }
+        @media (min-width: 768px) { .nav-card-icon { width: 4rem; height: 4rem; margin-bottom: 1rem; } }
+        .nav-card-icon svg { color: white; width: 1.5rem; height: 1.5rem; }
+        @media (min-width: 768px) { .nav-card-icon svg { width: 2rem; height: 2rem; } }
+        .nav-card h3 { color: white; font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem; }
+        @media (min-width: 768px) { .nav-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; } }
+        .nav-card p { color: rgba(255, 255, 255, 0.8); font-size: 0.875rem; }
+        @media (min-width: 768px) { .nav-card p { font-size: 1rem; } }
         
-        .nav-card:hover {
-            transform: translateY(-10px) scale(1.02);
+        /* 底部装饰 */
+        .footer-section {
+            padding: 2rem 1rem 3rem;
+            text-align: center;
         }
-        
-        .nav-card:active {
-            transform: scale(0.98);
+        .footer-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
+        .footer-icon {
+            background: white;
+            border-radius: 50%;
+            padding: 0.75rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+        .footer-icon svg { width: 1.5rem; height: 1.5rem; }
+        .footer-text { color: #4b5563; font-size: 0.875rem; }
+        @media (min-width: 768px) { .footer-text { font-size: 1rem; } }
     </style>
 </head>
 
-<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+<body>
     <!-- 顶部标题栏 -->
-    <header class="bg-gradient-red shadow-2xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4">
-            <div class="flex items-center justify-center space-x-3">
-                <div class="bg-white/20 p-2 rounded-full">
-                    <i class="fa fa-fire text-2xl text-yellow-200"></i>
-                </div>
-                <span class="text-white text-xl md:text-2xl font-bold text-shadow">2026宁波新春佳节</span>
+    <header>
+        <div class="header-content">
+            <div class="header-icon">
+                <svg class="animate-wiggle" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                </svg>
             </div>
+            <span class="header-title">2026宁波新春佳节</span>
         </div>
     </header>
 
     <!-- 主页横幅 -->
-    <section class="relative py-12 md:py-20 overflow-hidden">
+    <section class="hero">
         <!-- 背景装饰 -->
-        <div class="absolute inset-0">
-            <div class="absolute top-10 left-10 w-20 h-20 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow"></div>
-            <div class="absolute top-32 right-20 w-16 h-16 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
-            <div class="absolute bottom-32 left-20 w-24 h-24 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 2s;"></div>
-            <div class="absolute bottom-10 right-10 w-12 h-12 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 0.5s;"></div>
-        </div>
+        <div class="deco-circle" style="width: 5rem; height: 5rem; top: 2.5rem; left: 2.5rem; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);"></div>
+        <div class="deco-circle" style="width: 4rem; height: 4rem; top: 8rem; right: 5rem; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); animation-delay: 1s;"></div>
+        <div class="deco-circle" style="width: 6rem; height: 6rem; bottom: 8rem; left: 5rem; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); animation-delay: 2s;"></div>
+        <div class="deco-circle" style="width: 3rem; height: 3rem; bottom: 2.5rem; right: 2.5rem; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); animation-delay: 0.5s;"></div>
         
-        <div class="relative z-10 text-center px-4">
+        <div class="hero-content">
             <!-- 春节装饰 -->
-            <div class="mb-6">
-                <div class="inline-block bg-gradient-gold text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg">
-                    <i class="fa fa-star mr-2"></i>2026龙年大吉
-                </div>
+            <div class="hero-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                2026龙年大吉
             </div>
             
             <!-- 主标题 -->
-            <h1 class="text-4xl md:text-6xl font-bold text-chinese-red mb-4 text-shadow-lg">
-                2026宁波新春佳节
-            </h1>
+            <h1 class="hero-title">2026宁波新春佳节</h1>
             
             <!-- 副标题 -->
-            <p class="text-lg md:text-xl text-gray-700 mb-6 max-w-3xl mx-auto leading-relaxed">
-                感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情
-            </p>
+            <p class="hero-desc">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情</p>
             
             <!-- 祝福语句 -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-xl mb-8 max-w-2xl mx-auto">
-                <p class="text-lg text-gray-800 leading-relaxed font-medium">
-                    恭祝大家龙年大吉，万事如意，身体健康，阖家幸福！
-                </p>
+            <div class="hero-wish">
+                <p>恭祝大家龙年大吉，万事如意，身体健康，阖家幸福！</p>
             </div>
         </div>
     </section>
 
     <!-- 导航卡片区域 -->
-    <section class="py-8 md:py-16 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl md:text-3xl font-bold text-center text-chinese-red mb-8 md:mb-12">
-                <i class="fa fa-compass mr-2"></i>探索宁波春节
+    <section class="nav-section">
+        <div class="nav-container">
+            <h2 class="nav-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#DC2626">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                探索宁波春节
             </h2>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            <div class="nav-grid">
                 <!-- 春节知识 -->
-                <a href="knowledge.html" class="nav-card block">
-                    <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl text-center h-full">
-                        <div class="bg-white/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                            <i class="fa fa-book text-2xl md:text-3xl text-white"></i>
+                <a href="knowledge.html" class="nav-card">
+                    <div class="nav-card-inner nav-card-red">
+                        <div class="nav-card-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+                            </svg>
                         </div>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">春节知识</h3>
-                        <p class="text-white/80 text-sm md:text-base">了解春节由来与习俗</p>
+                        <h3>春节知识</h3>
+                        <p>了解春节由来与习俗</p>
                     </div>
                 </a>
                 
                 <!-- 宁波年俗 -->
-                <a href="culture.html" class="nav-card block">
-                    <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl text-center h-full">
-                        <div class="bg-white/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                            <i class="fa fa-home text-2xl md:text-3xl text-white"></i>
+                <a href="culture.html" class="nav-card">
+                    <div class="nav-card-inner nav-card-orange">
+                        <div class="nav-card-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                            </svg>
                         </div>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">宁波年俗</h3>
-                        <p class="text-white/80 text-sm md:text-base">体验甬城传统风俗</p>
+                        <h3>宁波年俗</h3>
+                        <p>体验甬城传统风俗</p>
                     </div>
                 </a>
                 
                 <!-- 春节游戏 -->
-                <a href="games.html" class="nav-card block">
-                    <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl text-center h-full">
-                        <div class="bg-white/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                            <i class="fa fa-gamepad text-2xl md:text-3xl text-white"></i>
+                <a href="games.html" class="nav-card">
+                    <div class="nav-card-inner nav-card-green">
+                        <div class="nav-card-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                            </svg>
                         </div>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">春节游戏</h3>
-                        <p class="text-white/80 text-sm md:text-base">趣味互动小游戏</p>
+                        <h3>春节游戏</h3>
+                        <p>趣味互动小游戏</p>
                     </div>
                 </a>
                 
                 <!-- 宁波花市 -->
-                <a href="flower_market.html" class="nav-card block">
-                    <div class="bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl text-center h-full">
-                        <div class="bg-white/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                            <i class="fa fa-leaf text-2xl md:text-3xl text-white"></i>
+                <a href="flower_market.html" class="nav-card">
+                    <div class="nav-card-inner nav-card-pink">
+                        <div class="nav-card-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
+                            </svg>
                         </div>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">宁波花市</h3>
-                        <p class="text-white/80 text-sm md:text-base">逛花市迎新春</p>
+                        <h3>宁波花市</h3>
+                        <p>逛花市迎新春</p>
                     </div>
                 </a>
                 
                 <!-- 特色美食 -->
-                <a href="food_culture.html" class="nav-card block">
-                    <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl text-center h-full">
-                        <div class="bg-white/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                            <i class="fa fa-cutlery text-2xl md:text-3xl text-white"></i>
+                <a href="food_culture.html" class="nav-card">
+                    <div class="nav-card-inner nav-card-yellow">
+                        <div class="nav-card-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/>
+                            </svg>
                         </div>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">特色美食</h3>
-                        <p class="text-white/80 text-sm md:text-base">品味宁波传统美食</p>
+                        <h3>特色美食</h3>
+                        <p>品味宁波传统美食</p>
                     </div>
                 </a>
                 
                 <!-- 民俗表演 -->
-                <a href="lion_dragon.html" class="nav-card block">
-                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl text-center h-full">
-                        <div class="bg-white/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                            <i class="fa fa-music text-2xl md:text-3xl text-white"></i>
+                <a href="lion_dragon.html" class="nav-card">
+                    <div class="nav-card-inner nav-card-purple">
+                        <div class="nav-card-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                            </svg>
                         </div>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">民俗表演</h3>
-                        <p class="text-white/80 text-sm md:text-base">舞龙舞狮看大戏</p>
+                        <h3>民俗表演</h3>
+                        <p>舞龙舞狮看大戏</p>
                     </div>
                 </a>
             </div>
@@ -238,24 +362,25 @@
     </section>
 
     <!-- 底部装饰 -->
-    <section class="py-8 md:py-12">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <div class="flex justify-center space-x-4 mb-6">
-                <div class="bg-white rounded-full p-3 shadow-lg animate-float">
-                    <i class="fa fa-heart text-2xl text-red-400"></i>
-                </div>
-                <div class="bg-white rounded-full p-3 shadow-lg animate-float" style="animation-delay: 0.5s;">
-                    <i class="fa fa-star text-2xl text-yellow-400"></i>
-                </div>
-                <div class="bg-white rounded-full p-3 shadow-lg animate-float" style="animation-delay: 1s;">
-                    <i class="fa fa-fire text-2xl text-red-400"></i>
-                </div>
+    <section class="footer-section">
+        <div class="footer-icons">
+            <div class="footer-icon">
+                <svg viewBox="0 0 24 24" fill="#f87171">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
             </div>
-            <p class="text-gray-600 text-sm md:text-base">
-                &copy; 2026 宁波新春佳节主题网站 | 感受七千年河姆渡文化传承
-            </p>
+            <div class="footer-icon" style="animation-delay: 0.5s;">
+                <svg viewBox="0 0 24 24" fill="#facc15">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+            </div>
+            <div class="footer-icon" style="animation-delay: 1s;">
+                <svg viewBox="0 0 24 24" fill="#f87171">
+                    <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/>
+                </svg>
+            </div>
         </div>
+        <p class="footer-text">&copy; 2026 宁波新春佳节主题网站 | 感受七千年河姆渡文化传承</p>
     </section>
 </body>
-
 </html>

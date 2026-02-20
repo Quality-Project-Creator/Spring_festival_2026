@@ -7,242 +7,480 @@
     <meta name="description" content="探索宁波独特的春节年俗文化，了解河姆渡文化传承、传统祭祀、年夜饭、拜年习俗等甬城特色春节风俗。">
     <meta name="keywords" content="宁波年俗,河姆渡文化,宁波春节习俗,年夜饭,拜年,传统风俗">
     <title>宁波年俗文化 - 2026宁波新春佳节</title>
-    <!-- DNS预解析和预连接 -->
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css" media="print" onload="this.media='all'">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#DC2626',
-                        secondary: '#F59E0B',
-                        accent: '#059669',
-                        gold: '#D97706',
-                        'chinese-red': '#DC2626',
-                        'chinese-gold': '#D97706',
-                        'warm-orange': '#F97316'
-                    },
-                    fontFamily: {
-                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 3s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                        'bounce-slow': 'bounce 2s infinite',
-                        'pulse-slow': 'pulse 3s infinite',
-                        'wiggle': 'wiggle 1s ease-in-out infinite',
-                        'slide-in': 'slideIn 0.8s ease-out forwards',
-                        'fade-in': 'fadeIn 1s ease-out forwards'
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-shadow {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            }
-            .text-shadow-lg {
-                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-            }
-            .bg-gradient-red {
-                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            }
-            .bg-gradient-gold {
-                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            }
-            .bg-gradient-orange {
-                background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
-            }
-            .border-gradient {
-                border-image: linear-gradient(45deg, #F59E0B, #DC2626) 1;
-            }
-            .timeline-line {
-                background: linear-gradient(to bottom, #DC2626, #F59E0B, #059669);
-            }
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #ffffff 50%, #fefce8 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #1f2937;
         }
         
+        /* 渐变 */
+        .bg-gradient-red { background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); }
+        .bg-gradient-gold { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+        .bg-gradient-orange { background: linear-gradient(135deg, #F97316 0%, #EA580C 100%); }
+        .bg-gradient-green { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .text-shadow-lg { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); }
+        
+        /* 动画 */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-        
-        @keyframes glow {
-            from { box-shadow: 0 0 20px #F59E0B; }
-            to { box-shadow: 0 0 30px #F59E0B, 0 0 40px #F59E0B; }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.05); }
         }
-        
         @keyframes wiggle {
             0%, 100% { transform: rotate(-3deg); }
             50% { transform: rotate(3deg); }
         }
-        
         @keyframes slideIn {
-            from { 
-                opacity: 0; 
-                transform: translateX(-50px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateX(0); 
-            }
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse { animation: pulse 3s ease-in-out infinite; }
+        .animate-wiggle { animation: wiggle 0.5s ease-in-out infinite; }
+        .animate-slide-in { animation: slideIn 0.8s ease-out forwards; }
+        
+        /* 导航栏 */
+        nav {
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .nav-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-back:hover { color: #fef08a; }
+        .nav-back svg { width: 1.25rem; height: 1.25rem; }
+        .nav-title { color: white; font-size: 1.125rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        
+        /* Hero区域 */
+        .hero {
+            position: relative;
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, #fee2e2 0%, #ffedd5 100%);
+            overflow: hidden;
+        }
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1280px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .hero-badge svg { width: 1rem; height: 1rem; }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #DC2626;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+        @media (min-width: 768px) { .hero-title { font-size: 3.75rem; } }
+        .hero-desc {
+            font-size: 1.25rem;
+            color: #374151;
+            max-width: 48rem;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+        .hero-icon {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+        .hero-icon svg { width: 2.5rem; height: 2.5rem; opacity: 0.6; }
+        
+        /* 时间线区域 */
+        .timeline-section {
+            padding: 5rem 1rem;
+            background: white;
+        }
+        .section-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #DC2626;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .section-desc {
+            font-size: 1.25rem;
+            color: #374151;
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto 4rem;
         }
         
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+        .timeline {
+            position: relative;
         }
-        
-        .firecracker {
-            animation: wiggle 0.5s ease-in-out infinite;
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #DC2626, #F59E0B, #22c55e);
+            border-radius: 9999px;
         }
         
         .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
             opacity: 0;
-            transform: translateX(-50px);
             animation: slideIn 0.8s ease-out forwards;
         }
+        .timeline-item:nth-child(even) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(odd) { animation-delay: 0.4s; }
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) { .timeline-grid { grid-template-columns: 1fr 1fr; } }
         
-        .timeline-item:nth-child(even) {
-            animation-delay: 0.2s;
+        .timeline-card {
+            border-radius: 1.5rem;
+            padding: 2rem;
+            color: white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        .timeline-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .timeline-card p { font-size: 1.125rem; line-height: 1.75; margin-bottom: 1rem; }
+        .timeline-card-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
         
-        .timeline-item:nth-child(odd) {
-            animation-delay: 0.4s;
+        .timeline-icon-wrap {
+            position: relative;
+            height: 4rem;
         }
+        .timeline-icon {
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 50%;
+            width: 4rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 4px solid;
+        }
+        .timeline-icon svg { width: 1.5rem; height: 1.5rem; }
         
-        /* 自定义滚动条 */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* 特色卡片 */
+        .features-section {
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, #fefce8 0%, #fef2f2 100%);
         }
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
         
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+        .feature-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+        .feature-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+        .feature-card img {
+            width: 100%;
+            height: 12rem;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .feature-card h3 { font-size: 1.25rem; font-weight: 700; color: #DC2626; margin-bottom: 0.75rem; }
+        .feature-card p { color: #4b5563; line-height: 1.75; }
         
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #DC2626, #F59E0B);
-            border-radius: 4px;
+        /* 商帮文化 */
+        .culture-section {
+            padding: 5rem 1rem;
+            background: white;
         }
+        .culture-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) { .culture-grid { grid-template-columns: 1fr 1fr; } }
+        .culture-content h2 { font-size: 2.25rem; font-weight: 700; color: #DC2626; margin-bottom: 1.5rem; }
+        .culture-content > p { font-size: 1.125rem; color: #374151; line-height: 1.75; margin-bottom: 1.5rem; }
         
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #B91C1C, #D97706);
+        .culture-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
+        .culture-item-icon {
+            flex-shrink: 0;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .culture-item-icon svg { width: 1.25rem; height: 1.25rem; }
+        .culture-item h3 { font-size: 1.25rem; font-weight: 700; color: #DC2626; margin-bottom: 0.5rem; }
+        .culture-item p { color: #4b5563; line-height: 1.6; }
         
-        /* 平滑滚动 */
-        html {
-            scroll-behavior: smooth;
+        .culture-image-card {
+            background: linear-gradient(135deg, #fee2e2 0%, #ffedd5 100%);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
-    </style>
-
-    <!-- 防止CLS: 布局稳定性样式 -->
-    <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: PingFang SC, Microsoft YaHei, system-ui, sans-serif; }
-        .nav-card, .food-card { min-height: 180px; contain: layout style; }
-        section { contain: layout; }
-        img { aspect-ratio: auto; object-fit: cover; }
-        .food-card img { aspect-ratio: 16/9; }
+        .culture-image-card img {
+            width: 100%;
+            height: 24rem;
+            object-fit: cover;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        .culture-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .culture-stat {
+            background: white;
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .culture-stat-value { font-size: 1.875rem; font-weight: 700; color: #DC2626; margin-bottom: 0.25rem; }
+        .culture-stat-label { color: #4b5563; }
+        
+        /* 页脚 */
+        footer {
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            color: white;
+            padding: 4rem 1rem;
+        }
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-brand-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+        .footer-brand-icon svg { width: 1.5rem; height: 1.5rem; color: #fef08a; }
+        .footer-brand-text { font-size: 1.5rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .footer-desc { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
+        .footer-social { display: flex; gap: 1rem; }
+        .footer-social-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        .footer-social-icon:hover { background: rgba(255, 255, 255, 0.3); }
+        .footer-social-icon svg { width: 1.25rem; height: 1.25rem; color: #fef08a; }
+        
+        .footer-nav h5 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9); }
+        .footer-nav ul { list-style: none; }
+        .footer-nav li { margin-bottom: 0.5rem; }
+        .footer-nav a { color: white; text-decoration: none; transition: color 0.3s; font-weight: 500; }
+        .footer-nav a:hover { color: #fef08a; }
+        
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+        .footer-copyright { color: rgba(255, 255, 255, 0.8); font-weight: 500; }
+        .footer-contact { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .footer-contact-item svg { width: 1rem; height: 1rem; color: #fef08a; }
+        
+        /* 返回顶部 */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .back-to-top.visible { opacity: 1; pointer-events: auto; }
+        .back-to-top:hover { transform: scale(1.1); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); }
+        .back-to-top svg { width: 1.25rem; height: 1.25rem; }
+        
+        /* 文字对齐 */
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        @media (min-width: 1024px) {
+            .lg\:text-left { text-align: left; }
+            .lg\:text-right { text-align: right; }
+        }
     </style>
 </head>
 
-<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+<body>
     <!-- 导航栏 -->
-        <!-- 简化导航栏 -->
-    <nav class="bg-gradient-red shadow-2xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="flex items-center space-x-2 text-white hover:text-yellow-200 transition-colors">
-                    <i class="fa fa-arrow-left text-xl"></i>
-                    <span class="font-medium">返回首页</span>
-                </a>
-                <span class="text-white text-lg font-bold text-shadow">2026宁波新春佳节</span>
-            </div>
+    <nav>
+        <div class="nav-content">
+            <a href="index.html" class="nav-back">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                <span>返回首页</span>
+            </a>
+            <span class="nav-title">2026宁波新春佳节</span>
         </div>
     </nav>
 
     <!-- 页面标题 -->
-    <section class="relative py-20 bg-gradient-to-br from-red-100 to-orange-100 overflow-hidden">
+    <section class="hero">
         <!-- 背景装饰 -->
-        <div class="absolute inset-0">
-            <div class="absolute top-10 left-10 w-20 h-20 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow"></div>
-            <div class="absolute top-32 right-20 w-16 h-16 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
-            <div class="absolute bottom-32 left-20 w-24 h-24 bg-gradient-gold rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 2s;"></div>
-            <div class="absolute bottom-10 right-10 w-12 h-12 bg-gradient-red rounded-full opacity-20 animate-pulse-slow" style="animation-delay: 0.5s;"></div>
-        </div>
+        <div class="deco-circle" style="width: 5rem; height: 5rem; top: 2.5rem; left: 2.5rem; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);"></div>
+        <div class="deco-circle" style="width: 4rem; height: 4rem; top: 8rem; right: 5rem; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); animation-delay: 1s;"></div>
+        <div class="deco-circle" style="width: 6rem; height: 6rem; bottom: 8rem; left: 5rem; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); animation-delay: 2s;"></div>
+        <div class="deco-circle" style="width: 3rem; height: 3rem; bottom: 2.5rem; right: 2.5rem; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); animation-delay: 0.5s;"></div>
         
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-block bg-gradient-gold text-white px-6 py-3 rounded-full text-lg font-semibold mb-6 shadow-lg">
-                <i class="fa fa-calendar mr-2"></i>传统习俗
+        <div class="hero-content">
+            <div class="hero-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                </svg>
+                传统习俗
             </div>
-            <h1 class="text-5xl md:text-6xl font-bold text-chinese-red mb-6 text-shadow-lg">宁波年俗文化</h1>
-            <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情
-            </p>
+            <h1 class="hero-title">宁波年俗文化</h1>
+            <p class="hero-desc">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情</p>
             
             <!-- 装饰性元素 -->
-            <div class="absolute top-20 left-20 animate-float">
-                <i class="fa fa-heart text-4xl text-red-300 opacity-60"></i>
+            <div class="hero-icon" style="top: 5rem; left: 5rem;">
+                <svg viewBox="0 0 24 24" fill="#f87171">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
             </div>
-            <div class="absolute top-40 right-32 animate-float" style="animation-delay: 1s;">
-                <i class="fa fa-star text-3xl text-yellow-300 opacity-60"></i>
+            <div class="hero-icon" style="top: 10rem; right: 8rem; animation-delay: 1s;">
+                <svg viewBox="0 0 24 24" fill="#facc15">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
             </div>
         </div>
     </section>
 
     <!-- 宁波年俗时间线 -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-chinese-red mb-6">宁波春节习俗时间线</h2>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">追溯宁波春节的传统习俗，感受浓厚的文化底蕴</p>
-            </div>
+    <section class="timeline-section">
+        <div class="section-container">
+            <h2 class="section-title">宁波春节习俗时间线</h2>
+            <p class="section-desc">追溯宁波春节的传统习俗，感受浓厚的文化底蕴</p>
             
-            <div class="relative">
-                <!-- 时间线 -->
-                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full timeline-line rounded-full"></div>
+            <div class="timeline">
+                <div class="timeline-line"></div>
                 
                 <!-- 冬至 -->
-                <div class="relative mb-16 timeline-item">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="timeline-item">
+                    <div class="timeline-grid">
                         <div class="lg:text-right">
-                            <div class="bg-gradient-red text-white rounded-2xl p-8 shadow-xl">
-                                <h3 class="text-2xl font-bold mb-4">冬至大如年</h3>
-                                <p class="text-lg leading-relaxed mb-4">
-                                    宁波老话："冬至大如年，皇帝老倌也谢年"。冬至日要吃大头菜年糕、煮番薯汤果、吃汤团，拉开春节序幕。
-                                </p>
-                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
-                                    农历十一月
-                                </div>
+                            <div class="timeline-card bg-gradient-red">
+                                <h3>冬至大如年</h3>
+                                <p>宁波老话："冬至大如年，皇帝老倌也谢年"。冬至日要吃大头菜年糕、煮番薯汤果、吃汤团，拉开春节序幕。</p>
+                                <div class="timeline-card-badge">农历十一月</div>
                             </div>
                         </div>
                         <div class="lg:text-left">
-                            <div class="relative">
-                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-red absolute left-1/2 transform -translate-x-1/2 -translate-y-8">
-                                    <i class="fa fa-snowflake-o text-2xl text-chinese-red"></i>
+                            <div class="timeline-icon-wrap">
+                                <div class="timeline-icon" style="border-color: #DC2626;">
+                                    <svg viewBox="0 0 24 24" fill="#DC2626">
+                                        <path d="M22 11h-4.17l3.24-3.24-1.41-1.42L15 11h-2V9l4.66-4.66-1.42-1.41L13 6.17V2h-2v4.17L7.76 2.93 6.34 4.34 11 9v2H9L4.34 6.34 2.93 7.76 6.17 11H2v2h4.17l-3.24 3.24 1.41 1.42L9 13h2v2l-4.66 4.66 1.42 1.41L11 17.83V22h2v-4.17l3.24 3.24 1.42-1.41L13 15v-2h2l4.66 4.66 1.41-1.42L17.83 13H22z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -250,47 +488,43 @@
                 </div>
                 
                 <!-- 腊月廿三 祭灶 -->
-                <div class="relative mb-16 timeline-item">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="timeline-item">
+                    <div class="timeline-grid">
                         <div class="lg:text-right">
-                            <div class="relative">
-                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-orange absolute right-1/2 transform translate-x-1/2 -translate-y-8">
-                                    <i class="fa fa-fire text-2xl text-warm-orange"></i>
+                            <div class="timeline-icon-wrap">
+                                <div class="timeline-icon" style="border-color: #F97316;">
+                                    <svg viewBox="0 0 24 24" fill="#F97316">
+                                        <path d="M19.48 12.35c-1.57-4.08-7.16-4.3-5.81-10.23.1-.44-.37-.78-.75-.55C9.29 3.71 6 7.95 6 12c0 3.83 3.13 7 7 7 4.33 0 7.29-4.31 5.48-7.65zm-7.48 4.65c-1.66 0-3-1.34-3-3 0-1.66 1.34-3 3-3s3 1.34 3 3c0 1.66-1.34 3-3 3z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                         <div class="lg:text-left">
-                            <div class="bg-gradient-orange text-white rounded-2xl p-8 shadow-xl">
-                                <h3 class="text-2xl font-bold mb-4">腊月廿三 祭灶</h3>
-                                <p class="text-lg leading-relaxed mb-4">
-                                    送灶君上天汇报，用"净茶"和"祭灶果"供奉。祭灶果有红球、白球、麻球、油果、寸金糖、脚骨糖、白交切、黑交切8色，寓意让灶君尝到甜头，粘住他的口。
-                                </p>
-                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
-                                    小年
-                                </div>
+                            <div class="timeline-card bg-gradient-orange">
+                                <h3>腊月廿三 祭灶</h3>
+                                <p>送灶君上天汇报，用"净茶"和"祭灶果"供奉。祭灶果有红球、白球、麻球、油果、寸金糖、脚骨糖、白交切、黑交切8色，寓意让灶君尝到甜头，粘住他的口。</p>
+                                <div class="timeline-card-badge">小年</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- 腊月廿五至廿九 谢年 -->
-                <div class="relative mb-16 timeline-item">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="timeline-item">
+                    <div class="timeline-grid">
                         <div class="lg:text-right">
-                            <div class="relative">
-                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-gold absolute right-1/2 transform translate-x-1/2 -translate-y-8">
-                                    <i class="fa fa-gift text-2xl text-chinese-gold"></i>
-                                </div>
+                            <div class="timeline-card bg-gradient-gold">
+                                <h3>谢年祝福</h3>
+                                <p>一年中最隆重的祭神活动，用"五牲"或"七牲"供奉，祈求神明降福，俗谓"闷声大发财"。</p>
+                                <div class="timeline-card-badge">祈福祭祀</div>
                             </div>
                         </div>
                         <div class="lg:text-left">
-                            <div class="bg-gradient-gold text-white rounded-2xl p-8 shadow-xl">
-                                <h3 class="text-2xl font-bold mb-4">谢年祝福</h3>
-                                <p class="text-lg leading-relaxed mb-4">
-                                    一年中最隆重的祭神活动，用"五牲"或"七牲"供奉，祈求神明降福，俗谓"闷声大发财"。
-                                </p>
-                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
-                                    祈福祭祀
+                            <div class="timeline-icon-wrap">
+                                <div class="timeline-icon" style="border-color: #F59E0B;">
+                                    <svg viewBox="0 0 24 24" fill="#F59E0B">
+                                        <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -298,47 +532,43 @@
                 </div>
                 
                 <!-- 除夕 -->
-                <div class="relative mb-16 timeline-item">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="timeline-item">
+                    <div class="timeline-grid">
                         <div class="lg:text-right">
-                            <div class="bg-gradient-red text-white rounded-2xl p-8 shadow-xl">
-                                <h3 class="text-2xl font-bold mb-4">除夕谢年饭</h3>
-                                <p class="text-lg leading-relaxed mb-4">
-                                    宁波年夜饭讲究"十碗头"，必有一碗鲢鱼象征"年年有余"但不吃，红膏呛蟹、新风鳗鲞、年糕等宁波特色菜上桌。饭后守岁，长辈给晚辈压岁钱。
-                                </p>
-                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
-                                    大年三十
+                            <div class="timeline-icon-wrap">
+                                <div class="timeline-icon" style="border-color: #DC2626;">
+                                    <svg viewBox="0 0 24 24" fill="#DC2626">
+                                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                         <div class="lg:text-left">
-                            <div class="relative">
-                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-red absolute left-1/2 transform -translate-x-1/2 -translate-y-8">
-                                    <i class="fa fa-home text-2xl text-chinese-red"></i>
-                                </div>
+                            <div class="timeline-card bg-gradient-red">
+                                <h3>除夕谢年饭</h3>
+                                <p>宁波年夜饭讲究"十碗头"，必有一碗鲢鱼象征"年年有余"但不吃，红膏呛蟹、新风鳗鲞、年糕等宁波特色菜上桌。饭后守岁，长辈给晚辈压岁钱。</p>
+                                <div class="timeline-card-badge">大年三十</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- 正月初一 -->
-                <div class="relative mb-16 timeline-item">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="timeline-item">
+                    <div class="timeline-grid">
                         <div class="lg:text-right">
-                            <div class="relative">
-                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-orange absolute right-1/2 transform translate-x-1/2 -translate-y-8">
-                                    <i class="fa fa-star text-2xl text-warm-orange"></i>
-                                </div>
+                            <div class="timeline-card bg-gradient-orange">
+                                <h3>正月初一 春节</h3>
+                                <p>穿新衣、放开门炮、吃汤果。让家里器物"休息"一天，不扫地、不乞火、不杀牲、不动刀剪、不倒马桶、不洗涤衣服，过"太平夜"。</p>
+                                <div class="timeline-card-badge">新年第一天</div>
                             </div>
                         </div>
                         <div class="lg:text-left">
-                            <div class="bg-gradient-orange text-white rounded-2xl p-8 shadow-xl">
-                                <h3 class="text-2xl font-bold mb-4">正月初一 春节</h3>
-                                <p class="text-lg leading-relaxed mb-4">
-                                    穿新衣、放开门炮、吃汤果。让家里器物"休息"一天，不扫地、不乞火、不杀牲、不动刀剪、不倒马桶、不洗涤衣服，过"太平夜"。
-                                </p>
-                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
-                                    新年第一天
+                            <div class="timeline-icon-wrap">
+                                <div class="timeline-icon" style="border-color: #F97316;">
+                                    <svg viewBox="0 0 24 24" fill="#F97316">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -346,24 +576,22 @@
                 </div>
                 
                 <!-- 正月十四 元宵节 -->
-                <div class="relative timeline-item">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="timeline-item">
+                    <div class="timeline-grid">
                         <div class="lg:text-right">
-                            <div class="relative">
-                                <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-4 border-gradient-gold absolute right-1/2 transform translate-x-1/2 -translate-y-8">
-                                    <i class="fa fa-moon-o text-2xl text-chinese-gold"></i>
+                            <div class="timeline-icon-wrap">
+                                <div class="timeline-icon" style="border-color: #F59E0B;">
+                                    <svg viewBox="0 0 24 24" fill="#F59E0B">
+                                        <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                         <div class="lg:text-left">
-                            <div class="bg-gradient-gold text-white rounded-2xl p-8 shadow-xl">
-                                <h3 class="text-2xl font-bold mb-4">正月十四 元宵节</h3>
-                                <p class="text-lg leading-relaxed mb-4">
-                                    宁波有"正月十四夜，户户丫头羹"的习俗。用水果、干果、年糕丁、糯米圆子熬制丫头羹，祈求团圆美满。正月十五吃宁波猪油汤圆。
-                                </p>
-                                <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
-                                    上元节
-                                </div>
+                            <div class="timeline-card bg-gradient-gold">
+                                <h3>正月十四 元宵节</h3>
+                                <p>宁波有"正月十四夜，户户丫头羹"的习俗。用水果、干果、年糕丁、糯米圆子熬制丫头羹，祈求团圆美满。正月十五吃宁波猪油汤圆。</p>
+                                <div class="timeline-card-badge">上元节</div>
                             </div>
                         </div>
                     </div>
@@ -373,126 +601,106 @@
     </section>
 
     <!-- 宁波年俗特色 -->
-    <section class="py-20 bg-gradient-to-br from-yellow-50 to-red-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-chinese-red mb-6">宁波年俗特色</h2>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">了解宁波春节的独特习俗和文化内涵</p>
-            </div>
+    <section class="features-section">
+        <div class="section-container">
+            <h2 class="section-title">宁波年俗特色</h2>
+            <p class="section-desc">了解宁波春节的独特习俗和文化内涵</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 祭灶果 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
-                    <img src="public/images/jizao-guo.jpeg" alt="八色祭灶果" class="w-full h-48 object-cover rounded-2xl mb-6">
-                    <h3 class="text-xl font-bold text-chinese-red mb-4">八色祭灶果</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        宁波祭灶果有八色：红球、白球、麻球、油果、寸金糖、脚骨糖、白交切、黑交切，寓意让灶君尝到甜头，上天言好事。
-                    </p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="public/images/jizao-guo.jpeg" alt="八色祭灶果">
+                    <h3>八色祭灶果</h3>
+                    <p>宁波祭灶果有八色：红球、白球、麻球、油果、寸金糖、脚骨糖、白交切、黑交切，寓意让灶君尝到甜头，上天言好事。</p>
                 </div>
                 
-                <!-- 谢年仪式 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
-                    <img src="public/images/xienian-dadian.jpeg" alt="谢年大典" class="w-full h-48 object-cover rounded-2xl mb-6">
-                    <h3 class="text-xl font-bold text-chinese-red mb-4">谢年大典</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        宁波人最隆重的祭神仪式，用五牲或七牲供奉，男性主祭，祈求神明保佑全家平安，来年财源广进。
-                    </p>
+                <div class="feature-card">
+                    <img src="public/images/xienian-dadian.jpeg" alt="谢年大典">
+                    <h3>谢年大典</h3>
+                    <p>宁波人最隆重的祭神仪式，用五牲或七牲供奉，男性主祭，祈求神明保佑全家平安，来年财源广进。</p>
                 </div>
                 
-                <!-- 丫头羹 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
-                    <img src="public/images/yatou-geng-culture.jpeg" alt="丫头羹习俗" class="w-full h-48 object-cover rounded-2xl mb-6">
-                    <h3 class="text-xl font-bold text-chinese-red mb-4">丫头羹习俗</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        正月十四夜，宁波家家户户熬制丫头羹，用水果、干果、年糕丁、糯米圆子等食材，象征团圆美满。
-                    </p>
+                <div class="feature-card">
+                    <img src="public/images/yatou-geng-culture.jpeg" alt="丫头羹习俗">
+                    <h3>丫头羹习俗</h3>
+                    <p>正月十四夜，宁波家家户户熬制丫头羹，用水果、干果、年糕丁、糯米圆子等食材，象征团圆美满。</p>
                 </div>
                 
-                <!-- 太平夜 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
-                    <img src="public/images/taiping-ye.jpeg" alt="太平夜" class="w-full h-48 object-cover rounded-2xl mb-6">
-                    <h3 class="text-xl font-bold text-chinese-red mb-4">太平夜</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        正月初一让家里器物"休息"，不扫地、不乞火、不杀牲、不动刀剪、不倒马桶、不洗涤衣服，过"太平夜"。
-                    </p>
+                <div class="feature-card">
+                    <img src="public/images/taiping-ye.jpeg" alt="太平夜">
+                    <h3>太平夜</h3>
+                    <p>正月初一让家里器物"休息"，不扫地、不乞火、不杀牲、不动刀剪、不倒马桶、不洗涤衣服，过"太平夜"。</p>
                 </div>
                 
-                <!-- 十碗头 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
-                    <img src="public/images/nianyefan-shiwantou.jpeg" alt="年夜饭十碗头" class="w-full h-48 object-cover rounded-2xl mb-6">
-                    <h3 class="text-xl font-bold text-chinese-red mb-4">年夜饭十碗头</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        宁波年夜饭讲究"十碗头"，必有一碗鲢鱼象征"年年有余"但不吃，红膏呛蟹、新风鳗鲞是必备佳肴。
-                    </p>
+                <div class="feature-card">
+                    <img src="public/images/nianyefan-shiwantou.jpeg" alt="年夜饭十碗头">
+                    <h3>年夜饭十碗头</h3>
+                    <p>宁波年夜饭讲究"十碗头"，必有一碗鲢鱼象征"年年有余"但不吃，红膏呛蟹、新风鳗鲞是必备佳肴。</p>
                 </div>
                 
-                <!-- 汤圆文化 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl card-hover">
-                    <img src="public/images/tang-yuan.jpeg" alt="宁波猪油汤圆" class="w-full h-48 object-cover rounded-2xl mb-6">
-                    <h3 class="text-xl font-bold text-chinese-red mb-4">宁波猪油汤圆</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        宁波猪油汤圆闻名全国，以黑芝麻、猪油、白糖为馅，皮薄馅大，香甜软糯，正月初一、十五必吃。
-                    </p>
+                <div class="feature-card">
+                    <img src="public/images/tang-yuan.jpeg" alt="宁波猪油汤圆">
+                    <h3>宁波猪油汤圆</h3>
+                    <p>宁波猪油汤圆闻名全国，以黑芝麻、猪油、白糖为馅，皮薄馅大，香甜软糯，正月初一、十五必吃。</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 宁波商帮文化影响 -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-4xl font-bold text-chinese-red mb-6">宁波商帮文化影响</h2>
-                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                        宁波作为"海上丝绸之路"的重要起点，商帮文化深厚。宁波商人素有"无宁不成市"之说，其务实、诚信、创新的精神也深刻影响了宁波的春节习俗。
-                    </p>
+    <section class="culture-section">
+        <div class="section-container">
+            <div class="culture-grid">
+                <div class="culture-content">
+                    <h2>宁波商帮文化影响</h2>
+                    <p>宁波作为"海上丝绸之路"的重要起点，商帮文化深厚。宁波商人素有"无宁不成市"之说，其务实、诚信、创新的精神也深刻影响了宁波的春节习俗。</p>
                     
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-gradient-red text-white p-3 rounded-full flex-shrink-0">
-                                <i class="fa fa-bullseye text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-chinese-red mb-2">务实精神</h3>
-                                <p class="text-gray-600">宁波春节习俗注重实际，如谢年祭祀祈求实际利益，压岁钱注重实用价值。</p>
-                            </div>
+                    <div class="culture-item">
+                        <div class="culture-item-icon bg-gradient-red">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                            </svg>
                         </div>
-                        
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-gradient-gold text-white p-3 rounded-full flex-shrink-0">
-                                <i class="fa fa-handshake-o text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-chinese-red mb-2">诚信文化</h3>
-                                <p class="text-gray-600">宁波商人重诚信，这种精神体现在春节的拜年礼仪和人际关系处理中。</p>
-                            </div>
+                        <div>
+                            <h3>务实精神</h3>
+                            <p>宁波春节习俗注重实际，如谢年祭祀祈求实际利益，压岁钱注重实用价值。</p>
                         </div>
-                        
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-gradient-green text-white p-3 rounded-full flex-shrink-0">
-                                <i class="fa fa-ship text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-chinese-red mb-2">开放包容</h3>
-                                <p class="text-gray-600">海洋文化使宁波春节习俗具有开放性，吸收了各地文化精华。</p>
-                            </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-item-icon bg-gradient-gold">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>诚信文化</h3>
+                            <p>宁波商人重诚信，这种精神体现在春节的拜年礼仪和人际关系处理中。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-item-icon bg-gradient-green">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 21c-1.39 0-2.78-.47-4-1.32-2.44 1.71-5.56 1.71-8 0C6.78 20.53 5.39 21 4 21H2v2h2c1.38 0 2.74-.35 4-.99 2.52 1.29 5.48 1.29 8 0 1.26.65 2.62.99 4 .99h2v-2h-2zM3.95 19H4c1.6 0 3.02-.88 4-2 .98 1.12 2.4 2 4 2s3.02-.88 4-2c.98 1.12 2.4 2 4 2h.05l1.89-6.68c.08-.26.06-.54-.06-.78s-.34-.42-.6-.5L20 10.62V6c0-1.1-.9-2-2-2h-3V1H9v3H6c-1.1 0-2 .9-2 2v4.62l-1.29.42c-.26.08-.48.26-.6.5s-.15.52-.06.78L3.95 19zM6 6h12v3.97L12 8 6 9.97V6z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>开放包容</h3>
+                            <p>海洋文化使宁波春节习俗具有开放性，吸收了各地文化精华。</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="relative">
-                    <div class="bg-gradient-to-br from-red-100 to-orange-100 rounded-3xl p-8 shadow-xl">
-                        <img src="public/images/cheng-huang-temple.jpeg" alt="宁波城隍庙" class="w-full h-96 object-cover rounded-2xl shadow-lg mb-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white rounded-2xl p-4 text-center">
-                                <div class="text-3xl font-bold text-chinese-red mb-2">7000+</div>
-                                <div class="text-gray-600">年文化传承</div>
-                            </div>
-                            <div class="bg-white rounded-2xl p-4 text-center">
-                                <div class="text-3xl font-bold text-chinese-red mb-2">100+</div>
-                                <div class="text-gray-600">项传统习俗</div>
-                            </div>
+                <div class="culture-image-card">
+                    <img src="public/images/cheng-huang-temple.jpeg" alt="宁波城隍庙">
+                    <div class="culture-stats">
+                        <div class="culture-stat">
+                            <div class="culture-stat-value">7000+</div>
+                            <div class="culture-stat-label">年文化传承</div>
+                        </div>
+                        <div class="culture-stat">
+                            <div class="culture-stat-value">100+</div>
+                            <div class="culture-stat-label">项传统习俗</div>
                         </div>
                     </div>
                 </div>
@@ -501,149 +709,120 @@
     </section>
 
     <!-- 页脚 -->
-    <footer class="bg-gradient-red text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- 网站介绍 -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="bg-white/20 p-2 rounded-full">
-                            <i class="fa fa-fire text-2xl text-yellow-200 firecracker"></i>
-                        </div>
-                        <span class="text-2xl font-bold text-shadow">2026宁波新春佳节</span>
+    <footer>
+        <div class="footer-grid">
+            <div style="grid-column: span 2;">
+                <div class="footer-brand">
+                    <div class="footer-brand-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="animate-wiggle">
+                            <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                        </svg>
                     </div>
-                    <p class="text-gray-200 mb-4">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情。</p>
-                    <div class="flex space-x-4">
-                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                            <i class="fa fa-heart text-yellow-200"></i>
-                        </div>
-                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                            <i class="fa fa-star text-yellow-200"></i>
-                        </div>
-                        <div class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                            <i class="fa fa-thumbs-up text-yellow-200"></i>
-                        </div>
+                    <span class="footer-brand-text">2026宁波新春佳节</span>
+                </div>
+                <p class="footer-desc">感受七千年河姆渡文化传承，体验甬城独特的春节民俗风情。</p>
+                <div class="footer-social">
+                    <div class="footer-social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                     </div>
-                </div>
-                
-                <!-- 快速导航 -->
-                <div>
-                    <h5 class="text-xl font-semibold mb-4 text-gray-100">快速导航</h5>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="text-white hover:text-yellow-200 transition-colors font-medium">首页</a></li>
-                        <li><a href="knowledge.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节知识</a></li>
-                        <li><a href="culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波年俗</a></li>
-                        <li><a href="games.html" class="text-white hover:text-yellow-200 transition-colors font-medium">春节游戏</a></li>
-                    </ul>
-                </div>
-                
-                <!-- 宁波特色 -->
-                <div>
-                    <h5 class="text-xl font-semibold mb-4 text-gray-100">宁波特色</h5>
-                    <ul class="space-y-2">
-                        <li><a href="flower_market.html" class="text-white hover:text-yellow-200 transition-colors font-medium">宁波花市</a></li>
-                        <li><a href="food_culture.html" class="text-white hover:text-yellow-200 transition-colors font-medium">特色美食</a></li>
-                        <li><a href="lion_dragon.html" class="text-white hover:text-yellow-200 transition-colors font-medium">民俗表演</a></li>
-                    </ul>
+                    <div class="footer-social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                    </div>
+                    <div class="footer-social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
             
-            <!-- 联系信息 -->
-            <div class="border-t border-white/20 mt-12 pt-8 text-center">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="mb-4 md:mb-0">
-                        <p class="text-gray-200 font-medium">&copy; 2026 宁波新春佳节主题网站. 保留所有权利.</p>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <div class="flex items-center">
-                            <i class="fa fa-map-marker mr-2 text-yellow-200"></i>
-                            <span class="text-gray-200">浙江宁波</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa fa-phone mr-2 text-yellow-200"></i>
-                            <span class="text-gray-200">0574-12345678</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa fa-envelope mr-2 text-yellow-200"></i>
-                            <span class="text-gray-200">ningbo@spring.com</span>
-                        </div>
-                    </div>
+            <div class="footer-nav">
+                <h5>快速导航</h5>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="knowledge.html">春节知识</a></li>
+                    <li><a href="culture.html">宁波年俗</a></li>
+                    <li><a href="games.html">春节游戏</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-nav">
+                <h5>宁波特色</h5>
+                <ul>
+                    <li><a href="flower_market.html">宁波花市</a></li>
+                    <li><a href="food_culture.html">特色美食</a></li>
+                    <li><a href="lion_dragon.html">民俗表演</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 宁波新春佳节主题网站. 保留所有权利.</p>
+            <div class="footer-contact">
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span>浙江宁波</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    <span>0574-12345678</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <span>ningbo@spring.com</span>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- 返回顶部按钮 -->
-    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-gold text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
-        <i class="fa fa-arrow-up text-xl"></i>
+    <button id="backToTop" class="back-to-top">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+        </svg>
     </button>
 
     <script>
-        // 移动端菜单切换
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
         // 返回顶部
-        function backToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // 导航栏滚动效果
+        const backToTopBtn = document.getElementById('backToTop');
+        
         window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const backToTop = document.getElementById('backToTop');
-            
             if (window.scrollY > 100) {
-                navbar.classList.add('bg-gradient-red/95', 'backdrop-blur-sm');
-                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('visible');
             } else {
-                navbar.classList.remove('bg-gradient-red/95', 'backdrop-blur-sm');
-                backToTop.classList.add('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.remove('visible');
             }
         });
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-        // 返回顶部按钮点击事件
-        document.getElementById('backToTop').addEventListener('click', backToTop);
-
-        // 页面加载完成后的初始化
+        // 页面加载动画
         document.addEventListener('DOMContentLoaded', function() {
-            // 添加滚动触发动画
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
             const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.transform = 'translateX(0)';
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-            // 观察所有需要动画的元素
             document.querySelectorAll('.timeline-item').forEach(item => {
                 observer.observe(item);
             });
         });
-
-        // 键盘导航支持
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                // ESC键关闭移动端菜单
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            }
-        });
     </script>
 </body>
-
 </html>

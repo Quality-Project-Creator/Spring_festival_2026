@@ -6,151 +6,274 @@
     <meta name="description" content="宁波年糕制作方法详解，传统手工年糕制作步骤，体验宁波人过年必吃的传统美食。">
     <meta name="keywords" content="宁波年糕,年糕制作,手工年糕,宁波美食,传统年糕,春节美食">
     <title>宁波年糕制作 - 2026宁波新春佳节</title>
-    <!-- DNS预解析和预连接 -->
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"></noscript>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#DC2626',
-                        secondary: '#F59E0B',
-                        accent: '#059669',
-                        gold: '#D97706',
-                        'chinese-red': '#DC2626',
-                        'chinese-gold': '#D97706'
-                    },
-                    fontFamily: {
-                        chinese: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-shadow {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            }
-            .text-shadow-lg {
-                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-            }
-            .bg-gradient-red {
-                background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            }
-            .bg-gradient-gold {
-                background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            }
-        }
-        
-        .step-slider {
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .step-container {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        
-        .step-item {
-            min-width: 100%;
-            padding: 0 1rem;
-        }
-        
-        @media (min-width: 768px) {
-            .step-item {
-                min-width: 50%;
-            }
-        }
-        
-        /* 自定义滚动条 */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #DC2626, #F59E0B);
-            border-radius: 4px;
-        }
-    </style>
-
-    <!-- 防止CLS: 布局稳定性样式 -->
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { font-family: PingFang SC, Microsoft YaHei, system-ui, sans-serif; }
-        .nav-card, .food-card { min-height: 180px; contain: layout style; }
-        section { contain: layout; }
-        img { aspect-ratio: auto; object-fit: cover; }
-        .food-card img { aspect-ratio: 16/9; }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #ffffff 50%, #fefce8 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+        
+        .bg-gradient-red { background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); }
+        .bg-gradient-gold { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        
+        /* 导航栏 */
+        nav {
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .nav-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-back:hover { color: #fef08a; }
+        .nav-back svg { width: 1.25rem; height: 1.25rem; }
+        .nav-title { color: white; font-size: 1.125rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        
+        /* Hero区域 */
+        .hero {
+            position: relative;
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, #fef3c7 0%, #fee2e2 100%);
+            overflow: hidden;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .hero-badge svg { width: 1rem; height: 1rem; }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #DC2626;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+        .hero-desc { font-size: 1.25rem; color: #374151; }
+        
+        /* 介绍区域 */
+        .intro-section { padding: 4rem 1rem; background: white; }
+        .intro-container { max-width: 1280px; margin: 0 auto; }
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) { .intro-grid { grid-template-columns: 1fr 1fr; } }
+        
+        .intro-image-wrap {
+            background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        .intro-image-wrap img {
+            width: 100%;
+            height: 24rem;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+        
+        .intro-text h2 { font-size: 2.25rem; font-weight: 700; color: #DC2626; margin-bottom: 1.5rem; }
+        .intro-text p { font-size: 1.125rem; color: #374151; line-height: 1.75; margin-bottom: 1rem; }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .info-card {
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .info-card-yellow { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); }
+        .info-card-red { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); }
+        .info-card svg { width: 2rem; height: 2rem; color: #DC2626; margin-bottom: 0.5rem; }
+        .info-card p { font-weight: 600; color: #374151; margin-bottom: 0.25rem; }
+        .info-card span { color: #DC2626; font-weight: 700; }
+        
+        /* 食材区域 */
+        .ingredients-section { padding: 4rem 1rem; background: white; }
+        .section-title { font-size: 2.25rem; font-weight: 700; color: #DC2626; text-align: center; margin-bottom: 2rem; }
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        @media (min-width: 768px) { .ingredients-grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .ingredient-card {
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+        .ingredient-icon {
+            background: white;
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        .ingredient-icon svg { width: 2.5rem; height: 2.5rem; }
+        .ingredient-card h3 { font-weight: 700; color: #1f2937; margin-bottom: 0.5rem; }
+        .ingredient-card span { color: #DC2626; font-weight: 700; }
+        
+        /* 步骤区域 */
+        .steps-section { padding: 4rem 1rem; background: linear-gradient(135deg, #fef2f2 0%, #fefce8 100%); }
+        .steps-container { max-width: 1280px; margin: 0 auto; }
+        .steps-section .section-title { margin-bottom: 1rem; }
+        .steps-subtitle { font-size: 1.25rem; color: #374151; text-align: center; margin-bottom: 2rem; }
+        
+        .step-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .step-number {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .step-header h3 { font-size: 1.5rem; font-weight: 700; color: #DC2626; }
+        .step-content p { color: #374151; line-height: 1.75; margin-bottom: 1rem; }
+        .step-tip {
+            background: #fffbeb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border-left: 4px solid #F59E0B;
+        }
+        .step-tip p { color: #374151; font-size: 0.875rem; margin: 0; }
+        .step-tip svg { width: 1rem; height: 1rem; color: #F59E0B; margin-right: 0.5rem; }
+        
+        /* 返回按钮区域 */
+        .back-section {
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, #fef2f2 0%, #fefce8 100%);
+            text-align: center;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .back-btn:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); }
+        .back-btn svg { width: 1.25rem; height: 1.25rem; }
     </style>
 </head>
-<body class="font-chinese bg-gradient-to-br from-red-50 via-white to-yellow-50 min-h-screen">
+<body>
     <!-- 导航栏 -->
-        <!-- 简化导航栏 -->
-    <nav class="bg-gradient-red shadow-2xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <a href="food_culture.html" class="flex items-center space-x-2 text-white hover:text-yellow-200 transition-colors">
-                    <i class="fa fa-arrow-left text-xl"></i>
-                    <span class="font-medium">返回美食</span>
-                </a>
-                <span class="text-white text-lg font-bold text-shadow">2026宁波新春佳节</span>
-            </div>
+    <nav>
+        <div class="nav-content">
+            <a href="food_culture.html" class="nav-back">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                <span>返回美食</span>
+            </a>
+            <span class="nav-title">2026宁波新春佳节</span>
         </div>
     </nav>
 
     <!-- 页面标题 -->
-    <section class="relative py-20 bg-gradient-to-br from-red-100 to-orange-100 overflow-hidden">
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-block bg-gradient-gold text-white px-6 py-3 rounded-full text-lg font-semibold mb-6 shadow-lg">
-                <i class="fa fa-star mr-2"></i>传统美食
-            </div>
-            <h1 class="text-5xl md:text-6xl font-bold text-chinese-red mb-6 text-shadow-lg">宁波年糕制作</h1>
-            <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                传统水磨工艺，寓意年年高升
-            </p>
+    <section class="hero">
+        <div class="hero-badge">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+            宁波特产
         </div>
+        <h1 class="hero-title">宁波年糕制作</h1>
+        <p class="hero-desc">传统手工年糕，寓意年年高升</p>
     </section>
 
     <!-- 食物介绍 -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <div class="bg-gradient-gold rounded-3xl p-8 shadow-2xl">
-                        <img src="public/images/nian-gao.jpeg" alt="宁波年糕" class="w-full h-96 object-cover rounded-2xl shadow-lg">
-                    </div>
+    <section class="intro-section">
+        <div class="intro-container">
+            <div class="intro-grid">
+                <div class="intro-image-wrap">
+                    <img src="public/images/nian-gao.jpeg" alt="宁波年糕">
                 </div>
-                
-                <div>
-                    <h2 class="text-3xl font-bold text-chinese-red mb-6">美食介绍</h2>
-                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                        宁波年糕是宁波最具代表性的传统美食之一，以其细腻柔滑的口感和深厚的文化内涵而闻名。采用传统水磨工艺制作，选用优质粳米，经过浸米、磨粉、蒸制、搡捣等多道工序。
-                    </p>
-                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                        年糕寓意"年年高升"，是宁波人春节期间必不可少的美食。无论是煮、炒、烤、煎，都能做出独特的美味。
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-4 text-center">
-                            <i class="fa fa-clock text-2xl text-chinese-red mb-2"></i>
-                            <p class="font-semibold text-gray-700">准备时间</p>
-                            <p class="text-chinese-gold font-bold">4-5小时</p>
+                <div class="intro-text">
+                    <h2>美食介绍</h2>
+                    <p>宁波年糕是宁波最具代表性的传统美食之一，选用上等粳米，经过浸泡、磨浆、蒸制等多道工序制成。年糕洁白细腻，软糯可口，是宁波人过年必备的传统美食。</p>
+                    <p>年糕寓意"年年高升"，寄托着人们对新一年的美好祝愿。宁波年糕可以炒、煮、炸、烤，吃法多样，其中荠菜年糕、肉丝年糕最为经典。</p>
+                    <div class="info-grid">
+                        <div class="info-card info-card-yellow">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                            </svg>
+                            <p>准备时间</p>
+                            <span>4-6小时</span>
                         </div>
-                        <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-4 text-center">
-                            <i class="fa fa-users text-2xl text-chinese-red mb-2"></i>
-                            <p class="font-semibold text-gray-700">适用人数</p>
-                            <p class="text-chinese-gold font-bold">4-6人</p>
+                        <div class="info-card info-card-red">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                            </svg>
+                            <p>适用人数</p>
+                            <span>6-8人</span>
                         </div>
                     </div>
                 </div>
@@ -158,319 +281,130 @@
         </div>
     </section>
 
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-chinese-red mb-8 text-center">所需食材</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 text-center shadow-lg">
-                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa fa-circle text-4xl text-chinese-gold"></i>
-                    </div>
-                    <h3 class="font-bold text-gray-800 mb-2">优质粳米</h3>
-                    <p class="text-chinese-red font-bold">1000克</p>
+    <!-- 所需食材 -->
+    <section class="ingredients-section">
+        <h2 class="section-title">所需食材</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-card">
+                <div class="ingredient-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: #F59E0B;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                    </svg>
                 </div>
-                <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 text-center shadow-lg">
-                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa fa-tint text-4xl text-chinese-red"></i>
-                    </div>
-                    <h3 class="font-bold text-gray-800 mb-2">清水</h3>
-                    <p class="text-chinese-red font-bold">适量</p>
+                <h3>优质粳米</h3>
+                <span>1000克</span>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: #60a5fa;">
+                        <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/>
+                    </svg>
                 </div>
-                <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 text-center shadow-lg">
-                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa fa-cube text-4xl text-blue-600"></i>
-                    </div>
-                    <h3 class="font-bold text-gray-800 mb-2">纱布袋</h3>
-                    <p class="text-chinese-red font-bold">1个</p>
+                <h3>清水</h3>
+                <span>适量</span>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: #f87171;">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
                 </div>
-                <div class="bg-gradient-to-br from-green-50 to-yellow-50 rounded-2xl p-6 text-center shadow-lg">
-                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa fa-leaf text-4xl text-green-600"></i>
-                    </div>
-                    <h3 class="font-bold text-gray-800 mb-2">食用油</h3>
-                    <p class="text-chinese-red font-bold">少许</p>
+                <h3>食用油</h3>
+                <span>少许</span>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: #4ade80;">
+                        <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.7c.22.05.44.09.64.09C13.5 19.39 17 14.56 17 8z"/>
+                    </svg>
                 </div>
+                <h3>荠菜/肉丝</h3>
+                <span>适量配菜</span>
             </div>
         </div>
     </section>
 
     <!-- 制作步骤 -->
-    <section class="py-16 bg-gradient-to-br from-red-50 to-yellow-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-chinese-red mb-4">制作步骤</h2>
-                <p class="text-xl text-gray-700">左右滑动查看详细制作步骤</p>
-            </div>
-
-            <!-- 步骤导航 -->
-            <div class="flex justify-center mb-8">
-                <div class="inline-flex space-x-2 bg-white rounded-full p-2 shadow-lg" id="step-dots">
-                    <!-- 步骤指示点将通过JS动态生成 -->
+    <section class="steps-section">
+        <div class="steps-container">
+            <h2 class="section-title">制作步骤</h2>
+            <p class="steps-subtitle">按照以下步骤制作软糯可口的宁波年糕</p>
+            
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h3>浸泡粳米</h3>
                 </div>
-            </div>
-
-            <!-- 步骤滑动器 -->
-            <div class="relative">
-                <!-- 左箭头 -->
-                <button id="prevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:shadow-xl z-10 transition-all duration-300 hover:bg-chinese-red hover:text-white hidden md:block">
-                    <i class="fa fa-chevron-left text-2xl"></i>
-                </button>
-
-                <!-- 步骤容器 -->
-                <div class="step-slider">
-                    <div class="step-container" id="stepContainer">
-                        <!-- 步骤1 -->
-                        <div class="step-item">
-                            <div class="bg-white rounded-3xl p-8 shadow-xl">
-                                <div class="flex items-center mb-6">
-                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">1</div>
-                                    <h3 class="text-2xl font-bold text-chinese-red">选米浸米</h3>
-                                </div>
-                                <div class="mb-6">
-                                    <img src="public/images/niangao-step1.jpg" alt="选米浸米" class="w-full h-64 object-cover rounded-2xl">
-                                </div>
-                                <p class="text-gray-700 leading-relaxed mb-4">
-                                    选用优质粳米，淘洗干净后浸泡4-5小时。米粒要充分吸水膨胀，这样磨出来的米粉才能细腻柔滑。
-                                </p>
-                                <div class="bg-yellow-50 rounded-xl p-4 border-l-4 border-chinese-gold">
-                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>夏天浸泡时间可适当缩短，冬天可适当延长。</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 步骤2 -->
-                        <div class="step-item">
-                            <div class="bg-white rounded-3xl p-8 shadow-xl">
-                                <div class="flex items-center mb-6">
-                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">2</div>
-                                    <h3 class="text-2xl font-bold text-chinese-red">水磨成粉</h3>
-                                </div>
-                                <div class="mb-6">
-                                    <img src="public/images/niangao-step2.jpg" alt="水磨成粉" class="w-full h-64 object-cover rounded-2xl">
-                                </div>
-                                <p class="text-gray-700 leading-relaxed mb-4">
-                                    将浸泡好的米和水一起放入石磨，磨成细腻的米浆。传统方法需要用力推动石磨，让米浆缓缓流出。
-                                </p>
-                                <div class="bg-yellow-50 rounded-xl p-4 border-l-4 border-chinese-gold">
-                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>磨粉时米水比例要适当，米浆浓度要适中。</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 步骤3 -->
-                        <div class="step-item">
-                            <div class="bg-white rounded-3xl p-8 shadow-xl">
-                                <div class="flex items-center mb-6">
-                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">3</div>
-                                    <h3 class="text-2xl font-bold text-chinese-red">压滤沥水</h3>
-                                </div>
-                                <div class="mb-6">
-                                    <img src="public/images/niangao-step3.jpg" alt="压滤沥水" class="w-full h-64 object-cover rounded-2xl">
-                                </div>
-                                <p class="text-gray-700 leading-relaxed mb-4">
-                                    将米浆倒入纱布袋中，挤压出多余水分，形成湿润的米粉团。这一步需要用力按压，确保水分充分排出。
-                                </p>
-                                <div class="bg-yellow-50 rounded-xl p-4 border-l-4 border-chinese-gold">
-                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>水分不能太干，也不能太湿，保持适度湿度。</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 步骤4 -->
-                        <div class="step-item">
-                            <div class="bg-white rounded-3xl p-8 shadow-xl">
-                                <div class="flex items-center mb-6">
-                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">4</div>
-                                    <h3 class="text-2xl font-bold text-chinese-red">蒸制成糕</h3>
-                                </div>
-                                <div class="mb-6">
-                                    <img src="public/images/niangao-step4.jpg" alt="蒸制成糕" class="w-full h-64 object-cover rounded-2xl">
-                                </div>
-                                <p class="text-gray-700 leading-relaxed mb-4">
-                                    将米粉团掰成小块，放入蒸笼中大火蒸制20-30分钟。蒸熟的米粉要晶莹剔透，散发米香。
-                                </p>
-                                <div class="bg-yellow-50 rounded-xl p-4 border-l-4 border-chinese-gold">
-                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>蒸制时要大火足气，确保米粉完全熟透。</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 步骤5 -->
-                        <div class="step-item">
-                            <div class="bg-white rounded-3xl p-8 shadow-xl">
-                                <div class="flex items-center mb-6">
-                                    <div class="bg-gradient-gold text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mr-4">5</div>
-                                    <h3 class="text-2xl font-bold text-chinese-red">搡捣成型</h3>
-                                </div>
-                                <div class="mb-6">
-                                    <img src="public/images/niangao-step5.jpg" alt="搡捣成型" class="w-full h-64 object-cover rounded-2xl">
-                                </div>
-                                <p class="text-gray-700 leading-relaxed mb-4">
-                                    将蒸熟的米粉放入石臼中，用木杵反复搡捣，直到米粉变得有弹性、有韧性。然后切成条状或块状。
-                                </p>
-                                <div class="bg-yellow-50 rounded-xl p-4 border-l-4 border-chinese-gold">
-                                    <p class="text-sm text-gray-600"><i class="fa fa-lightbulb text-chinese-gold mr-2"></i><strong>小贴士：</strong>搡捣要用力均匀，这样年糕才会Q弹有嚼劲。</p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="step-content">
+                    <p>选用优质粳米，淘洗干净后放入清水中浸泡。一般需要浸泡4-6小时，直到米粒完全吸水变软，用手可以轻松捏碎。</p>
+                    <div class="step-tip">
+                        <p><svg viewBox="0 0 24 24" fill="currentColor" style="display: inline; vertical-align: middle;"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg><strong>小贴士：</strong>浸泡时间要足够，否则磨出的浆不够细腻。</p>
                     </div>
                 </div>
-
-                <!-- 右箭头 -->
-                <button id="nextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:shadow-xl z-10 transition-all duration-300 hover:bg-chinese-red hover:text-white hidden md:block">
-                    <i class="fa fa-chevron-right text-2xl"></i>
-                </button>
             </div>
-
-            <!-- 移动端滑动提示 -->
-            <div class="mt-8 text-center md:hidden">
-                <p class="text-gray-500 text-sm"><i class="fa fa-hand-point-left mr-2"></i>左右滑动查看更多步骤</p>
-            </div>
-
-            <!-- 步骤进度条 -->
-            <div class="mt-8">
-                <div class="bg-white rounded-full h-3 shadow-lg">
-                    <div class="bg-gradient-gold h-3 rounded-full transition-all duration-300" id="progressBar" style="width: 20%"></div>
+            
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h3>磨浆</h3>
                 </div>
-                <div class="flex justify-between mt-2 text-sm text-gray-600">
-                    <span>步骤 1/5</span>
-                    <span id="stepCounter">当前步骤：选米浸米</span>
+                <div class="step-content">
+                    <p>将浸泡好的米和水一起放入石磨或料理机中磨成米浆。米浆要磨得细腻均匀，没有颗粒感。传统做法使用石磨，磨出的米浆更加香滑。</p>
+                    <div class="step-tip">
+                        <p><svg viewBox="0 0 24 24" fill="currentColor" style="display: inline; vertical-align: middle;"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg><strong>小贴士：</strong>米浆的稠度要适中，太稠不易蒸熟，太稀则成型困难。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h3>蒸制</h3>
+                </div>
+                <div class="step-content">
+                    <p>将米浆倒入蒸盘或蒸笼中，大火蒸制20-30分钟。蒸熟的年糕呈半透明状，用手按压有弹性。蒸好后稍微晾凉，表面刷一层薄油防粘。</p>
+                    <div class="step-tip">
+                        <p><svg viewBox="0 0 24 24" fill="currentColor" style="display: inline; vertical-align: middle;"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg><strong>小贴士：</strong>蒸制时保持大火，确保年糕完全熟透。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h3>成型</h3>
+                </div>
+                <div class="step-content">
+                    <p>将蒸好的年糕取出，趁热揉压使其更加细腻。然后放入模具中压制成型，或者手工搓成条状、块状。晾凉后即可切片食用或保存。</p>
+                    <div class="step-tip">
+                        <p><svg viewBox="0 0 24 24" fill="currentColor" style="display: inline; vertical-align: middle;"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg><strong>小贴士：</strong>成型时手上抹些油可以防粘。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <h3>烹饪享用</h3>
+                </div>
+                <div class="step-content">
+                    <p>年糕的烹饪方法多样，可以切片炒荠菜年糕、肉丝年糕，也可以煮汤年糕，或者蘸糖直接食用。无论哪种方式，都能品尝到年糕的软糯香甜。</p>
+                    <div class="step-tip">
+                        <p><svg viewBox="0 0 24 24" fill="currentColor" style="display: inline; vertical-align: middle;"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg><strong>小贴士：</strong>荠菜年糕是宁波最经典的吃法，鲜香软糯。</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 食材清单 -->
-
-    <!-- 返回美食主页按钮 -->
-    <section class="py-12 bg-gradient-to-br from-red-50 to-yellow-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <a href="food_culture.html" class="inline-block bg-gradient-red text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                <i class="fa fa-arrow-left mr-2"></i>返回美食文化
-            </a>
-        </div>
+    <!-- 返回按钮 -->
+    <section class="back-section">
+        <a href="food_culture.html" class="back-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+            返回美食文化
+        </a>
     </section>
-
-    <script>
-        // 步骤滑动功能
-        let currentStep = 0;
-        const totalSteps = 5;
-        const stepContainer = document.getElementById('stepContainer');
-        const stepDots = document.getElementById('step-dots');
-        const progressBar = document.getElementById('progressBar');
-        const stepCounter = document.getElementById('stepCounter');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-
-        const stepNames = ['选米浸米', '水磨成粉', '压滤沥水', '蒸制成糕', '搡捣成型'];
-
-        // 创建步骤指示点
-        function createStepDots() {
-            for (let i = 0; i < totalSteps; i++) {
-                const dot = document.createElement('button');
-                dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${i === 0 ? 'bg-gradient-gold w-6' : 'bg-gray-300'}`;
-                dot.addEventListener('click', () => goToStep(i));
-                stepDots.appendChild(dot);
-            }
-        }
-
-        // 更新步骤显示
-        function updateStepDisplay() {
-            const stepWidth = window.innerWidth >= 768 ? 50 : 100;
-            const translateX = -(currentStep * stepWidth);
-            stepContainer.style.transform = `translateX(${translateX}%)`;
-            
-            // 更新进度条
-            const progress = ((currentStep + 1) / totalSteps) * 100;
-            progressBar.style.width = `${progress}%`;
-            
-            // 更新步骤计数
-            stepCounter.textContent = `当前步骤：${stepNames[currentStep]}`;
-            
-            // 更新指示点
-            const dots = stepDots.querySelectorAll('button');
-            dots.forEach((dot, index) => {
-                if (index === currentStep) {
-                    dot.className = 'w-6 h-3 rounded-full bg-gradient-gold transition-all duration-300';
-                } else {
-                    dot.className = 'w-3 h-3 rounded-full bg-gray-300 transition-all duration-300';
-                }
-            });
-            
-            // 更新按钮状态
-            prevBtn.disabled = currentStep === 0;
-            nextBtn.disabled = currentStep === totalSteps - 1;
-            prevBtn.style.opacity = currentStep === 0 ? '0.5' : '1';
-            nextBtn.style.opacity = currentStep === totalSteps - 1 ? '0.5' : '1';
-        }
-
-        // 下一页
-        function nextStep() {
-            if (currentStep < totalSteps - 1) {
-                currentStep++;
-                updateStepDisplay();
-            }
-        }
-
-        // 上一页
-        function prevStep() {
-            if (currentStep > 0) {
-                currentStep--;
-                updateStepDisplay();
-            }
-        }
-
-        // 跳转到指定步骤
-        function goToStep(index) {
-            currentStep = index;
-            updateStepDisplay();
-        }
-
-        // 事件监听
-        nextBtn.addEventListener('click', nextStep);
-        prevBtn.addEventListener('click', prevStep);
-
-        // 触摸滑动支持
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        stepContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        stepContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0 && currentStep < totalSteps - 1) {
-                    nextStep();
-                } else if (diff < 0 && currentStep > 0) {
-                    prevStep();
-                }
-            }
-        }
-
-        // 键盘导航
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') {
-                nextStep();
-            } else if (e.key === 'ArrowLeft') {
-                prevStep();
-            }
-        });
-
-        // 窗口大小改变时更新显示
-        window.addEventListener('resize', updateStepDisplay);
-
-        // 初始化
-        createStepDots();
-        updateStepDisplay();
-    </script>
 </body>
 </html>
