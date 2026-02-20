@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>呛蟹模拟制作 - 2026宁波新春佳节</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; overflow: hidden; touch-action: none; background: #1a1a1a; }
+        #gameCanvas { display: block; }
+        .hint-box { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: #fff; padding: 12px 24px; border-radius: 30px; font-size: 16px; z-index: 100; }
+        .step-indicator { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+        .step-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: all 0.3s; }
+        .step-dot.active { background: #F97316; transform: scale(1.3); }
+        .step-dot.done { background: #10B981; }
+        #completeModal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 200; }
+        #completeModal.show { display: flex; }
+    </style>
+</head>
+<body>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-orange-500 to-amber-500 px-4 py-3 flex items-center justify-between">
+        <a href="food_qiangxie.html" class="text-white flex items-center gap-2"><i class="fa fa-arrow-left"></i><span class="text-sm">返回</span></a>
+        <span class="text-white font-bold">呛蟹制作模拟</span>
+        <button onclick="showHelp()" class="text-white p-2"><i class="fa fa-question-circle"></i></button>
+    </nav>
+
+    <div class="step-indicator">
+        <div class="step-dot active" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+        <div class="step-dot" id="dot3"></div>
+        <div class="step-dot" id="dot4"></div>
+        <div class="step-dot" id="dot5"></div>
+    </div>
+
+    <div class="hint-box" id="hintBox">选择有红膏的母蟹</div>
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="completeModal">
+        <div class="bg-white rounded-3xl p-8 mx-4 max-w-sm w-full text-center">
+            <div class="text-6xl mb-4">🦀</div>
+            <h2 class="text-2xl font-bold text-orange-600 mb-2">恭喜完成！</h2>
+            <p class="text-gray-600 mb-4">您已掌握红膏呛蟹的传统制作工艺</p>
+            <div class="bg-orange-50 rounded-xl p-4 mb-4"><p class="text-orange-700 font-bold text-lg">鸿运当头</p></div>
+            <div class="flex gap-3">
+                <button onclick="restartGame()" class="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white py-3 rounded-full font-bold">重新制作</button>
+                <a href="food_qiangxie.html" class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-full font-bold text-center no-underline">返回步骤</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="helpModal" class="fixed inset-0 bg-black/70 z-[300] hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-6 mx-4 max-w-sm">
+            <h2 class="text-xl font-bold mb-4 text-center">操作说明</h2>
+            <div class="space-y-3 text-sm">
+                <p><span class="text-orange-500 font-bold">点击</span> - 选择螃蟹</p>
+                <p><span class="text-orange-500 font-bold">滑动</span> - 刷洗螃蟹</p>
+                <p><span class="text-orange-500 font-bold">拖拽</span> - 移动食材</p>
+            </div>
+            <button onclick="hideHelp()" class="mt-4 w-full bg-gray-100 py-3 rounded-xl font-medium">知道了</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const hintBox = document.getElementById('hintBox');
+        
+        let W, H;
+        let currentStep = 1;
+        let gameState = {
+            selectedCrab: null,
+            washed: false,
+            washCount: 0,
+            waterReady: false,
+            marinated: false,
+            marinateTime: 0,
+            isMarinating: false,
+            sliced: false
+        };
+        
+        let lastTouchX = 0, lastTouchY = 0;
+        let isWashing = false;
+        
+        let items = {};
+        
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+            layoutItems();
+        }
+        
+        function layoutItems() {
+            const cx = W / 2, cy = H / 2;
+            const scale = Math.min(W, H) / 600;
+            
+            items = {
+                crabs: [
+                    { x: W * 0.25, y: cy, size: 70 * scale, hasRoe: true, isFemale: true },
+                    { x: W * 0.5, y: cy, size: 65 * scale, hasRoe: false, isFemale: false },
+                    { x: W * 0.75, y: cy, size: 75 * scale, hasRoe: true, isFemale: true }
+                ],
+                brush: { x: W * 0.15, y: cy, size: 40 * scale },
+                salt: { x: W * 0.2, y: cy - 60 * scale, size: 40 * scale },
+                water: { x: W * 0.8, y: cy, size: 50 * scale },
+                container: { x: cx, y: cy, size: 100 * scale },
+                pepper: { x: W * 0.25, y: cy, size: 30 * scale },
+                ginger: { x: W * 0.75, y: cy, size: 35 * scale },
+                plate: { x: cx, y: cy, size: 130 * scale }
+            };
+        }
+        
+        // ========== 绘制函数 ==========
+        
+        function drawCrab(x, y, size, hasRoe, isFemale, washed) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // 蟹壳
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size, size * 0.7, 0, 0, Math.PI * 2);
+            const shellColor = washed ? '#E8A060' : '#C87840';
+            ctx.fillStyle = shellColor;
+            ctx.fill();
+            ctx.strokeStyle = '#8B4513';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // 红膏（如果有）
+            if (hasRoe) {
+                ctx.beginPath();
+                ctx.ellipse(0, -size * 0.1, size * 0.5, size * 0.3, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#FF6B35';
+                ctx.globalAlpha = 0.7;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+            
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            ctx.arc(-size * 0.35, -size * 0.35, size * 0.1, 0, Math.PI * 2);
+            ctx.arc(size * 0.35, -size * 0.35, size * 0.1, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 蟹钳
+            const clawY = size * 0.5;
+            ctx.fillStyle = shellColor;
+            
+            // 左钳
+            ctx.beginPath();
+            ctx.ellipse(-size * 0.8, clawY, size * 0.25, size * 0.2, -0.3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            
+            // 右钳
+            ctx.beginPath();
+            ctx.ellipse(size * 0.8, clawY, size * 0.25, size * 0.2, 0.3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            
+            // 蟹腿
+            ctx.strokeStyle = shellColor;
+            ctx.lineWidth = 4;
+            for (let i = 0; i < 3; i++) {
+                const legY = size * 0.1 + i * size * 0.2;
+                ctx.beginPath();
+                ctx.moveTo(-size * 0.9, legY);
+                ctx.lineTo(-size * 1.3, legY + size * 0.1);
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(size * 0.9, legY);
+                ctx.lineTo(size * 1.3, legY + size * 0.1);
+                ctx.stroke();
+            }
+            
+            // 标记好蟹
+            if (!washed && hasRoe && isFemale) {
+                ctx.fillStyle = '#10B981';
+                ctx.font = `bold ${size * 0.25}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText('有红膏', 0, size * 1.1);
+            }
+            
+            ctx.restore();
+        }
+        
+        function drawBrush(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(-0.5);
+            
+            // 刷柄
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(-size * 0.15, -size, size * 0.3, size * 1.5);
+            
+            // 刷毛
+            ctx.fillStyle = '#F5F5DC';
+            ctx.beginPath();
+            ctx.ellipse(0, -size * 0.8, size * 0.4, size * 0.3, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.restore();
+        }
+        
+        function drawSaltBag(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.beginPath();
+            ctx.roundRect(-size, -size * 0.8, size * 2, size * 1.6, 6);
+            ctx.fillStyle = '#F8F8F8';
+            ctx.fill();
+            ctx.strokeStyle = '#CCC';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            ctx.fillStyle = '#666';
+            ctx.font = `bold ${size * 0.4}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText('盐', 0, size * 0.2);
+            
+            ctx.restore();
+        }
+        
+        function drawWaterJar(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.beginPath();
+            ctx.ellipse(0, size * 0.2, size * 0.8, size, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#87CEEB';
+            ctx.fill();
+            ctx.strokeStyle = '#4A7BA7';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            ctx.fillStyle = 'rgba(135,206,235,0.6)';
+            ctx.beginPath();
+            ctx.ellipse(0, size * 0.3, size * 0.6, size * 0.6, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#2C5F7C';
+            ctx.font = `bold ${size * 0.35}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText('凉开水', 0, size * 0.5);
+            
+            ctx.restore();
+        }
+        
+        function drawContainer(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // 容器
+            ctx.beginPath();
+            ctx.ellipse(0, size * 0.3, size, size * 0.4, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#E8E8E8';
+            ctx.fill();
+            ctx.strokeStyle = '#AAA';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // 盐水
+            ctx.beginPath();
+            ctx.ellipse(0, size * 0.2, size * 0.85, size * 0.3, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(200,220,255,0.7)';
+            ctx.fill();
+            
+            ctx.restore();
+        }
+        
+        function drawPepper(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size, size * 0.7, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#8B4513';
+            ctx.fill();
+            
+            ctx.fillStyle = '#FFF';
+            ctx.font = `bold ${size * 0.5}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText('花椒', 0, size * 0.8);
+            
+            ctx.restore();
+        }
+        
+        function drawGinger(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size, size * 0.5, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#DEB887';
+            ctx.fill();
+            ctx.strokeStyle = '#B8860B';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            ctx.fillStyle = '#8B4513';
+            ctx.font = `bold ${size * 0.4}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText('生姜', 0, size * 0.8);
+            
+            ctx.restore();
+        }
+        
+        function drawPlate(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size, size * 0.6, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#F8F8F8';
+            ctx.fill();
+            ctx.strokeStyle = '#DDD';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            
+            // 装饰边
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size * 0.9, size * 0.5, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = '#E8E8E8';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            ctx.restore();
+        }
+        
+        function drawCrabSlice(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // 蟹肉
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size, size * 0.6, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFF8F0';
+            ctx.fill();
+            ctx.strokeStyle = '#E8D8C8';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // 红膏
+            ctx.beginPath();
+            ctx.ellipse(0, -size * 0.15, size * 0.4, size * 0.25, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#FF6B35';
+            ctx.fill();
+            
+            ctx.restore();
+        }
+        
+        // ========== 主绘制 ==========
+        
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            
+            // 背景
+            const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+            bgGrad.addColorStop(0, '#2A2018');
+            bgGrad.addColorStop(1, '#3D3020');
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, W, H);
+            
+            // 台面
+            ctx.fillStyle = '#5A4A3A';
+            ctx.fillRect(0, H * 0.35, W, H * 0.65);
+            
+            const cx = W / 2, cy = H / 2;
+            
+            switch (currentStep) {
+                case 1: // 挑选
+                    items.crabs.forEach((crab, i) => {
+                        if (gameState.selectedCrab === null || gameState.selectedCrab === i) {
+                            drawCrab(crab.x, crab.y, crab.size, crab.hasRoe, crab.isFemale, false);
+                        }
+                    });
+                    ctx.fillStyle = '#FFF';
+                    ctx.font = 'bold 18px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('点击选择有红膏的母蟹', cx, cy + 150);
+                    break;
+                    
+                case 2: // 清洗
+                    drawBrush(items.brush.x, items.brush.y, items.brush.size);
+                    const crab = items.crabs[gameState.selectedCrab];
+                    drawCrab(cx, cy, crab.size, crab.hasRoe, true, gameState.washed);
+                    
+                    ctx.fillStyle = '#FFF';
+                    ctx.font = 'bold 18px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`刷洗: ${gameState.washCount}/20`, cx, cy + crab.size + 40);
+                    break;
+                    
+                case 3: // 调制盐水
+                    drawContainer(cx, cy, items.container.size);
+                    
+                    if (!gameState.waterReady) {
+                        drawSaltBag(items.salt.x, items.salt.y, items.salt.size);
+                        drawWaterJar(items.water.x, items.water.y, items.water.size);
+                        drawPepper(items.pepper.x, items.pepper.y, items.pepper.size);
+                        drawGinger(items.ginger.x, items.ginger.y, items.ginger.size);
+                    }
+                    
+                    ctx.fillStyle = '#FFF';
+                    ctx.font = 'bold 18px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('将盐、水和调料拖入容器中', cx, cy + items.container.size + 50);
+                    break;
+                    
+                case 4: // 腌制
+                    drawContainer(cx, cy, items.container.size);
+                    
+                    // 螃蟹在容器里
+                    const c = items.crabs[gameState.selectedCrab];
+                    drawCrab(cx, cy - 20, c.size * 0.7, c.hasRoe, true, true);
+                    
+                    ctx.fillStyle = '#FFF';
+                    ctx.font = 'bold 18px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`腌制: ${Math.floor(gameState.marinateTime)}%`, cx, cy + items.container.size + 50);
+                    
+                    if (gameState.isMarinating && gameState.marinateTime < 100) {
+                        gameState.marinateTime += 0.2;
+                        if (gameState.marinateTime >= 100) {
+                            gameState.isMarinating = false;
+                            gameState.marinated = true;
+                            setTimeout(() => nextStep(), 500);
+                        }
+                    }
+                    break;
+                    
+                case 5: // 切块摆盘
+                    drawPlate(cx, cy, items.plate.size);
+                    
+                    // 摆放好的蟹块
+                    if (gameState.sliced) {
+                        drawCrabSlice(cx - 50, cy - 20, 35);
+                        drawCrabSlice(cx + 50, cy - 20, 35);
+                        drawCrabSlice(cx - 50, cy + 25, 35);
+                        drawCrabSlice(cx + 50, cy + 25, 35);
+                    }
+                    
+                    ctx.fillStyle = '#FFF';
+                    ctx.font = 'bold 18px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(gameState.sliced ? '红膏呛蟹制作完成！' : '滑动切开螃蟹并摆盘', cx, cy + items.plate.size + 50);
+                    break;
+            }
+            
+            requestAnimationFrame(draw);
+        }
+        
+        // ========== 交互 ==========
+        
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches ? e.touches[0] : e;
+            return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+        }
+        
+        function dist(a, b) {
+            return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+        }
+        
+        let addedItems = 0;
+        
+        canvas.addEventListener('mousedown', onStart);
+        canvas.addEventListener('mousemove', onMove);
+        canvas.addEventListener('mouseup', onEnd);
+        canvas.addEventListener('touchstart', onStart, { passive: false });
+        canvas.addEventListener('touchmove', onMove, { passive: false });
+        canvas.addEventListener('touchend', onEnd);
+        
+        function onStart(e) {
+            e.preventDefault();
+            const pos = getPos(e);
+            lastTouchX = pos.x;
+            lastTouchY = pos.y;
+            
+            if (currentStep === 1 && gameState.selectedCrab === null) {
+                items.crabs.forEach((crab, i) => {
+                    if (dist(pos, crab) < crab.size) {
+                        if (crab.hasRoe && crab.isFemale) {
+                            gameState.selectedCrab = i;
+                            setTimeout(() => nextStep(), 500);
+                        } else {
+                            updateHint('请选择有红膏的母蟹');
+                        }
+                    }
+                });
+            } else if (currentStep === 2 && !gameState.washed) {
+                isWashing = true;
+            } else if (currentStep === 3 && !gameState.waterReady) {
+                if (dist(pos, items.salt) < items.salt.size * 1.5 ||
+                    dist(pos, items.water) < items.water.size * 1.5 ||
+                    dist(pos, items.pepper) < items.pepper.size * 1.5 ||
+                    dist(pos, items.ginger) < items.ginger.size * 1.5) {
+                    addedItems++;
+                    if (addedItems >= 4) {
+                        gameState.waterReady = true;
+                        setTimeout(() => nextStep(), 500);
+                    }
+                }
+            } else if (currentStep === 4 && !gameState.isMarinating) {
+                gameState.isMarinating = true;
+                updateHint('正在腌制，请稍候...');
+            } else if (currentStep === 5 && !gameState.sliced) {
+                gameState.sliced = true;
+                setTimeout(() => showComplete(), 1000);
+            }
+        }
+        
+        function onMove(e) {
+            e.preventDefault();
+            const pos = getPos(e);
+            const dx = pos.x - lastTouchX;
+            const dy = pos.y - lastTouchY;
+            
+            if (currentStep === 2 && isWashing) {
+                if (Math.abs(dx) + Math.abs(dy) > 6) {
+                    gameState.washCount++;
+                    if (gameState.washCount >= 20) {
+                        gameState.washed = true;
+                        setTimeout(() => nextStep(), 500);
+                    }
+                    lastTouchX = pos.x;
+                    lastTouchY = pos.y;
+                }
+            }
+        }
+        
+        function onEnd(e) {
+            isWashing = false;
+        }
+        
+        function nextStep() {
+            currentStep++;
+            updateStepDots();
+            
+            const hints = {
+                2: '滑动刷洗螃蟹',
+                3: '点击添加盐和调料',
+                4: '点击开始腌制',
+                5: '滑动切开螃蟹'
+            };
+            
+            if (hints[currentStep]) updateHint(hints[currentStep]);
+        }
+        
+        function updateStepDots() {
+            for (let i = 1; i <= 5; i++) {
+                const dot = document.getElementById(`dot${i}`);
+                dot.className = 'step-dot';
+                if (i < currentStep) dot.classList.add('done');
+                else if (i === currentStep) dot.classList.add('active');
+            }
+        }
+        
+        function updateHint(text) { hintBox.textContent = text; }
+        function showComplete() { document.getElementById('completeModal').classList.add('show'); }
+        
+        function restartGame() {
+            currentStep = 1;
+            gameState = {
+                selectedCrab: null, washed: false, washCount: 0,
+                waterReady: false, marinated: false, marinateTime: 0,
+                isMarinating: false, sliced: false
+            };
+            addedItems = 0;
+            layoutItems();
+            updateStepDots();
+            updateHint('选择有红膏的母蟹');
+            document.getElementById('completeModal').classList.remove('show');
+        }
+        
+        function showHelp() { document.getElementById('helpModal').classList.remove('hidden'); }
+        function hideHelp() { document.getElementById('helpModal').classList.add('hidden'); }
+        
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+    </script>
+</body>
+</html>

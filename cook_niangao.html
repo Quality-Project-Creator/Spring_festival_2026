@@ -5,415 +5,339 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="宁波年糕模拟制作，在虚拟厨房中体验传统手工年糕制作过程。">
     <title>年糕模拟制作 - 2026宁波新春佳节</title>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'chinese-red': '#DC2626',
-                        'chinese-gold': '#D97706'
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            overflow-x: hidden;
+            overflow: hidden;
             touch-action: none;
+            background: #1a1a1a;
         }
-        
-        #gameCanvas {
-            display: block;
-            touch-action: none;
+        #gameCanvas { display: block; }
+        .hint-box {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 16px;
+            z-index: 100;
+            white-space: nowrap;
         }
-        
-        .game-btn {
-            transition: all 0.2s ease;
-            touch-action: manipulation;
+        .step-indicator {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 100;
         }
-        .game-btn:active {
-            transform: scale(0.95);
-        }
-        .game-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
         .step-dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s;
         }
-        .step-dot.active {
-            background: #F59E0B;
-            transform: scale(1.3);
+        .step-dot.active { background: #F59E0B; transform: scale(1.3); }
+        .step-dot.done { background: #10B981; }
+        #completeModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
         }
-        .step-dot.completed {
-            background: #059669;
-        }
-        .step-dot.pending {
-            background: #D1D5DB;
-        }
-        
-        .progress-fill {
-            transition: width 0.3s ease;
-        }
-        
-        .hint-text {
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
+        #completeModal.show { display: flex; }
     </style>
 </head>
-<body class="bg-gradient-to-b from-amber-50 to-orange-100 min-h-screen">
+<body>
     <!-- 导航栏 -->
-    <nav class="bg-gradient-to-r from-red-600 to-orange-500 shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <a href="food_niangao.html" class="flex items-center space-x-2 text-white hover:text-yellow-200 transition-colors">
-                    <i class="fa fa-arrow-left text-lg"></i>
-                    <span class="font-medium text-sm md:text-base">返回步骤</span>
-                </a>
-                <span class="text-white text-base md:text-lg font-bold">年糕模拟制作</span>
-                <button onclick="showHelp()" class="text-white hover:text-yellow-200 p-2">
-                    <i class="fa fa-question-circle text-lg"></i>
-                </button>
-            </div>
-        </div>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-red-600 to-orange-500 px-4 py-3 flex items-center justify-between">
+        <a href="food_niangao.html" class="text-white flex items-center gap-2">
+            <i class="fa fa-arrow-left"></i>
+            <span class="text-sm">返回</span>
+        </a>
+        <span class="text-white font-bold">年糕制作模拟</span>
+        <button onclick="showHelp()" class="text-white p-2"><i class="fa fa-question-circle"></i></button>
     </nav>
 
-    <!-- 游戏状态栏 -->
-    <div class="bg-white shadow-md px-4 py-3">
-        <div class="max-w-4xl mx-auto">
-            <div class="flex items-center justify-between mb-2">
-                <h2 class="text-sm md:text-base font-bold text-gray-800" id="stepTitle">步骤1: 选米浸米</h2>
-                <span class="text-xs md:text-sm text-gray-500" id="stepProgress">1/5</span>
-            </div>
-            <div class="flex items-center gap-1 mb-2">
-                <div class="step-dot active" id="dot1"></div>
-                <div class="flex-1 h-1 bg-gray-200 rounded"><div class="h-full bg-yellow-500 rounded progress-fill" id="progressBar" style="width: 0%"></div></div>
-                <div class="step-dot pending" id="dot2"></div>
-                <div class="flex-1 h-1 bg-gray-200 rounded"></div>
-                <div class="step-dot pending" id="dot3"></div>
-                <div class="flex-1 h-1 bg-gray-200 rounded"></div>
-                <div class="step-dot pending" id="dot4"></div>
-                <div class="flex-1 h-1 bg-gray-200 rounded"></div>
-                <div class="step-dot pending" id="dot5"></div>
-            </div>
-            <p class="text-xs md:text-sm text-gray-600 hint-text" id="hintText">点击并拖动食材到碗中</p>
-        </div>
+    <!-- 步骤指示器 -->
+    <div class="step-indicator">
+        <div class="step-dot active" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+        <div class="step-dot" id="dot3"></div>
+        <div class="step-dot" id="dot4"></div>
+        <div class="step-dot" id="dot5"></div>
     </div>
 
-    <!-- 游戏画布容器 -->
-    <div class="relative bg-gradient-to-b from-stone-100 to-stone-200" id="canvasContainer">
-        <canvas id="gameCanvas"></canvas>
-        
-        <!-- 操作按钮覆盖层 -->
-        <div id="actionButtons" class="absolute bottom-4 left-0 right-0 flex justify-center gap-3 px-4">
-            <!-- 按钮会动态显示 -->
-        </div>
-    </div>
+    <!-- 提示文字 -->
+    <div class="hint-box" id="hintBox">将米和水拖入碗中浸泡</div>
+
+    <!-- 游戏画布 -->
+    <canvas id="gameCanvas"></canvas>
 
     <!-- 完成弹窗 -->
-    <div id="completeModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl p-6 mx-4 max-w-sm w-full text-center shadow-2xl">
-            <div class="text-5xl mb-4">🎊</div>
-            <h2 class="text-2xl font-bold text-chinese-red mb-2">恭喜完成！</h2>
-            <p class="text-gray-600 mb-4">您已学会传统宁波年糕的水磨制作工艺</p>
+    <div id="completeModal">
+        <div class="bg-white rounded-3xl p-8 mx-4 max-w-sm w-full text-center">
+            <div class="text-6xl mb-4">🎊</div>
+            <h2 class="text-2xl font-bold text-red-600 mb-2">恭喜完成！</h2>
+            <p class="text-gray-600 mb-4">您已体验传统宁波年糕的水磨制作工艺</p>
             <div class="bg-yellow-50 rounded-xl p-4 mb-4">
-                <p class="text-yellow-700 font-bold">年年高升</p>
+                <p class="text-yellow-700 font-bold text-lg">年年高升</p>
             </div>
             <div class="flex gap-3">
-                <button onclick="restartGame()" class="flex-1 bg-gradient-to-r from-red-500 to-orange-500 text-white py-3 rounded-full font-semibold game-btn">
-                    重新制作
-                </button>
-                <a href="food_niangao.html" class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-full font-semibold text-center">
-                    返回步骤
-                </a>
+                <button onclick="restartGame()" class="flex-1 bg-gradient-to-r from-red-500 to-orange-500 text-white py-3 rounded-full font-bold">重新制作</button>
+                <a href="food_niangao.html" class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-full font-bold text-center no-underline">返回步骤</a>
             </div>
         </div>
     </div>
 
     <!-- 帮助弹窗 -->
-    <div id="helpModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl p-6 mx-4 max-w-sm w-full shadow-2xl">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">操作说明</h2>
-            <div class="space-y-3 text-gray-600 text-sm">
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i class="fa fa-hand-pointer text-yellow-600"></i>
-                    </div>
-                    <div>
-                        <p class="font-medium text-gray-800">拖拽食材</p>
-                        <p>点击食材拖动到目标位置</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i class="fa fa-mouse-pointer text-blue-600"></i>
-                    </div>
-                    <div>
-                        <p class="font-medium text-gray-800">点击按钮</p>
-                        <p>点击屏幕按钮执行动作</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i class="fa fa-sync text-green-600"></i>
-                    </div>
-                    <div>
-                        <p class="font-medium text-gray-800">连续操作</p>
-                        <p>某些步骤需要多次操作完成</p>
-                    </div>
-                </div>
+    <div id="helpModal" class="fixed inset-0 bg-black/70 z-[300] hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-6 mx-4 max-w-sm">
+            <h2 class="text-xl font-bold mb-4 text-center">操作说明</h2>
+            <div class="space-y-3 text-sm">
+                <p><span class="text-amber-500 font-bold">拖拽</span> - 移动物品到目标位置</p>
+                <p><span class="text-amber-500 font-bold">旋转</span> - 手指画圈转动石磨</p>
+                <p><span class="text-amber-500 font-bold">挤压</span> - 上下滑动挤压布袋</p>
+                <p><span class="text-amber-500 font-bold">敲击</span> - 上下滑动搡捣年糕</p>
             </div>
             <button onclick="hideHelp()" class="mt-4 w-full bg-gray-100 py-3 rounded-xl font-medium">知道了</button>
         </div>
     </div>
 
     <script>
-        // ============ 游戏配置 ============
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
+        const hintBox = document.getElementById('hintBox');
         
-        // 游戏状态
+        let W, H;
         let currentStep = 1;
-        const totalSteps = 5;
         let gameState = {
-            // 步骤1: 浸米
             riceInBowl: false,
             waterInBowl: false,
-            // 步骤2: 研磨
-            grindProgress: 0,
-            // 步骤3: 沥水
-            poured: false,
-            squeezeProgress: 0,
-            // 步骤4: 蒸制
-            steamProgress: 0,
-            steaming: false,
-            // 步骤5: 搡捣
-            poundCount: 0
+            grindAngle: 0,
+            grindCount: 0,
+            squeezeY: 0,
+            squeezeCount: 0,
+            steamTime: 0,
+            poundY: 0,
+            poundCount: 0,
+            isSteaming: false
         };
         
-        // 可拖拽物品
-        let draggables = [];
-        let dropZones = [];
+        // 拖拽状态
         let dragging = null;
-        let dragOffsetX = 0;
-        let dragOffsetY = 0;
+        let dragOffsetX = 0, dragOffsetY = 0;
+        let lastTouchX = 0, lastTouchY = 0;
+        let isRotating = false;
+        let isSqueezing = false;
+        let isPounding = false;
         
-        // 步骤信息
-        const stepInfo = [
-            {},
-            { title: '选米浸米', hint: '将粳米和清水拖入碗中浸泡' },
-            { title: '水磨成粉', hint: '点击石磨研磨米浆' },
-            { title: '压滤沥水', hint: '将米浆倒入布袋，挤压出水' },
-            { title: '蒸制成糕', hint: '将米粉团放入蒸笼蒸制' },
-            { title: '搡捣成型', hint: '连续点击搡捣年糕' }
-        ];
+        // 物品位置
+        let items = {
+            riceBag: { x: 0, y: 0, size: 0 },
+            waterPot: { x: 0, y: 0, size: 0 },
+            bowl: { x: 0, y: 0, size: 0 },
+            mill: { x: 0, y: 0, size: 0 },
+            bag: { x: 0, y: 0, size: 0 },
+            steamer: { x: 0, y: 0, size: 0 },
+            mortar: { x: 0, y: 0, size: 0 },
+            pestle: { x: 0, y: 0, size: 0 }
+        };
         
-        // ============ 画布初始化 ============
-        function resizeCanvas() {
-            const container = document.getElementById('canvasContainer');
-            const navHeight = document.querySelector('nav').offsetHeight;
-            const statusHeight = document.querySelector('.bg-white.shadow-md').offsetHeight;
-            const availableHeight = window.innerHeight - navHeight - statusHeight;
-            
-            canvas.width = Math.min(window.innerWidth, 800);
-            canvas.height = Math.max(availableHeight, 400);
-            
-            container.style.height = canvas.height + 'px';
-            
-            initGame();
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+            layoutItems();
         }
         
-        // ============ 绘制函数 ============
-        
-        // 绘制厨房台面背景
-        function drawKitchenBackground() {
-            // 台面
-            const gradient = ctx.createLinearGradient(0, canvas.height * 0.3, 0, canvas.height);
-            gradient.addColorStop(0, '#8B7355');
-            gradient.addColorStop(0.5, '#6B5344');
-            gradient.addColorStop(1, '#5B4334');
+        function layoutItems() {
+            const cx = W / 2;
+            const cy = H / 2;
+            const scale = Math.min(W, H) / 600;
             
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, canvas.height * 0.3, canvas.width, canvas.height * 0.7);
+            // 步骤1: 浸米
+            items.riceBag = { x: W * 0.2, y: cy, size: 70 * scale };
+            items.waterPot = { x: W * 0.8, y: cy, size: 60 * scale };
+            items.bowl = { x: cx, y: cy + 30, size: 90 * scale };
             
-            // 台面纹理线条
-            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
-            ctx.lineWidth = 1;
-            for (let i = 0; i < canvas.width; i += 30) {
-                ctx.beginPath();
-                ctx.moveTo(i, canvas.height * 0.3);
-                ctx.lineTo(i, canvas.height);
-                ctx.stroke();
-            }
-            
-            // 墙壁
-            const wallGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.3);
-            wallGradient.addColorStop(0, '#FFF8E7');
-            wallGradient.addColorStop(1, '#F5E6D3');
-            ctx.fillStyle = wallGradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height * 0.3);
+            // 其他步骤物品
+            items.mill = { x: cx, y: cy, size: 140 * scale };
+            items.bag = { x: cx, y: cy, size: 100 * scale };
+            items.steamer = { x: cx, y: cy, size: 130 * scale };
+            items.mortar = { x: cx, y: cy + 20, size: 110 * scale };
+            items.pestle = { x: cx + 100 * scale, y: cy - 50, size: 80 * scale };
         }
         
-        // 绘制木碗
-        function drawBowl(x, y, size, filled = false, fillType = '') {
+        // ========== 绘制函数 ==========
+        
+        function drawBowl(x, y, size) {
             // 碗身
             ctx.beginPath();
-            ctx.ellipse(x, y + size * 0.3, size, size * 0.4, 0, Math.PI, 0);
-            const bowlGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-            bowlGradient.addColorStop(0, '#D2691E');
-            bowlGradient.addColorStop(0.5, '#8B4513');
-            bowlGradient.addColorStop(1, '#654321');
-            ctx.fillStyle = bowlGradient;
+            ctx.ellipse(x, y + size * 0.35, size, size * 0.45, 0, Math.PI, 0);
+            const grad = ctx.createRadialGradient(x, y, size * 0.3, x, y, size);
+            grad.addColorStop(0, '#C9A66B');
+            grad.addColorStop(0.7, '#8B6914');
+            grad.addColorStop(1, '#5C4A1F');
+            ctx.fillStyle = grad;
             ctx.fill();
             
             // 碗内
             ctx.beginPath();
-            ctx.ellipse(x, y, size * 0.85, size * 0.35, 0, 0, Math.PI * 2);
-            ctx.fillStyle = filled ? (fillType === 'rice' ? '#F5F5DC' : '#87CEEB') : '#4A3728';
-            ctx.fill();
+            ctx.ellipse(x, y, size * 0.85, size * 0.38, 0, 0, Math.PI * 2);
             
-            // 碗沿高光
-            ctx.beginPath();
-            ctx.ellipse(x, y - size * 0.05, size * 0.9, size * 0.08, 0, 0, Math.PI);
-            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+            if (gameState.riceInBowl && gameState.waterInBowl) {
+                ctx.fillStyle = '#F5F0E1'; // 米水混合
+            } else if (gameState.riceInBowl) {
+                ctx.fillStyle = '#FFF8E7'; // 只有米
+            } else if (gameState.waterInBowl) {
+                ctx.fillStyle = '#B8D4E8'; // 只有水
+            } else {
+                ctx.fillStyle = '#3D2E1A'; // 空碗
+            }
+            ctx.fill();
         }
         
-        // 绘制粳米袋
         function drawRiceBag(x, y, size) {
-            // 袋子
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // 袋子主体
             ctx.beginPath();
-            ctx.roundRect(x - size, y - size * 1.2, size * 2, size * 2.4, 10);
-            const bagGradient = ctx.createLinearGradient(x - size, y, x + size, y);
-            bagGradient.addColorStop(0, '#E8DCC8');
-            bagGradient.addColorStop(0.5, '#F5EDE0');
-            bagGradient.addColorStop(1, '#D8CBB8');
-            ctx.fillStyle = bagGradient;
+            ctx.roundRect(-size, -size * 1.3, size * 2, size * 2.6, size * 0.2);
+            const grad = ctx.createLinearGradient(-size, 0, size, 0);
+            grad.addColorStop(0, '#D4C4A8');
+            grad.addColorStop(0.5, '#F0E6D2');
+            grad.addColorStop(1, '#D4C4A8');
+            ctx.fillStyle = grad;
             ctx.fill();
             ctx.strokeStyle = '#8B7355';
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 3;
             ctx.stroke();
             
-            // 米粒装饰
+            // 米粒
             ctx.fillStyle = '#FFF8DC';
-            for (let i = 0; i < 5; i++) {
-                const px = x - size * 0.5 + Math.random() * size;
-                const py = y - size * 0.5 + Math.random() * size;
+            for (let i = 0; i < 8; i++) {
                 ctx.beginPath();
-                ctx.ellipse(px, py, 3, 5, Math.random() * Math.PI, 0, Math.PI * 2);
+                ctx.ellipse(
+                    (Math.random() - 0.5) * size * 1.5,
+                    (Math.random() - 0.5) * size * 2,
+                    4, 6, Math.random() * Math.PI, 0, Math.PI * 2
+                );
                 ctx.fill();
             }
             
             // 标签
             ctx.fillStyle = '#8B4513';
-            ctx.font = `bold ${size * 0.3}px sans-serif`;
+            ctx.font = `bold ${size * 0.35}px sans-serif`;
             ctx.textAlign = 'center';
-            ctx.fillText('粳米', x, y + size * 0.1);
+            ctx.fillText('粳米', 0, size * 0.15);
+            
+            ctx.restore();
         }
         
-        // 绘制水壶
-        function drawWaterPitcher(x, y, size) {
+        function drawWaterPot(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
             // 壶身
             ctx.beginPath();
-            ctx.ellipse(x, y + size * 0.3, size * 0.6, size * 0.8, 0, 0, Math.PI * 2);
-            const pitcherGradient = ctx.createLinearGradient(x - size, y, x + size, y);
-            pitcherGradient.addColorStop(0, '#87CEEB');
-            pitcherGradient.addColorStop(0.5, '#B0E0E6');
-            pitcherGradient.addColorStop(1, '#87CEEB');
-            ctx.fillStyle = pitcherGradient;
+            ctx.ellipse(0, size * 0.2, size * 0.7, size * 0.9, 0, 0, Math.PI * 2);
+            const grad = ctx.createLinearGradient(-size, 0, size, 0);
+            grad.addColorStop(0, '#6BA3D6');
+            grad.addColorStop(0.5, '#9FC5E8');
+            grad.addColorStop(1, '#6BA3D6');
+            ctx.fillStyle = grad;
             ctx.fill();
-            ctx.strokeStyle = '#4682B4';
-            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#4A7BA7';
+            ctx.lineWidth = 3;
             ctx.stroke();
             
             // 壶嘴
             ctx.beginPath();
-            ctx.moveTo(x + size * 0.5, y + size * 0.1);
-            ctx.quadraticCurveTo(x + size, y - size * 0.2, x + size * 0.8, y - size * 0.5);
-            ctx.strokeStyle = '#4682B4';
+            ctx.moveTo(size * 0.5, -size * 0.1);
+            ctx.quadraticCurveTo(size, -size * 0.4, size * 0.7, -size * 0.8);
+            ctx.strokeStyle = '#4A7BA7';
             ctx.lineWidth = size * 0.15;
             ctx.lineCap = 'round';
             ctx.stroke();
             
             // 把手
             ctx.beginPath();
-            ctx.arc(x - size * 0.7, y + size * 0.2, size * 0.3, Math.PI * 0.5, Math.PI * 1.5);
-            ctx.strokeStyle = '#4682B4';
+            ctx.arc(-size * 0.75, size * 0.1, size * 0.35, Math.PI * 0.4, Math.PI * 1.6);
             ctx.lineWidth = size * 0.12;
             ctx.stroke();
             
             // 水
             ctx.beginPath();
-            ctx.ellipse(x, y + size * 0.4, size * 0.45, size * 0.5, 0, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(135, 206, 235, 0.6)';
+            ctx.ellipse(0, size * 0.3, size * 0.5, size * 0.55, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(135,206,235,0.6)';
             ctx.fill();
             
             // 标签
-            ctx.fillStyle = '#2F4F4F';
-            ctx.font = `bold ${size * 0.25}px sans-serif`;
+            ctx.fillStyle = '#2C5F7C';
+            ctx.font = `bold ${size * 0.28}px sans-serif`;
             ctx.textAlign = 'center';
-            ctx.fillText('清水', x, y + size * 0.5);
+            ctx.fillText('清水', 0, size * 0.4);
+            
+            ctx.restore();
         }
         
-        // 绘制石磨
-        function drawStoneMill(x, y, size, rotation = 0) {
+        function drawMill(x, y, size, rotation) {
+            ctx.save();
+            ctx.translate(x, y);
+            
             // 底座
             ctx.beginPath();
-            ctx.ellipse(x, y + size * 0.6, size * 0.9, size * 0.25, 0, 0, Math.PI * 2);
-            ctx.fillStyle = '#696969';
+            ctx.ellipse(0, size * 0.5, size * 0.9, size * 0.25, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#5C4033';
             ctx.fill();
             
             // 下磨盘
             ctx.beginPath();
-            ctx.ellipse(x, y + size * 0.3, size * 0.8, size * 0.25, 0, 0, Math.PI * 2);
-            const stoneGradient = ctx.createRadialGradient(x, y + size * 0.3, 0, x, y + size * 0.3, size);
-            stoneGradient.addColorStop(0, '#A9A9A9');
-            stoneGradient.addColorStop(1, '#696969');
-            ctx.fillStyle = stoneGradient;
+            ctx.ellipse(0, size * 0.25, size * 0.8, size * 0.22, 0, 0, Math.PI * 2);
+            const grad = ctx.createRadialGradient(0, size * 0.25, 0, 0, size * 0.25, size * 0.8);
+            grad.addColorStop(0, '#9E9E9E');
+            grad.addColorStop(1, '#616161');
+            ctx.fillStyle = grad;
             ctx.fill();
             
-            // 上磨盘
+            // 上磨盘（可旋转）
             ctx.save();
-            ctx.translate(x, y);
             ctx.rotate(rotation);
             
             ctx.beginPath();
-            ctx.ellipse(0, -size * 0.15, size * 0.7, size * 0.22, 0, 0, Math.PI * 2);
-            const topGradient = ctx.createRadialGradient(0, -size * 0.15, 0, 0, -size * 0.15, size * 0.7);
-            topGradient.addColorStop(0, '#C0C0C0');
-            topGradient.addColorStop(1, '#808080');
-            ctx.fillStyle = topGradient;
+            ctx.ellipse(0, -size * 0.1, size * 0.7, size * 0.2, 0, 0, Math.PI * 2);
+            const topGrad = ctx.createRadialGradient(0, -size * 0.1, 0, 0, -size * 0.1, size * 0.7);
+            topGrad.addColorStop(0, '#BDBDBD');
+            topGrad.addColorStop(1, '#757575');
+            ctx.fillStyle = topGrad;
             ctx.fill();
             
-            // 磨盘纹理
-            ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+            // 磨纹
+            ctx.strokeStyle = 'rgba(0,0,0,0.2)';
             ctx.lineWidth = 1;
-            for (let i = 0; i < 8; i++) {
-                const angle = (i / 8) * Math.PI * 2;
+            for (let i = 0; i < 12; i++) {
+                const angle = (i / 12) * Math.PI * 2;
                 ctx.beginPath();
-                ctx.moveTo(0, -size * 0.15);
-                ctx.lineTo(Math.cos(angle) * size * 0.6, -size * 0.15 + Math.sin(angle) * size * 0.15);
+                ctx.moveTo(0, -size * 0.1);
+                ctx.lineTo(Math.cos(angle) * size * 0.6, -size * 0.1 + Math.sin(angle) * size * 0.15);
                 ctx.stroke();
             }
             
             // 把手孔
             ctx.beginPath();
-            ctx.arc(size * 0.4, -size * 0.15, size * 0.08, 0, Math.PI * 2);
+            ctx.arc(size * 0.4, -size * 0.1, size * 0.08, 0, Math.PI * 2);
             ctx.fillStyle = '#4A4A4A';
             ctx.fill();
             
@@ -421,621 +345,457 @@
             
             // 把手
             ctx.beginPath();
-            ctx.moveTo(x + size * 0.4, y - size * 0.15);
-            ctx.lineTo(x + size * 1.2, y - size * 0.4);
-            ctx.strokeStyle = '#8B4513';
+            ctx.moveTo(size * 0.4, -size * 0.1);
+            ctx.lineTo(size * 1.1, -size * 0.5);
+            ctx.strokeStyle = '#6D4C41';
             ctx.lineWidth = size * 0.1;
             ctx.lineCap = 'round';
             ctx.stroke();
-        }
-        
-        // 绘制纱布袋
-        function drawClothBag(x, y, size, filled = false, squeezeProgress = 0) {
-            ctx.save();
-            ctx.translate(x, y);
             
-            if (filled) {
-                // 膨胀的袋子
-                const bulge = 1 + squeezeProgress * 0.3;
-                ctx.beginPath();
-                ctx.moveTo(-size * bulge, -size * 1.5);
-                ctx.quadraticCurveTo(-size * 1.3 * bulge, 0, -size * bulge, size);
-                ctx.quadraticCurveTo(0, size * 1.2, size * bulge, size);
-                ctx.quadraticCurveTo(size * 1.3 * bulge, 0, size * bulge, -size * 1.5);
-                ctx.closePath();
-                
-                // 米浆颜色透出
-                const bagGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, size * 1.5);
-                bagGradient.addColorStop(0, 'rgba(255,248,220,0.9)');
-                bagGradient.addColorStop(1, 'rgba(245,245,220,0.7)');
-                ctx.fillStyle = bagGradient;
-                ctx.fill();
-                
-                // 布料纹理
-                ctx.strokeStyle = 'rgba(139,119,101,0.3)';
-                ctx.lineWidth = 1;
-                for (let i = -size * 1.2; i < size * 1.2; i += 8) {
-                    ctx.beginPath();
-                    ctx.moveTo(i, -size * 1.5);
-                    ctx.lineTo(i, size);
-                    ctx.stroke();
-                }
-                
-                // 挤压时的水滴
-                if (squeezeProgress > 0) {
-                    ctx.fillStyle = 'rgba(135,206,235,0.7)';
-                    for (let i = 0; i < squeezeProgress * 5; i++) {
-                        ctx.beginPath();
-                        ctx.arc((Math.random() - 0.5) * size, size + 10 + Math.random() * 20, 3, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                }
-            } else {
-                // 空袋子
-                ctx.beginPath();
-                ctx.moveTo(-size * 0.5, -size);
-                ctx.lineTo(-size * 0.3, size);
-                ctx.quadraticCurveTo(0, size * 1.2, size * 0.3, size);
-                ctx.lineTo(size * 0.5, -size);
-                ctx.closePath();
-                
-                ctx.fillStyle = 'rgba(245,245,220,0.8)';
-                ctx.fill();
-                ctx.strokeStyle = '#8B7355';
-                ctx.lineWidth = 1;
-                ctx.stroke();
+            // 进度显示
+            if (currentStep === 2) {
+                ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                ctx.font = `bold ${size * 0.18}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText(`研磨: ${gameState.grindCount}/15`, 0, size * 0.85);
             }
             
             ctx.restore();
         }
         
-        // 绘制蒸笼
-        function drawSteamer(x, y, size, steaming = false, progress = 0) {
-            // 蒸笼底
+        function drawClothBag(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            const squeeze = gameState.squeezeCount / 8;
+            
+            // 袋子主体（根据挤压程度变化形状）
             ctx.beginPath();
-            ctx.ellipse(x, y + size * 0.5, size * 0.9, size * 0.25, 0, 0, Math.PI * 2);
+            const bulge = 1 + (1 - squeeze) * 0.4;
+            ctx.moveTo(-size * bulge, -size * 1.2);
+            ctx.quadraticCurveTo(-size * 1.3 * bulge, 0, -size * bulge, size * 0.8);
+            ctx.quadraticCurveTo(0, size * (1 - squeeze * 0.3), size * bulge, size * 0.8);
+            ctx.quadraticCurveTo(size * 1.3 * bulge, 0, size * bulge, -size * 1.2);
+            ctx.closePath();
+            
+            const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, size * 1.5);
+            grad.addColorStop(0, 'rgba(255,250,240,0.9)');
+            grad.addColorStop(1, 'rgba(245,245,220,0.7)');
+            ctx.fillStyle = grad;
+            ctx.fill();
+            ctx.strokeStyle = '#A09060';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // 米浆（如果有）
+            if (gameState.squeezeCount < 8) {
+                ctx.beginPath();
+                ctx.ellipse(0, size * 0.2 * (1 - squeeze * 0.5), size * 0.6 * bulge, size * 0.4, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFF8E7';
+                ctx.fill();
+            }
+            
+            // 水滴效果
+            if (isSqueezing && gameState.squeezeCount < 8) {
+                ctx.fillStyle = 'rgba(100,180,255,0.7)';
+                for (let i = 0; i < 5; i++) {
+                    ctx.beginPath();
+                    ctx.arc(
+                        (Math.random() - 0.5) * size * 0.8,
+                        size + 20 + Math.random() * 30,
+                        4, 0, Math.PI * 2
+                    );
+                    ctx.fill();
+                }
+            }
+            
+            // 进度
+            if (currentStep === 3) {
+                ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                ctx.font = `bold ${size * 0.15}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText(`挤压: ${gameState.squeezeCount}/8`, 0, size * 1.5);
+            }
+            
+            ctx.restore();
+        }
+        
+        function drawSteamer(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // 蒸笼底座
+            ctx.beginPath();
+            ctx.ellipse(0, size * 0.4, size * 0.9, size * 0.25, 0, 0, Math.PI * 2);
             ctx.fillStyle = '#8B4513';
             ctx.fill();
             
             // 蒸笼身
             ctx.beginPath();
-            ctx.moveTo(x - size * 0.9, y + size * 0.5);
-            ctx.lineTo(x - size * 0.85, y - size * 0.3);
-            ctx.quadraticCurveTo(x, y - size * 0.5, x + size * 0.85, y - size * 0.3);
-            ctx.lineTo(x + size * 0.9, y + size * 0.5);
+            ctx.moveTo(-size * 0.9, size * 0.4);
+            ctx.lineTo(-size * 0.85, -size * 0.3);
+            ctx.quadraticCurveTo(0, -size * 0.5, size * 0.85, -size * 0.3);
+            ctx.lineTo(size * 0.9, size * 0.4);
+            ctx.closePath();
             
-            const steamerGradient = ctx.createLinearGradient(x - size, y, x + size, y);
-            steamerGradient.addColorStop(0, '#D2691E');
-            steamerGradient.addColorStop(0.5, '#F4A460');
-            steamerGradient.addColorStop(1, '#D2691E');
-            ctx.fillStyle = steamerGradient;
+            const grad = ctx.createLinearGradient(-size, 0, size, 0);
+            grad.addColorStop(0, '#D2691E');
+            grad.addColorStop(0.5, '#F4A460');
+            grad.addColorStop(1, '#D2691E');
+            ctx.fillStyle = grad;
             ctx.fill();
             
             // 竹编纹理
             ctx.strokeStyle = 'rgba(139,69,19,0.3)';
             ctx.lineWidth = 1;
-            for (let i = 0; i < 5; i++) {
-                const yPos = y - size * 0.2 + i * size * 0.15;
+            for (let i = 0; i < 6; i++) {
+                const yPos = -size * 0.2 + i * size * 0.12;
                 ctx.beginPath();
-                ctx.moveTo(x - size * 0.8, yPos);
-                ctx.lineTo(x + size * 0.8, yPos);
+                ctx.moveTo(-size * 0.8, yPos);
+                ctx.lineTo(size * 0.8, yPos);
                 ctx.stroke();
             }
             
-            // 蒸笼盖
+            // 年糕
+            const cooked = gameState.steamTime / 100;
             ctx.beginPath();
-            ctx.ellipse(x, y - size * 0.4, size * 0.8, size * 0.2, 0, 0, Math.PI * 2);
-            ctx.fillStyle = '#A0522D';
-            ctx.fill();
-            ctx.strokeStyle = '#654321';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            
-            // 盖子把手
-            ctx.beginPath();
-            ctx.arc(x, y - size * 0.5, size * 0.15, 0, Math.PI * 2);
-            ctx.fillStyle = '#654321';
+            ctx.ellipse(0, size * 0.1, size * 0.5, size * 0.15, 0, 0, Math.PI * 2);
+            const r = Math.floor(255 - cooked * 30);
+            const g = Math.floor(248 - cooked * 20);
+            const b = Math.floor(220 - cooked * 80);
+            ctx.fillStyle = `rgb(${r},${g},${b})`;
             ctx.fill();
             
             // 蒸汽效果
-            if (steaming) {
-                ctx.globalAlpha = 0.6;
-                for (let i = 0; i < 3; i++) {
-                    const steamY = y - size * 0.7 - i * 20 - Math.sin(Date.now() / 500 + i) * 5;
-                    const steamSize = size * 0.2 + i * 5;
+            if (gameState.isSteaming) {
+                ctx.globalAlpha = 0.5;
+                for (let i = 0; i < 5; i++) {
+                    const steamY = -size * 0.6 - i * 25 - Math.sin(Date.now() / 400 + i) * 8;
+                    const steamSize = 15 + i * 8;
                     ctx.beginPath();
-                    ctx.arc(x + Math.sin(Date.now() / 300 + i * 2) * 10, steamY, steamSize, 0, Math.PI * 2);
+                    ctx.arc(
+                        Math.sin(Date.now() / 300 + i * 1.5) * 15,
+                        steamY,
+                        steamSize, 0, Math.PI * 2
+                    );
                     ctx.fillStyle = 'rgba(255,255,255,0.4)';
                     ctx.fill();
                 }
                 ctx.globalAlpha = 1;
             }
             
-            // 年糕在蒸笼里
-            if (progress > 0) {
-                ctx.beginPath();
-                ctx.ellipse(x, y + size * 0.1, size * 0.5, size * 0.15, 0, 0, Math.PI * 2);
-                const cooked = progress / 100;
-                const r = Math.floor(255 - cooked * 50);
-                const g = Math.floor(248 - cooked * 30);
-                const b = Math.floor(220 - cooked * 100);
-                ctx.fillStyle = `rgb(${r},${g},${b})`;
-                ctx.fill();
+            // 进度
+            if (currentStep === 4) {
+                ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                ctx.font = `bold ${size * 0.15}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText(`蒸制: ${Math.floor(gameState.steamTime)}%`, 0, size * 0.85);
             }
+            
+            ctx.restore();
         }
         
-        // 绘制石臼
-        function drawMortar(x, y, size, doughProgress = 0) {
+        function drawMortar(x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
             // 臼体
             ctx.beginPath();
-            ctx.moveTo(x - size, y + size * 0.8);
-            ctx.lineTo(x - size * 0.7, y - size * 0.3);
-            ctx.quadraticCurveTo(x, y - size * 0.5, x + size * 0.7, y - size * 0.3);
-            ctx.lineTo(x + size, y + size * 0.8);
+            ctx.moveTo(-size * 0.9, size * 0.6);
+            ctx.lineTo(-size * 0.6, -size * 0.3);
+            ctx.quadraticCurveTo(0, -size * 0.45, size * 0.6, -size * 0.3);
+            ctx.lineTo(size * 0.9, size * 0.6);
             ctx.closePath();
             
-            const mortarGradient = ctx.createLinearGradient(x - size, y, x + size, y);
-            mortarGradient.addColorStop(0, '#696969');
-            mortarGradient.addColorStop(0.5, '#A9A9A9');
-            mortarGradient.addColorStop(1, '#696969');
-            ctx.fillStyle = mortarGradient;
+            const grad = ctx.createLinearGradient(-size, 0, size, 0);
+            grad.addColorStop(0, '#616161');
+            grad.addColorStop(0.5, '#9E9E9E');
+            grad.addColorStop(1, '#616161');
+            ctx.fillStyle = grad;
             ctx.fill();
             
             // 臼内
             ctx.beginPath();
-            ctx.ellipse(x, y - size * 0.2, size * 0.55, size * 0.2, 0, 0, Math.PI * 2);
+            ctx.ellipse(0, -size * 0.2, size * 0.45, size * 0.18, 0, 0, Math.PI * 2);
             ctx.fillStyle = '#4A4A4A';
             ctx.fill();
             
             // 年糕团
-            if (doughProgress > 0) {
-                ctx.beginPath();
-                const stretch = 1 + Math.sin(doughProgress * 0.5) * 0.1;
-                ctx.ellipse(x, y - size * 0.15, size * 0.4 * stretch, size * 0.15, 0, 0, Math.PI * 2);
-                const doughGradient = ctx.createRadialGradient(x, y - size * 0.15, 0, x, y - size * 0.15, size * 0.4);
-                doughGradient.addColorStop(0, '#FFFAF0');
-                doughGradient.addColorStop(1, '#F5F5DC');
-                ctx.fillStyle = doughGradient;
-                ctx.fill();
-            }
-        }
-        
-        // 绘制木杵
-        function drawPestle(x, y, size, pounding = false) {
-            ctx.save();
-            ctx.translate(x, y);
-            
-            if (pounding) {
-                ctx.translate(0, Math.sin(Date.now() / 100) * 10);
-            }
-            
-            // 杵头
             ctx.beginPath();
-            ctx.roundRect(-size * 0.2, size * 0.3, size * 0.4, size * 0.6, 5);
-            ctx.fillStyle = '#8B4513';
-            ctx.fill();
-            
-            // 杵柄
-            ctx.beginPath();
-            ctx.roundRect(-size * 0.12, -size * 0.8, size * 0.24, size * 1.1, 3);
-            ctx.fillStyle = '#A0522D';
-            ctx.fill();
-            
-            // 高光
-            ctx.beginPath();
-            ctx.roundRect(-size * 0.08, -size * 0.7, size * 0.08, size * 1, 2);
-            ctx.fillStyle = 'rgba(255,255,255,0.2)';
+            ctx.ellipse(0, -size * 0.15, size * 0.35, size * 0.12, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFF8F0';
             ctx.fill();
             
             ctx.restore();
         }
         
-        // ============ 游戏逻辑 ============
-        
-        function initGame() {
-            draggables = [];
-            dropZones = [];
-            initStep(currentStep);
+        function drawPestle(x, y, size, poundOffset) {
+            ctx.save();
+            ctx.translate(x, y + poundOffset);
+            
+            // 杵头
+            ctx.beginPath();
+            ctx.roundRect(-size * 0.2, size * 0.2, size * 0.4, size * 0.5, 6);
+            ctx.fillStyle = '#6D4C41';
+            ctx.fill();
+            
+            // 杵柄
+            ctx.beginPath();
+            ctx.roundRect(-size * 0.12, -size * 0.8, size * 0.24, size, 4);
+            ctx.fillStyle = '#8D6E63';
+            ctx.fill();
+            
+            ctx.restore();
         }
         
-        function initStep(step) {
-            draggables = [];
-            dropZones = [];
+        // ========== 主绘制循环 ==========
+        
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
             
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
+            // 背景
+            const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+            bgGrad.addColorStop(0, '#2C1810');
+            bgGrad.addColorStop(0.4, '#4A3728');
+            bgGrad.addColorStop(1, '#3D2E1F');
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, W, H);
             
-            switch(step) {
+            // 台面
+            ctx.fillStyle = '#5C4033';
+            ctx.fillRect(0, H * 0.35, W, H * 0.65);
+            
+            // 木纹
+            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < W; i += 40) {
+                ctx.beginPath();
+                ctx.moveTo(i, H * 0.35);
+                ctx.lineTo(i, H);
+                ctx.stroke();
+            }
+            
+            const cx = W / 2, cy = H / 2;
+            
+            // 根据步骤绘制
+            switch (currentStep) {
                 case 1:
-                    // 浸米步骤
-                    draggables.push({
-                        id: 'rice',
-                        type: 'riceBag',
-                        x: canvas.width * 0.25,
-                        y: centerY,
-                        size: 40,
-                        used: gameState.riceInBowl
-                    });
-                    draggables.push({
-                        id: 'water',
-                        type: 'waterPitcher',
-                        x: canvas.width * 0.75,
-                        y: centerY,
-                        size: 40,
-                        used: gameState.waterInBowl
-                    });
-                    dropZones.push({
-                        id: 'bowl',
-                        type: 'bowl',
-                        x: centerX,
-                        y: centerY + 50,
-                        size: 60
-                    });
+                    drawBowl(items.bowl.x, items.bowl.y, items.bowl.size);
+                    if (!gameState.riceInBowl) drawRiceBag(items.riceBag.x, items.riceBag.y, items.riceBag.size);
+                    if (!gameState.waterInBowl) drawWaterPot(items.waterPot.x, items.waterPot.y, items.waterPot.size);
                     break;
                     
                 case 2:
-                    // 研磨步骤
+                    drawMill(items.mill.x, items.mill.y, items.mill.size, gameState.grindAngle);
                     break;
                     
                 case 3:
-                    // 沥水步骤
+                    drawClothBag(items.bag.x, items.bag.y, items.bag.size);
                     break;
                     
                 case 4:
-                    // 蒸制步骤
+                    drawSteamer(items.steamer.x, items.steamer.y, items.steamer.size);
                     break;
                     
                 case 5:
-                    // 搡捣步骤
+                    drawMortar(items.mortar.x, items.mortar.y, items.mortar.size);
+                    drawPestle(items.pestle.x, items.pestle.y, items.pestle.size, gameState.poundY);
                     break;
             }
             
-            updateUI();
-            render();
-        }
-        
-        function updateUI() {
-            document.getElementById('stepTitle').textContent = `步骤${currentStep}: ${stepInfo[currentStep].title}`;
-            document.getElementById('stepProgress').textContent = `${currentStep}/${totalSteps}`;
-            document.getElementById('hintText').textContent = stepInfo[currentStep].hint;
-            
-            // 更新进度点
-            for (let i = 1; i <= totalSteps; i++) {
-                const dot = document.getElementById(`dot${i}`);
-                dot.className = 'step-dot';
-                if (i < currentStep) dot.classList.add('completed');
-                else if (i === currentStep) dot.classList.add('active');
-                else dot.classList.add('pending');
-            }
-            
-            // 更新进度条
-            document.getElementById('progressBar').style.width = `${((currentStep - 1) / (totalSteps - 1)) * 100}%`;
-        }
-        
-        function render() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // 绘制背景
-            drawKitchenBackground();
-            
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            
-            // 根据步骤绘制不同内容
-            switch(currentStep) {
-                case 1:
-                    renderStep1(centerX, centerY);
-                    break;
-                case 2:
-                    renderStep2(centerX, centerY);
-                    break;
-                case 3:
-                    renderStep3(centerX, centerY);
-                    break;
-                case 4:
-                    renderStep4(centerX, centerY);
-                    break;
-                case 5:
-                    renderStep5(centerX, centerY);
-                    break;
-            }
-            
-            requestAnimationFrame(render);
-        }
-        
-        function renderStep1(cx, cy) {
-            // 绘制碗（放置区）
-            const bowl = dropZones[0];
-            if (bowl) {
-                const filled = gameState.riceInBowl && gameState.waterInBowl;
-                drawBowl(bowl.x, bowl.y, bowl.size, filled, filled ? 'both' : '');
-                
-                // 部分填充
-                if (gameState.riceInBowl && !gameState.waterInBowl) {
-                    ctx.beginPath();
-                    ctx.ellipse(bowl.x, bowl.y + 5, bowl.size * 0.7, bowl.size * 0.25, 0, 0, Math.PI * 2);
-                    ctx.fillStyle = '#F5F5DC';
-                    ctx.fill();
+            // 更新蒸汽
+            if (gameState.isSteaming && gameState.steamTime < 100) {
+                gameState.steamTime += 0.5;
+                if (gameState.steamTime >= 100) {
+                    gameState.isSteaming = false;
+                    setTimeout(() => nextStep(), 500);
                 }
             }
             
-            // 绘制可拖拽物品
-            draggables.forEach(item => {
-                if (!item.used) {
-                    if (item.type === 'riceBag') {
-                        drawRiceBag(item.x, item.y, item.size);
-                    } else if (item.type === 'waterPitcher') {
-                        drawWaterPitcher(item.x, item.y, item.size);
-                    }
-                }
-            });
-            
-            // 提示文字
-            if (!gameState.riceInBowl || !gameState.waterInBowl) {
-                ctx.fillStyle = 'rgba(0,0,0,0.6)';
-                ctx.font = 'bold 14px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('拖动食材到碗中', cx, cy - 100);
-            }
+            requestAnimationFrame(draw);
         }
         
-        function renderStep2(cx, cy) {
-            // 绘制石磨
-            const rotation = (gameState.grindProgress / 10) * Math.PI;
-            drawStoneMill(cx, cy, 80, rotation);
-            
-            // 进度条
-            ctx.fillStyle = '#E5E7EB';
-            ctx.fillRect(cx - 100, cy + 120, 200, 20);
-            ctx.fillStyle = '#F59E0B';
-            ctx.fillRect(cx - 100, cy + 120, gameState.grindProgress * 20, 20);
-            
-            ctx.fillStyle = '#374151';
-            ctx.font = 'bold 14px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(`研磨进度: ${gameState.grindProgress}/10`, cx, cy + 160);
-        }
+        // ========== 交互处理 ==========
         
-        function renderStep3(cx, cy) {
-            // 布袋
-            drawClothBag(cx, cy, 60, gameState.poured, gameState.squeezeProgress);
-            
-            // 提示
-            if (!gameState.poured) {
-                ctx.fillStyle = 'rgba(0,0,0,0.6)';
-                ctx.font = 'bold 14px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('点击按钮将米浆倒入布袋', cx, cy - 120);
-            } else if (gameState.squeezeProgress < 5) {
-                ctx.fillStyle = 'rgba(0,0,0,0.6)';
-                ctx.font = 'bold 14px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('点击按钮挤压布袋沥水', cx, cy - 120);
-            }
-            
-            // 进度
-            if (gameState.poured) {
-                ctx.fillStyle = '#374151';
-                ctx.font = 'bold 14px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText(`挤压进度: ${gameState.squeezeProgress}/5`, cx, cy + 100);
-            }
-        }
-        
-        function renderStep4(cx, cy) {
-            // 蒸笼
-            drawSteamer(cx, cy, 80, gameState.steaming, gameState.steamProgress);
-            
-            // 进度
-            if (gameState.steaming) {
-                ctx.fillStyle = '#374151';
-                ctx.font = 'bold 14px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText(`蒸制进度: ${Math.floor(gameState.steamProgress)}%`, cx, cy + 120);
-            }
-        }
-        
-        function renderStep5(cx, cy) {
-            // 石臼和木杵
-            drawMortar(cx, cy + 20, 70, gameState.poundCount);
-            drawPestle(cx + 100, cy - 20, 40, gameState.poundCount < 20);
-            
-            // 进度
-            ctx.fillStyle = '#E5E7EB';
-            ctx.fillRect(cx - 100, cy + 120, 200, 20);
-            ctx.fillStyle = '#F59E0B';
-            ctx.fillRect(cx - 100, cy + 120, gameState.poundCount * 10, 20);
-            
-            ctx.fillStyle = '#374151';
-            ctx.font = 'bold 14px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(`搡捣次数: ${gameState.poundCount}/20`, cx, cy + 160);
-        }
-        
-        // ============ 交互处理 ============
-        
-        // 获取点击位置
-        function getEventPos(e) {
+        function getPos(e) {
             const rect = canvas.getBoundingClientRect();
-            if (e.touches) {
-                return {
-                    x: e.touches[0].clientX - rect.left,
-                    y: e.touches[0].clientY - rect.top
-                };
-            }
-            return {
-                x: e.clientX - rect.left,
-                y: e.clientY - rect.top
-            };
+            const touch = e.touches ? e.touches[0] : e;
+            return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
         }
         
-        // 检测点击区域
-        function hitTest(pos, item) {
-            const dx = pos.x - item.x;
-            const dy = pos.y - item.y;
-            return Math.sqrt(dx * dx + dy * dy) < item.size * 1.5;
+        function dist(a, b) {
+            return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
         }
         
-        // 鼠标/触摸事件
-        canvas.addEventListener('mousedown', handleStart);
-        canvas.addEventListener('mousemove', handleMove);
-        canvas.addEventListener('mouseup', handleEnd);
-        canvas.addEventListener('touchstart', handleStart, { passive: false });
-        canvas.addEventListener('touchmove', handleMove, { passive: false });
-        canvas.addEventListener('touchend', handleEnd);
+        canvas.addEventListener('mousedown', onStart);
+        canvas.addEventListener('mousemove', onMove);
+        canvas.addEventListener('mouseup', onEnd);
+        canvas.addEventListener('touchstart', onStart, { passive: false });
+        canvas.addEventListener('touchmove', onMove, { passive: false });
+        canvas.addEventListener('touchend', onEnd);
         
-        function handleStart(e) {
+        function onStart(e) {
             e.preventDefault();
-            const pos = getEventPos(e);
+            const pos = getPos(e);
+            lastTouchX = pos.x;
+            lastTouchY = pos.y;
             
-            // 检查是否点击了可拖拽物品
-            for (let item of draggables) {
-                if (!item.used && hitTest(pos, item)) {
-                    dragging = item;
-                    dragOffsetX = pos.x - item.x;
-                    dragOffsetY = pos.y - item.y;
-                    return;
+            if (currentStep === 1) {
+                // 检查是否点击了米袋或水壶
+                if (!gameState.riceInBowl && dist(pos, items.riceBag) < items.riceBag.size) {
+                    dragging = 'rice';
+                    dragOffsetX = pos.x - items.riceBag.x;
+                    dragOffsetY = pos.y - items.riceBag.y;
+                } else if (!gameState.waterInBowl && dist(pos, items.waterPot) < items.waterPot.size) {
+                    dragging = 'water';
+                    dragOffsetX = pos.x - items.waterPot.x;
+                    dragOffsetY = pos.y - items.waterPot.y;
+                }
+            } else if (currentStep === 2) {
+                // 研磨模式
+                isRotating = true;
+            } else if (currentStep === 3) {
+                // 挤压模式
+                isSqueezing = true;
+            } else if (currentStep === 4) {
+                // 开始蒸制
+                if (!gameState.isSteaming && gameState.steamTime === 0) {
+                    gameState.isSteaming = true;
+                    updateHint('正在蒸制，请稍候...');
+                }
+            } else if (currentStep === 5) {
+                // 搡捣模式
+                isPounding = true;
+            }
+        }
+        
+        function onMove(e) {
+            e.preventDefault();
+            const pos = getPos(e);
+            const dx = pos.x - lastTouchX;
+            const dy = pos.y - lastTouchY;
+            
+            if (currentStep === 1 && dragging) {
+                if (dragging === 'rice') {
+                    items.riceBag.x = pos.x - dragOffsetX;
+                    items.riceBag.y = pos.y - dragOffsetY;
+                } else if (dragging === 'water') {
+                    items.waterPot.x = pos.x - dragOffsetX;
+                    items.waterPot.y = pos.y - dragOffsetY;
+                }
+            } else if (currentStep === 2 && isRotating) {
+                // 旋转石磨 - 通过移动来旋转
+                const angle = Math.atan2(pos.y - items.mill.y, pos.x - items.mill.x);
+                const lastAngle = Math.atan2(lastTouchY - items.mill.y, lastTouchX - items.mill.x);
+                let delta = angle - lastAngle;
+                if (delta > Math.PI) delta -= Math.PI * 2;
+                if (delta < -Math.PI) delta += Math.PI * 2;
+                
+                gameState.grindAngle += delta;
+                
+                // 每转一圈增加计数
+                if (Math.abs(gameState.grindAngle - gameState.grindCount * Math.PI * 2) > Math.PI * 2) {
+                    gameState.grindCount++;
+                    if (gameState.grindCount >= 15) {
+                        setTimeout(() => nextStep(), 500);
+                    }
+                }
+            } else if (currentStep === 3 && isSqueezing) {
+                // 挤压布袋 - 上下移动
+                if (Math.abs(dy) > 10) {
+                    gameState.squeezeCount++;
+                    if (gameState.squeezeCount >= 8) {
+                        setTimeout(() => nextStep(), 500);
+                    }
+                    lastTouchY = pos.y;
+                }
+            } else if (currentStep === 5 && isPounding) {
+                // 搡捣 - 上下移动
+                gameState.poundY = Math.min(50, Math.max(-50, gameState.poundY + dy * 0.5));
+                
+                if (gameState.poundY > 40) {
+                    gameState.poundCount++;
+                    gameState.poundY = -30;
+                    if (gameState.poundCount >= 20) {
+                        setTimeout(() => showComplete(), 500);
+                    }
                 }
             }
+            
+            lastTouchX = pos.x;
+            lastTouchY = pos.y;
         }
         
-        function handleMove(e) {
-            e.preventDefault();
-            if (!dragging) return;
-            
-            const pos = getEventPos(e);
-            dragging.x = pos.x - dragOffsetX;
-            dragging.y = pos.y - dragOffsetY;
-        }
-        
-        function handleEnd(e) {
-            if (!dragging) return;
-            
-            // 检查是否放入了放置区
-            for (let zone of dropZones) {
-                const dx = dragging.x - zone.x;
-                const dy = dragging.y - zone.y;
-                if (Math.sqrt(dx * dx + dy * dy) < zone.size * 2) {
-                    // 成功放入
-                    if (currentStep === 1) {
-                        if (dragging.id === 'rice') {
-                            gameState.riceInBowl = true;
-                            dragging.used = true;
-                        } else if (dragging.id === 'water') {
-                            gameState.waterInBowl = true;
-                            dragging.used = true;
+        function onEnd(e) {
+            if (currentStep === 1 && dragging) {
+                const pos = getPos(e.changedTouches ? { touches: [e.changedTouches[0]] } : e);
+                
+                // 检查是否放入碗中
+                if (dist(pos, items.bowl) < items.bowl.size * 1.5) {
+                    if (dragging === 'rice') {
+                        gameState.riceInBowl = true;
+                        layoutItems();
+                        if (!gameState.waterInBowl) {
+                            updateHint('米已放入，现在加入清水');
                         }
-                        
-                        // 检查是否完成
-                        if (gameState.riceInBowl && gameState.waterInBowl) {
-                            setTimeout(() => goToStep(2), 1000);
+                    } else if (dragging === 'water') {
+                        gameState.waterInBowl = true;
+                        layoutItems();
+                        if (!gameState.riceInBowl) {
+                            updateHint('水已加入，现在放入粳米');
                         }
                     }
-                    break;
+                    
+                    // 检查是否完成
+                    if (gameState.riceInBowl && gameState.waterInBowl) {
+                        updateHint('浸泡完成！');
+                        setTimeout(() => nextStep(), 1000);
+                    }
+                } else {
+                    // 放回原位
+                    layoutItems();
                 }
             }
             
             dragging = null;
-            initStep(currentStep);
+            isRotating = false;
+            isSqueezing = false;
+            isPounding = false;
         }
         
-        // 按钮操作
-        function performGrind() {
-            if (gameState.grindProgress < 10) {
-                gameState.grindProgress++;
-                if (gameState.grindProgress >= 10) {
-                    setTimeout(() => goToStep(3), 1000);
-                }
-            }
-        }
+        // ========== 步骤控制 ==========
         
-        function pourMixture() {
-            gameState.poured = true;
-            updateActionButtons();
-        }
-        
-        function performSqueeze() {
-            if (gameState.squeezeProgress < 5) {
-                gameState.squeezeProgress++;
-                if (gameState.squeezeProgress >= 5) {
-                    setTimeout(() => goToStep(4), 1000);
-                }
-            }
-        }
-        
-        function startSteaming() {
-            gameState.steaming = true;
-            const steamInterval = setInterval(() => {
-                gameState.steamProgress += 2;
-                if (gameState.steamProgress >= 100) {
-                    clearInterval(steamInterval);
-                    gameState.steaming = false;
-                    setTimeout(() => goToStep(5), 1000);
-                }
-            }, 100);
-        }
-        
-        function performPound() {
-            if (gameState.poundCount < 20) {
-                gameState.poundCount++;
-                if (gameState.poundCount >= 20) {
-                    setTimeout(() => showComplete(), 1000);
-                }
-            }
-        }
-        
-        function goToStep(step) {
-            currentStep = step;
-            initStep(step);
-            updateActionButtons();
-        }
-        
-        function updateActionButtons() {
-            const container = document.getElementById('actionButtons');
-            container.innerHTML = '';
+        function nextStep() {
+            currentStep++;
+            updateStepDots();
             
-            switch(currentStep) {
-                case 2:
-                    container.innerHTML = `
-                        <button onclick="performGrind()" class="game-btn bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg" ${gameState.grindProgress >= 10 ? 'disabled' : ''}>
-                            <i class="fa fa-sync-alt mr-2"></i>研磨 (${gameState.grindProgress}/10)
-                        </button>
-                    `;
-                    break;
-                case 3:
-                    if (!gameState.poured) {
-                        container.innerHTML = `
-                            <button onclick="pourMixture()" class="game-btn bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
-                                <i class="fa fa-tint mr-2"></i>倒入布袋
-                            </button>
-                        `;
-                    } else {
-                        container.innerHTML = `
-                            <button onclick="performSqueeze()" class="game-btn bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg" ${gameState.squeezeProgress >= 5 ? 'disabled' : ''}>
-                                <i class="fa fa-hand-rock mr-2"></i>挤压 (${gameState.squeezeProgress}/5)
-                            </button>
-                        `;
-                    }
-                    break;
-                case 4:
-                    container.innerHTML = `
-                        <button onclick="startSteaming()" class="game-btn bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg" ${gameState.steaming ? 'disabled' : ''}>
-                            <i class="fa fa-fire mr-2"></i>${gameState.steaming ? '蒸制中...' : '开始蒸制'}
-                        </button>
-                    `;
-                    break;
-                case 5:
-                    container.innerHTML = `
-                        <button onclick="performPound()" class="game-btn bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg" ${gameState.poundCount >= 20 ? 'disabled' : ''}>
-                            <i class="fa fa-hand-rock mr-2"></i>搡捣 (${gameState.poundCount}/20)
-                        </button>
-                    `;
-                    break;
+            const hints = {
+                2: '用手指画圈转动石磨研磨',
+                3: '上下滑动挤压布袋沥水',
+                4: '点击开始蒸制',
+                5: '上下滑动搡捣年糕 (20次)'
+            };
+            
+            if (hints[currentStep]) {
+                updateHint(hints[currentStep]);
             }
+        }
+        
+        function updateStepDots() {
+            for (let i = 1; i <= 5; i++) {
+                const dot = document.getElementById(`dot${i}`);
+                dot.className = 'step-dot';
+                if (i < currentStep) dot.classList.add('done');
+                else if (i === currentStep) dot.classList.add('active');
+            }
+        }
+        
+        function updateHint(text) {
+            hintBox.textContent = text;
         }
         
         function showComplete() {
-            document.getElementById('completeModal').classList.remove('hidden');
+            document.getElementById('completeModal').classList.add('show');
         }
         
         function restartGame() {
@@ -1043,16 +803,19 @@
             gameState = {
                 riceInBowl: false,
                 waterInBowl: false,
-                grindProgress: 0,
-                poured: false,
-                squeezeProgress: 0,
-                steamProgress: 0,
-                steaming: false,
-                poundCount: 0
+                grindAngle: 0,
+                grindCount: 0,
+                squeezeY: 0,
+                squeezeCount: 0,
+                steamTime: 0,
+                poundY: 0,
+                poundCount: 0,
+                isSteaming: false
             };
-            document.getElementById('completeModal').classList.add('hidden');
-            initStep(1);
-            updateActionButtons();
+            layoutItems();
+            updateStepDots();
+            updateHint('将米和水拖入碗中浸泡');
+            document.getElementById('completeModal').classList.remove('show');
         }
         
         function showHelp() {
@@ -1064,9 +827,9 @@
         }
         
         // 初始化
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        updateActionButtons();
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
     </script>
 </body>
 </html>
